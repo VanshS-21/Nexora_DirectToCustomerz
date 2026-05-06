@@ -3,581 +3,880 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Direct to Customerz – Buy & Sell Running Businesses</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Direct to Customerz — Premium Business Acquisitions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --orange: #F26522;
-    --orange-light: #FFF0E8;
-    --orange-dark: #C44E14;
-    --green: #1A6B3C;
-    --green-light: #E8F5EE;
-    --dark: #1A1A1A;
-    --mid: #4A4A4A;
-    --muted: #888;
-    --border: #E5E5E5;
-    --bg: #FAFAF8;
-    --white: #FFFFFF;
-    --card-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  }
+:root {
+  --ink:       #0E0E0E;
+  --ink-soft:  #1C1C1C;
+  --ink-mid:   #2E2E2E;
+  --gold:      #C9A84C;
+  --gold-lt:   #E8D49A;
+  --gold-dk:   #9B7A2A;
+  --cream:     #F7F3EC;
+  --cream-dk:  #EDE7DB;
+  --warm-gray: #8A8680;
+  --border:    rgba(201,168,76,0.2);
+  --border-lt: rgba(201,168,76,0.08);
+  --white:     #FFFFFF;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --sans:      'Jost', sans-serif;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--dark);
-    line-height: 1.6;
-  }
+html { scroll-behavior: smooth; }
 
-  /* NAV */
-  nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: var(--orange);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    color: white;
-  }
-  .logo-text {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 17px;
-    color: var(--dark);
-  }
-  .logo-text span { color: var(--orange); }
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--mid);
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--orange); }
-  .nav-cta {
-    display: flex; gap: 10px; align-items: center;
-  }
-  .btn {
-    padding: 9px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 7px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid var(--border);
-    color: var(--mid);
-  }
-  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
-  .btn-primary {
-    background: var(--orange);
-    border: 1.5px solid var(--orange);
-    color: white;
-  }
-  .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
-  .btn-green {
-    background: var(--green);
-    border: 1.5px solid var(--green);
-    color: white;
-  }
-  .btn-green:hover { background: #145a32; }
-  .btn-lg {
-    padding: 14px 28px;
-    font-size: 16px;
-    border-radius: 10px;
-  }
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* HERO */
-  .hero {
-    background: var(--white);
-    padding: 72px 5% 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--orange-light);
-    color: var(--orange-dark);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 20px;
-    margin-bottom: 18px;
-    letter-spacing: 0.3px;
-  }
-  .hero-badge .dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 48px;
-    font-weight: 800;
-    line-height: 1.15;
-    color: var(--dark);
-    margin-bottom: 20px;
-  }
-  h1 .accent { color: var(--orange); }
-  .hero-sub {
-    font-size: 17px;
-    color: var(--mid);
-    margin-bottom: 32px;
-    max-width: 440px;
-    line-height: 1.7;
-  }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-  .hero-stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--dark);
-  }
-  .hero-stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .hero-visual {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .listing-mini {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-    transition: transform 0.2s;
-  }
-  .listing-mini:hover { transform: translateY(-3px); }
-  .listing-mini:first-child { grid-column: 1 / -1; }
-  .listing-img {
-    height: 100px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-  }
-  .listing-mini:first-child .listing-img { height: 80px; }
-  .listing-body { padding: 10px 12px 12px; }
-  .listing-type {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--orange);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .listing-title { font-size: 14px; font-weight: 600; margin: 2px 0 4px; }
-  .listing-price {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--green);
-    background: var(--green-light);
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 5px;
-  }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
 
-  /* MARQUEE STRIP */
-  .marquee-strip {
-    background: var(--orange);
-    overflow: hidden;
-    padding: 10px 0;
-    white-space: nowrap;
-  }
-  .marquee-inner {
-    display: inline-flex;
-    animation: marquee 22s linear infinite;
-    gap: 0;
-  }
-  .marquee-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 0 28px;
-  }
-  .marquee-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* ── SELECTION ── */
+::selection { background: var(--gold); color: var(--ink); }
 
-  /* SECTION STYLES */
-  section { padding: 72px 5%; }
-  .section-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--orange);
-    margin-bottom: 10px;
-  }
-  h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 34px;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-  .section-sub {
-    font-size: 16px;
-    color: var(--mid);
-    max-width: 500px;
-    margin-bottom: 40px;
-  }
-  .section-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 32px;
-  }
+/* ═══════════════════ NAV ═══════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  height: 72px;
+  background: rgba(14,14,14,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.4s;
+}
+.nav-logo {
+  display: flex; flex-direction: column;
+  text-decoration: none;
+}
+.nav-logo-main {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  line-height: 1;
+}
+.nav-logo-sub {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 3px;
+}
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-enquire {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 10px 24px;
+  border: 1px solid var(--gold);
+  transition: all 0.3s;
+}
+.nav-enquire:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
 
-  /* CATEGORIES */
-  .categories-section { background: var(--bg); }
-  .cat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 14px;
-  }
-  .cat-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    color: var(--dark);
-  }
-  .cat-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: var(--card-shadow); }
-  .cat-emoji { font-size: 28px; margin-bottom: 8px; }
-  .cat-name { font-size: 13px; font-weight: 600; }
-  .cat-count { font-size: 11px; color: var(--muted); margin-top: 2px; }
+/* ═══════════════════ HERO ═══════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 140px 6% 80px 6%;
+  position: relative;
+  z-index: 2;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 32px;
+}
+.hero-eyebrow-line {
+  width: 40px; height: 1px; background: var(--gold);
+}
+.hero-eyebrow span {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--gold-lt);
+}
+.hero-h1-sub {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--warm-gray);
+  margin-bottom: 36px;
+}
+.hero-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.9;
+  max-width: 360px;
+  margin-bottom: 48px;
+}
+.hero-actions { display: flex; align-items: center; gap: 28px; }
+.btn-gold {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  padding: 14px 36px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-gold:hover { background: var(--gold-lt); }
+.btn-ghost {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  transition: color 0.3s;
+}
+.btn-ghost:hover { color: var(--cream); }
+.btn-ghost .icon-inline { width: 14px; height: 14px; stroke-width: 1.5; transition: transform 0.3s; }
+.btn-ghost:hover .icon-inline { transform: translateX(4px); }
+.hero-stats {
+  display: flex; gap: 40px;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.hero-stat-n {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1;
+}
+.hero-stat-l {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-top: 6px;
+}
+.hero-right {
+  position: relative;
+  background: var(--ink-soft);
+  overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-cards-float {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  gap: 16px;
+}
+.hero-card-float {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s;
+  cursor: default;
+}
+.hero-card-float:hover {
+  background: rgba(201,168,76,0.05);
+  border-color: rgba(201,168,76,0.35);
+  transform: translateX(6px);
+}
+.hcf-left { display: flex; flex-direction: column; gap: 4px; }
+.hcf-type {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.hcf-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--cream);
+}
+.hcf-loc {
+  font-size: 11px;
+  color: var(--warm-gray);
+  font-weight: 300;
+}
+.hcf-price {
+  text-align: right;
+}
+.hcf-price-val {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--gold-lt);
+}
+.hcf-price-note {
+  font-size: 9px;
+  color: var(--warm-gray);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+.hero-card-float:first-child {
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.04);
+}
 
-  /* LISTINGS */
-  .listings-section { background: var(--white); }
-  .filter-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-  }
-  .filter-chip {
-    padding: 7px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    background: white;
-    color: var(--mid);
-    transition: all 0.2s;
-  }
-  .filter-chip:hover, .filter-chip.active { background: var(--orange); border-color: var(--orange); color: white; }
-  .listings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  .listing-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.25s;
-    cursor: pointer;
-  }
-  .listing-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); border-color: #ddd; }
-  .listing-card-img {
-    height: 160px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 48px;
-    position: relative;
-  }
-  .listing-card-badge {
-    position: absolute;
-    top: 12px; left: 12px;
-    background: var(--dark);
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 6px;
-  }
-  .listing-card-body { padding: 16px 18px 18px; }
-  .listing-card-meta {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 12px; color: var(--muted); margin-bottom: 6px;
-  }
-  .listing-card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .listing-card-desc {
-    font-size: 13px;
-    color: var(--mid);
-    margin-bottom: 14px;
-    line-height: 1.5;
-  }
-  .listing-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
-  .price-label { font-size: 11px; color: var(--muted); }
-  .price-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--green);
-  }
-  .price-note { font-size: 11px; color: var(--muted); }
-  .wa-btn {
-    display: flex; align-items: center; gap: 6px;
-    background: #25D366; color: white;
-    padding: 8px 14px; border-radius: 8px;
-    font-size: 13px; font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .wa-btn:hover { background: #1ebe5b; }
+/* ═══════════════════ DIVIDER ═══════════════════ */
+.gold-divider {
+  display: flex; align-items: center; gap: 0;
+  overflow: hidden;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+  opacity: 0.3;
+}
 
-  /* HOW IT WORKS */
-  .how-section { background: var(--bg); }
-  .steps-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-  }
-  .step-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 24px;
-    position: relative;
-  }
-  .step-num {
-    width: 40px; height: 40px;
-    background: var(--orange-light);
-    color: var(--orange-dark);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-  .step-for {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .step-for.buyer { color: var(--green); }
-  .step-for.seller { color: var(--orange); }
-  .step-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .step-desc { font-size: 14px; color: var(--mid); line-height: 1.6; }
+/* ═══════════════════ MARQUEE ═══════════════════ */
+.marquee-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+.marquee-track {
+  display: flex; white-space: nowrap;
+  animation: slide 30s linear infinite;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 0 32px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+}
+.marquee-gem {
+  color: var(--gold);
+  width: 10px;
+  height: 10px;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+@keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* SELL CTA */
-  .sell-section {
-    background: var(--dark);
-    padding: 72px 5%;
-  }
-  .sell-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .sell-section h2 { color: white; }
-  .sell-section .section-label { color: #F26522; }
-  .sell-sub { font-size: 16px; color: #aaa; margin-bottom: 32px; line-height: 1.7; }
-  .sell-points { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
-  .sell-points li {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 15px; color: #ddd;
-  }
-  .sell-points li::before {
-    content: '';
-    width: 20px; height: 20px;
-    background: var(--orange);
-    border-radius: 50%;
-    flex-shrink: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 12px;
-  }
-  .sell-form {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 32px 28px;
-  }
-  .sell-form h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-  .form-group { margin-bottom: 16px; }
-  .form-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--mid);
-    margin-bottom: 6px;
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--dark);
-    background: white;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--orange);
-  }
-  .form-group textarea { resize: none; height: 80px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* ═══════════════════ SECTION BASE ═══════════════════ */
+.section { padding: 100px 6%; }
+.section-label {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.section-label-line { width: 32px; height: 1px; background: var(--gold); }
+.section-label span {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+h2.serif-head {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+h2.serif-head em { font-style: italic; color: var(--gold-lt); }
+.section-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.9;
+  max-width: 480px;
+}
 
-  /* TESTIMONIALS */
-  .testimonials-section { background: var(--white); }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .testimonial-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-  }
-  .testimonial-stars { color: #F59E0B; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
-  .testimonial-text { font-size: 14px; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
-  .testimonial-author { display: flex; align-items: center; gap: 10px; }
-  .author-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 13px; color: white;
-  }
-  .author-name { font-size: 13px; font-weight: 600; }
-  .author-role { font-size: 11px; color: var(--muted); }
+/* ═══════════════════ CATEGORIES ═══════════════════ */
+.cat-section { background: var(--ink-soft); }
+.cat-header-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 56px;
+}
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.cat-tile {
+  background: var(--ink-soft);
+  padding: 36px 28px;
+  text-decoration: none;
+  display: flex; flex-direction: column;
+  transition: background 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.cat-tile::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.cat-tile:hover { background: rgba(201,168,76,0.04); }
+.cat-tile:hover::before { transform: scaleX(1); }
+.cat-tile-icon {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 20px;
+  color: var(--gold-lt);
+  stroke-width: 1.35;
+}
+.cat-tile-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.cat-tile-count {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--warm-gray);
+}
+.cat-tile-arrow {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s;
+}
+.cat-tile-arrow svg { width: 18px; height: 18px; stroke-width: 1.4; }
+.cat-tile:hover .cat-tile-arrow { opacity: 1; transform: translateX(0); }
 
-  /* FOOTER */
-  footer {
-    background: var(--dark);
-    color: white;
-    padding: 48px 5% 28px;
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  .footer-brand .logo-text { color: white; }
-  .footer-desc { font-size: 13px; color: #aaa; margin-top: 10px; line-height: 1.7; max-width: 240px; }
-  .footer-col h4 {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #888;
-    margin-bottom: 14px;
-  }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .footer-col a { font-size: 13px; color: #ccc; text-decoration: none; transition: color 0.2s; }
-  .footer-col a:hover { color: var(--orange); }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: #666;
-  }
-  .wa-fixed {
-    position: fixed;
-    bottom: 24px; right: 24px;
-    background: #25D366;
-    color: white;
-    width: 54px; height: 54px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    text-decoration: none;
-    transition: transform 0.2s;
-    z-index: 200;
-  }
-  .wa-fixed:hover { transform: scale(1.08); }
+/* ═══════════════════ LISTINGS ═══════════════════ */
+.listings-section { background: var(--ink); }
+.listing-filters {
+  display: flex; gap: 0;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.lf-btn {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  padding: 14px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: -1px;
+  font-family: var(--sans);
+}
+.lf-btn:hover, .lf-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-lt);
+}
+.listing-card {
+  background: var(--ink);
+  border: 1px solid var(--border-lt);
+  transition: all 0.4s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.listing-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.listing-card:hover::after { opacity: 0.4; }
+.listing-card:hover { background: var(--ink-soft); transform: translateY(-2px); }
+.listing-card-img {
+  height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold-lt);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-lt);
+}
+.listing-card-img > svg {
+  width: 56px;
+  height: 56px;
+  stroke-width: 1.2;
+  opacity: 0.9;
+}
+.listing-card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(14,14,14,0.8));
+}
+.lc-badge {
+  position: absolute; top: 16px; right: 16px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(14,14,14,0.85);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 5px 10px;
+}
+.lc-body { padding: 24px 24px 28px; }
+.lc-type {
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.lc-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.lc-loc {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 6px;
+}
+.lc-loc svg {
+  width: 13px;
+  height: 13px;
+  color: var(--gold);
+  stroke-width: 1.7;
+  flex-shrink: 0;
+}
+.lc-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.lc-footer {
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.lc-price-lbl {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 4px;
+}
+.lc-price-val {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--gold-lt);
+  line-height: 1;
+}
+.lc-price-note {
+  font-size: 9px;
+  color: var(--warm-gray);
+  margin-top: 3px;
+}
+.lc-enquire {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 9px 18px;
+  transition: all 0.3s;
+  display: inline-block;
+}
+.lc-enquire:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
 
-  @media (max-width: 768px) {
-    h1 { font-size: 32px; }
-    h2 { font-size: 26px; }
-    .hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 5% 52px; }
-    .hero-visual { display: none; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .sell-inner { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    nav .nav-links { display: none; }
-  }
+/* ═══════════════════ HOW IT WORKS ═══════════════════ */
+.how-section {
+  background: var(--cream);
+  color: var(--ink);
+}
+.how-section .section-label span { color: var(--gold-dk); }
+.how-section .section-label-line { background: var(--gold-dk); }
+.how-section h2.serif-head { color: var(--ink); }
+.how-section .section-body { color: #5A5650; }
+.how-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 64px;
+  gap: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.how-step {
+  padding: 48px 40px 48px;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  position: relative;
+}
+.how-step:last-child { border-right: none; }
+.how-step-num {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(0,0,0,0.06);
+  margin-bottom: 24px;
+}
+.how-step-for {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.how-step-for.buyer { color: var(--green, #2E6B42); }
+.how-step-for.seller { color: var(--gold-dk); }
+.how-step-for.both { color: #5A5650; }
+.how-step-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+.how-step-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: #5A5650;
+  line-height: 1.9;
+}
+
+/* ═══════════════════ SELL CTA ═══════════════════ */
+.sell-section {
+  background: var(--ink-soft);
+  padding: 100px 6%;
+}
+.sell-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.sell-form-wrap {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 48px 40px;
+}
+.sell-form-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.sell-form-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  margin-bottom: 36px;
+  letter-spacing: 0.03em;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 0;
+  padding: 12px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cream);
+  outline: none;
+  transition: border-color 0.3s;
+  appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(138,134,128,0.5); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+.form-group select option { background: var(--ink-mid); color: var(--cream); }
+.form-group textarea { resize: none; height: 90px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  display: block; width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 14px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--gold-lt); }
+.sell-points {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 18px;
+  margin: 36px 0 44px;
+}
+.sell-points li {
+  display: flex; align-items: flex-start; gap: 16px;
+  font-size: 13px; font-weight: 300;
+  color: var(--warm-gray); line-height: 1.7;
+}
+.sell-point-icon {
+  width: 24px; height: 24px; flex-shrink: 0;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.sell-point-icon svg {
+  width: 13px;
+  height: 13px;
+  color: var(--gold);
+  stroke-width: 2;
+}
+
+/* ═══════════════════ TESTIMONIALS ═══════════════════ */
+.testimonials-section { background: var(--ink); padding: 100px 6%; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 64px;
+}
+.testi-card {
+  border: 1px solid var(--border);
+  padding: 36px 32px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.testi-card:hover { border-color: rgba(201,168,76,0.4); }
+.testi-quote-mark {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 0.8;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+.testi-text {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.testi-author-name {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  margin-bottom: 3px;
+}
+.testi-author-role {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--warm-gray);
+}
+.testi-stars {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+  color: var(--gold);
+}
+.testi-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  stroke-width: 1.2;
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer {
+  background: var(--ink-mid);
+  border-top: 1px solid var(--border);
+  padding: 72px 6% 36px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px; padding-bottom: 56px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.footer-brand-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.footer-brand-tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.footer-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.9;
+  max-width: 260px;
+}
+.footer-col h4 {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--warm-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+  letter-spacing: 0.03em;
+}
+.footer-col a:hover { color: var(--cream); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.08em; color: rgba(138,134,128,0.5);
+}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-h1, .hero-h1-sub { font-size: 48px; }
+  .hero-right { display: none; }
+  h2.serif-head { font-size: 36px; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .listings-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .how-step { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .sell-inner { grid-template-columns: 1fr; gap: 48px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  nav .nav-links { display: none; }
+}
+
+/* ═══════════════════ ANIMATIONS ═══════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-left > * {
+  animation: fadeUp 0.8s ease both;
+}
+.hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+.hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+.hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+.hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+.hero-left > *:nth-child(6) { animation-delay: 0.6s; }
 </style>
 </head>
 <body>
@@ -585,212 +884,340 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="logo-icon">D2C</div>
-    <span class="logo-text">Direct to <span>Customerz</span></span>
+    <span class="nav-logo-main">Direct to Customerz</span>
+    <span class="nav-logo-sub">Premium Business Acquisitions</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#listings">Browse Listings</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#sell">Sell Your Business</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#listings">Listings</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#sell">List a Business</a></li>
   </ul>
-  <div class="nav-cta">
-    <a href="https://wa.me/916363528371" target="_blank" class="btn btn-outline">📱 WhatsApp</a>
-    <a href="#sell" class="btn btn-primary">List Your Business</a>
-  </div>
+  <a href="#sell" class="nav-enquire">Enquire Now</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div>
-    <div class="hero-badge"><span class="dot"></span> Bangalore's #1 Business Marketplace</div>
-    <h1>Buy &amp; Sell <span class="accent">Running Businesses</span> Directly</h1>
-    <p class="hero-sub">Hotels, cafes, salons, shops, food trucks — find verified running businesses for sale in Bangalore and Karnataka. No middlemen. No brokerage.</p>
-    <div class="hero-btns">
-      <a href="#listings" class="btn btn-primary btn-lg">🔍 Browse Listings</a>
-      <a href="#sell" class="btn btn-green btn-lg">📢 Sell My Business</a>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Bangalore's Premier Business Marketplace</span>
+    </div>
+    <h1 class="hero-h1">Acquire <em>Running</em></h1>
+    <div class="hero-h1-sub">Businesses Directly.</div>
+    <p class="hero-desc">From heritage hotels to curated cafés — discover verified, income-generating businesses across Bangalore and Karnataka. No intermediaries. No brokerage. Just direct ownership transfer.</p>
+    <div class="hero-actions">
+      <a href="#listings" class="btn-gold">Browse Listings</a>
+      <a href="#process" class="btn-ghost">How It Works</a>
     </div>
     <div class="hero-stats">
       <div>
-        <div class="hero-stat-num">93K+</div>
-        <div class="hero-stat-label">Followers</div>
+        <div class="hero-stat-n">93K+</div>
+        <div class="hero-stat-l">Community Reach</div>
       </div>
       <div>
-        <div class="hero-stat-num">142+</div>
-        <div class="hero-stat-label">Listings Posted</div>
+        <div class="hero-stat-n">142+</div>
+        <div class="hero-stat-l">Deals Facilitated</div>
       </div>
       <div>
-        <div class="hero-stat-num">₹2L+</div>
-        <div class="hero-stat-label">Starting Advance</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">0</div>
-        <div class="hero-stat-label">Brokerage Fees</div>
+        <div class="hero-stat-n">₹0</div>
+        <div class="hero-stat-l">Brokerage Charged</div>
       </div>
     </div>
   </div>
-  <div class="hero-visual">
-    <div class="listing-mini">
-      <div class="listing-img" style="background:#FFF3E8;">🏨</div>
-      <div class="listing-body">
-        <div class="listing-type">Hotel</div>
-        <div class="listing-title">Swadishta Cafe, Bangalore</div>
-        <span class="listing-price">₹5L Advance</span>
+  <div class="hero-right">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-cards-float">
+      <div class="hero-card-float">
+        <div class="hcf-left">
+          <span class="hcf-type">Featured · Hotel</span>
+          <span class="hcf-title">Swadishta Cafe & Hotel</span>
+          <span class="hcf-loc">Central Bangalore</span>
+        </div>
+        <div class="hcf-price">
+          <div class="hcf-price-val">₹5 Lakh</div>
+          <div class="hcf-price-note">Advance</div>
+        </div>
       </div>
-    </div>
-    <div class="listing-mini">
-      <div class="listing-img" style="background:#E8F5EE;">☕</div>
-      <div class="listing-body">
-        <div class="listing-type">Cafe</div>
-        <div class="listing-title">Cafe for Sale</div>
-        <span class="listing-price">₹2L Advance</span>
+      <div class="hero-card-float">
+        <div class="hcf-left">
+          <span class="hcf-type">Restaurant</span>
+          <span class="hcf-title">Restaurant — Hennur Rd</span>
+          <span class="hcf-loc">Near Big Brewski, Bangalore</span>
+        </div>
+        <div class="hcf-price">
+          <div class="hcf-price-val">₹2 Lakh</div>
+          <div class="hcf-price-note">₹8–10L Monthly Revenue</div>
+        </div>
       </div>
-    </div>
-    <div class="listing-mini">
-      <div class="listing-img" style="background:#FFF0F5;">✂️</div>
-      <div class="listing-body">
-        <div class="listing-type">Salon</div>
-        <div class="listing-title">Unisex Salon</div>
-        <span class="listing-price">₹2L Advance</span>
+      <div class="hero-card-float">
+        <div class="hcf-left">
+          <span class="hcf-type">Retail</span>
+          <span class="hcf-title">Premium Cloth Store</span>
+          <span class="hcf-loc">Bangalore</span>
+        </div>
+        <div class="hcf-price">
+          <div class="hcf-price-val">₹5 Lakh</div>
+          <div class="hcf-price-note">Incl. Full Inventory</div>
+        </div>
+      </div>
+      <div class="hero-card-float">
+        <div class="hcf-left">
+          <span class="hcf-type">F&B · Dhaba</span>
+          <span class="hcf-title">Nisarga Family Restaurant</span>
+          <span class="hcf-loc">Bangalore–Mysore Highway</span>
+        </div>
+        <div class="hcf-price">
+          <div class="hcf-price-val">₹2 Lakh</div>
+          <div class="hcf-price-note">Advance</div>
+        </div>
+      </div>
+      <div class="hero-card-float">
+        <div class="hcf-left">
+          <span class="hcf-type">Beauty</span>
+          <span class="hcf-title">Unisex Salon</span>
+          <span class="hcf-loc">Bangalore</span>
+        </div>
+        <div class="hcf-price">
+          <div class="hcf-price-val">₹13K</div>
+          <div class="hcf-price-note">Monthly Rent</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-inner">
-    <span class="marquee-item"><span class="marquee-dot"></span> Hotels for Sale</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Cafes &amp; Restaurants</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Salons &amp; Spas</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Retail Shops</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Bakeries</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Food Trucks</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Snack Outlets</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Cloth Stores</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Dhabas on Highway</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Hotels for Sale</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Cafes &amp; Restaurants</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Salons &amp; Spas</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Retail Shops</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Bakeries</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Food Trucks</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Snack Outlets</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Cloth Stores</span>
-    <span class="marquee-item"><span class="marquee-dot"></span> Dhabas on Highway</span>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Hotels &amp; Lodges</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Cafés &amp; Restaurants</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Salons &amp; Spas</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Retail Boutiques</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Bakeries</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Food Trucks</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Highway Dhabas</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Snack Outlets</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Cloth Stores</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Hotels &amp; Lodges</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Cafés &amp; Restaurants</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Salons &amp; Spas</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Retail Boutiques</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Bakeries</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Food Trucks</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Highway Dhabas</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Snack Outlets</span>
+    <span class="marquee-item"><i data-lucide="gem" class="marquee-gem" aria-hidden="true"></i> Cloth Stores</span>
   </div>
 </div>
 
 <!-- CATEGORIES -->
-<section class="categories-section" id="categories">
-  <div class="section-label">Browse By Type</div>
-  <h2>What are you looking for?</h2>
-  <p class="section-sub">From food businesses to retail — find the right business opportunity across categories.</p>
+<section class="section cat-section" id="categories">
+  <div class="cat-header-row">
+    <div>
+      <div class="section-label"><div class="section-label-line"></div><span>Business Categories</span></div>
+      <h2 class="serif-head">What Are You<br><em>Looking For?</em></h2>
+    </div>
+    <p class="section-body" style="margin: 0; max-width: 320px;">Every listing is a running, revenue-generating business — ready for immediate acquisition.</p>
+  </div>
   <div class="cat-grid">
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🏨</div><div class="cat-name">Hotels</div><div class="cat-count">12 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">☕</div><div class="cat-name">Cafes</div><div class="cat-count">9 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🍽️</div><div class="cat-name">Restaurants</div><div class="cat-count">15 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">✂️</div><div class="cat-name">Salons</div><div class="cat-count">8 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🛍️</div><div class="cat-name">Retail Shops</div><div class="cat-count">20 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🍰</div><div class="cat-name">Bakeries</div><div class="cat-count">5 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🚚</div><div class="cat-name">Food Trucks</div><div class="cat-count">4 listings</div></a>
-    <a href="#listings" class="cat-card"><div class="cat-emoji">🍵</div><div class="cat-name">Tea Stalls</div><div class="cat-count">6 listings</div></a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="hotel" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Hotels &amp; Lodges</div>
+      <div class="cat-tile-count">12 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="utensils" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Restaurants</div>
+      <div class="cat-tile-count">15 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="coffee" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Cafés</div>
+      <div class="cat-tile-count">9 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="scissors" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Salons &amp; Spas</div>
+      <div class="cat-tile-count">8 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="shopping-bag" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Retail Shops</div>
+      <div class="cat-tile-count">20 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="cake-slice" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Bakeries</div>
+      <div class="cat-tile-count">5 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="truck" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Food Trucks</div>
+      <div class="cat-tile-count">4 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
+    <a href="#listings" class="cat-tile">
+      <i data-lucide="cup-soda" class="cat-tile-icon" aria-hidden="true"></i>
+      <div class="cat-tile-name">Tea Stalls</div>
+      <div class="cat-tile-count">6 Active Listings</div>
+      <div class="cat-tile-arrow"><i data-lucide="arrow-right" aria-hidden="true"></i></div>
+    </a>
   </div>
 </section>
 
 <!-- LISTINGS -->
-<section class="listings-section" id="listings">
-  <div class="section-header-row">
+<section class="section listings-section" id="listings">
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 0;">
     <div>
-      <div class="section-label">Latest Listings</div>
-      <h2>Businesses for Sale</h2>
+      <div class="section-label"><div class="section-label-line"></div><span>Current Opportunities</span></div>
+      <h2 class="serif-head">Businesses <em>Available</em></h2>
     </div>
-    <a href="https://www.instagram.com/direct_to_customerz" target="_blank" class="btn btn-outline">View All on Instagram →</a>
   </div>
-  <div class="filter-bar">
-    <button class="filter-chip active" onclick="filterListings('all', this)">All</button>
-    <button class="filter-chip" onclick="filterListings('hotel', this)">Hotels</button>
-    <button class="filter-chip" onclick="filterListings('restaurant', this)">Restaurants</button>
-    <button class="filter-chip" onclick="filterListings('salon', this)">Salons</button>
-    <button class="filter-chip" onclick="filterListings('retail', this)">Retail</button>
-    <button class="filter-chip" onclick="filterListings('food', this)">Food</button>
+  <div class="listing-filters">
+    <button class="lf-btn active" onclick="filter('all',this)">All</button>
+    <button class="lf-btn" onclick="filter('hotel',this)">Hotels</button>
+    <button class="lf-btn" onclick="filter('restaurant',this)">Restaurants</button>
+    <button class="lf-btn" onclick="filter('salon',this)">Salons</button>
+    <button class="lf-btn" onclick="filter('retail',this)">Retail</button>
+    <button class="lf-btn" onclick="filter('food',this)">Food &amp; Beverage</button>
   </div>
   <div class="listings-grid" id="listingsGrid">
 
-    <div class="listing-card" data-category="hotel">
-      <div class="listing-card-img" style="background:#FFF3E8;"><span>🏨</span><span class="listing-card-badge">Running Business</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Bangalore</div>
-        <div class="listing-card-title">Hotel for Sale</div>
-        <div class="listing-card-desc">Fully running hotel with established clientele. Well-located with good visibility. Immediate handover.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Advance</div><div class="price-value">₹5L</div><div class="price-note">negotiable</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Hotel listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="hotel">
+      <div class="listing-card-img" style="background:#1A1610;">
+        <i data-lucide="hotel" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">Running Business</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Hotel</div>
+        <div class="lc-title">Swadishta Cafe &amp; Hotel</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Central Bangalore</div>
+        <div class="lc-desc">Fully operational hotel with established clientele and consistent footfall. Prime visibility, immediate handover available with all assets included.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Advance Required</div>
+            <div class="lc-price-val">₹5 Lakh</div>
+            <div class="lc-price-note">Negotiable</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
 
-    <div class="listing-card" data-category="restaurant">
-      <div class="listing-card-img" style="background:#E8F5EE;"><span>🍽️</span><span class="listing-card-badge">Running Business</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Hennur Main Road, Bangalore</div>
-        <div class="listing-card-title">Restaurant for Sale</div>
-        <div class="listing-card-desc">Near Big Brewski Brewing Co. Monthly business ₹8L to ₹10L. Prime location with loyal customer base.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Advance</div><div class="price-value">₹2L</div><div class="price-note">monthly ₹8-10L biz</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Restaurant listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="restaurant">
+      <div class="listing-card-img" style="background:#101A12;">
+        <i data-lucide="utensils" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">High Revenue</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Restaurant</div>
+        <div class="lc-title">Restaurant — Hennur Road</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Near Big Brewski, Bangalore</div>
+        <div class="lc-desc">Strategic location near a premium brewery hub. Monthly business of ₹8–10 Lakh with loyal walk-in and delivery customer base.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Advance Required</div>
+            <div class="lc-price-val">₹2 Lakh</div>
+            <div class="lc-price-note">₹8–10L Monthly Revenue</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
 
-    <div class="listing-card" data-category="salon">
-      <div class="listing-card-img" style="background:#F5E8FF;"><span>✂️</span><span class="listing-card-badge">For Sale/Rent</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Bangalore</div>
-        <div class="listing-card-title">Unisex Salon for Sale</div>
-        <div class="listing-card-desc">Fully equipped unisex salon. Available for sale or rent at ₹13K/month. All furniture and equipment included.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Advance</div><div class="price-value">₹2L</div><div class="price-note">or rent ₹13K/mo</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Salon listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="salon">
+      <div class="listing-card-img" style="background:#1A1018;">
+        <i data-lucide="scissors" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">Sale or Rent</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Salon</div>
+        <div class="lc-title">Unisex Salon</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Bangalore</div>
+        <div class="lc-desc">Fully fitted unisex salon available for outright purchase or monthly rental. All premium equipment and furniture included in transfer.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Advance / Rent</div>
+            <div class="lc-price-val">₹2 Lakh</div>
+            <div class="lc-price-note">Or ₹13K / Month</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
 
-    <div class="listing-card" data-category="food">
-      <div class="listing-card-img" style="background:#E8F0FF;"><span>🍰</span><span class="listing-card-badge">Running Business</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Yalahanka, Bangalore</div>
-        <div class="listing-card-title">Bakery for Sale</div>
-        <div class="listing-card-desc">Established bakery near Garuda Mall, Yalahanka. Well-set-up interior with regular customers.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Advance</div><div class="price-value">₹2L</div><div class="price-note">negotiable</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Bakery listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="food">
+      <div class="listing-card-img" style="background:#1A1508;">
+        <i data-lucide="cake-slice" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">Running Business</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Bakery</div>
+        <div class="lc-title">Bakery — Yalahanka</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Near Garuda Mall, Yalahanka</div>
+        <div class="lc-desc">Established bakery with sophisticated interiors and regular daily customers. Strong monthly profit margins with scope for expansion.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Profit</div>
+            <div class="lc-price-val">₹1–2 Lakh</div>
+            <div class="lc-price-note">Monthly</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
 
-    <div class="listing-card" data-category="food">
-      <div class="listing-card-img" style="background:#FFF5E8;"><span>🚚</span><span class="listing-card-badge">Running Business</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Near Indiranagar, Bangalore</div>
-        <div class="listing-card-title">Food Truck for Sale</div>
-        <div class="listing-card-desc">Love Bites food truck. Very low price. Operating near Indiranagar. Immediate transfer of ownership available.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Price</div><div class="price-value">Low</div><div class="price-note">contact for quote</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Food Truck listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="food">
+      <div class="listing-card-img" style="background:#0E1218;">
+        <i data-lucide="truck" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">Very Low Price</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Food Truck</div>
+        <div class="lc-title">Love Bites Food Truck</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Near Indiranagar, Bangalore</div>
+        <div class="lc-desc">Fully operational branded food truck positioned in one of Bangalore's most premium and high-footfall corridors. Immediate ownership transfer.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Asking Price</div>
+            <div class="lc-price-val">On Request</div>
+            <div class="lc-price-note">Very Competitive</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
 
-    <div class="listing-card" data-category="retail">
-      <div class="listing-card-img" style="background:#E8FFF3;"><span>👗</span><span class="listing-card-badge">Running Business</span></div>
-      <div class="listing-card-body">
-        <div class="listing-card-meta">📍 Bangalore</div>
-        <div class="listing-card-title">Cloth Shop for Sale</div>
-        <div class="listing-card-desc">Running cloth store with full inventory. Stock and shopfitting included. Established supplier network.</div>
-        <div class="listing-card-footer">
-          <div><div class="price-label">Advance</div><div class="price-value">₹5L</div><div class="price-note">incl. stock</div></div>
-          <a href="https://wa.me/916363528371?text=I'm interested in the Cloth Shop listing" target="_blank" class="wa-btn">💬 Enquire</a>
+    <div class="listing-card" data-cat="retail">
+      <div class="listing-card-img" style="background:#101A10;">
+        <i data-lucide="shirt" aria-hidden="true"></i>
+        <div class="listing-card-img-overlay"></div>
+        <span class="lc-badge">Stock Included</span>
+      </div>
+      <div class="lc-body">
+        <div class="lc-type">Retail</div>
+        <div class="lc-title">Cloth Store</div>
+        <div class="lc-loc"><i data-lucide="map-pin" aria-hidden="true"></i>Bangalore</div>
+        <div class="lc-desc">Running cloth boutique with complete inventory and established supplier network. Business, branding and customer base transferred in full.</div>
+        <div class="lc-footer">
+          <div>
+            <div class="lc-price-lbl">Advance Required</div>
+            <div class="lc-price-val">₹5 Lakh</div>
+            <div class="lc-price-note">Includes Full Stock</div>
+          </div>
+          <a href="#sell" class="lc-enquire">Enquire</a>
         </div>
       </div>
     </div>
@@ -799,28 +1226,28 @@
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="section-label">Simple Process</div>
-  <h2>How It Works</h2>
-  <p class="section-sub">Whether you're a buyer or a seller, getting started takes just minutes.</p>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <div class="step-for seller">For Sellers</div>
-      <div class="step-title">DM or WhatsApp Us</div>
-      <div class="step-desc">Share your business details, photos, and asking price with us via Instagram DM or WhatsApp. Only genuine sellers, please.</div>
+<section class="section how-section" id="process">
+  <div class="section-label"><div class="section-label-line"></div><span>The Process</span></div>
+  <h2 class="serif-head">Simple. Direct. <em>Effective.</em></h2>
+  <p class="section-body">Whether you're acquiring or divesting — the process is built for speed and transparency with zero middlemen involved.</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-step-num">01</div>
+      <div class="how-step-for seller">For Sellers</div>
+      <div class="how-step-title">Contact &amp; Share Details</div>
+      <div class="how-step-desc">Submit your business details, location, photos and asking price through our listing form. Our team reviews every enquiry personally.</div>
     </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <div class="step-for seller">For Sellers</div>
-      <div class="step-title">We Post Your Listing</div>
-      <div class="step-desc">We create a professional video/post for your business and share it with our 93K+ followers at zero cost to you.</div>
+    <div class="how-step">
+      <div class="how-step-num">02</div>
+      <div class="how-step-for seller">For Sellers</div>
+      <div class="how-step-title">We Publish Your Listing</div>
+      <div class="how-step-desc">Your business is professionally featured across our 93K+ strong community — at absolutely zero cost to you. No listing fees, ever.</div>
     </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <div class="step-for buyer">For Buyers</div>
-      <div class="step-title">Browse &amp; Connect Directly</div>
-      <div class="step-desc">Buyers browse listings and connect with sellers directly. No broker, no commission — just a direct deal between both parties.</div>
+    <div class="how-step">
+      <div class="how-step-num">03</div>
+      <div class="how-step-for buyer">For Buyers</div>
+      <div class="how-step-title">Connect &amp; Close Directly</div>
+      <div class="how-step-desc">Buyers connect with sellers directly — no broker, no commission, no delays. A pure deal between two parties who both benefit.</div>
     </div>
   </div>
 </section>
@@ -829,37 +1256,37 @@
 <section class="sell-section" id="sell">
   <div class="sell-inner">
     <div>
-      <div class="section-label">For Business Owners</div>
-      <h2>Ready to Sell Your Business?</h2>
-      <p class="sell-sub">List your running business in front of 93,000+ potential buyers — for free. No brokerage, no hidden fees. Just share and sell.</p>
+      <div class="section-label"><div class="section-label-line"></div><span>For Business Owners</span></div>
+      <h2 class="serif-head">List Your <em>Business.</em><br>Sell It Fast.</h2>
+      <p style="font-size:14px; font-weight:300; color:var(--warm-gray); line-height:1.9; margin: 20px 0 0;">Reach over 93,000 verified buyers across Bangalore and Karnataka — completely free. No brokerage, no hidden charges, no delays.</p>
       <ul class="sell-points">
-        <li>Completely free to list your business</li>
-        <li>Reach 93K+ active Instagram followers</li>
-        <li>Professional video coverage of your business</li>
-        <li>Direct connection with serious buyers</li>
-        <li>WhatsApp support throughout the process</li>
+        <li><span class="sell-point-icon"><i data-lucide="check" aria-hidden="true"></i></span>Free to list — zero brokerage or platform fees</li>
+        <li><span class="sell-point-icon"><i data-lucide="check" aria-hidden="true"></i></span>Access to 93K+ active, high-intent buyers</li>
+        <li><span class="sell-point-icon"><i data-lucide="check" aria-hidden="true"></i></span>Professional media coverage for your business</li>
+        <li><span class="sell-point-icon"><i data-lucide="check" aria-hidden="true"></i></span>Direct buyer-seller connection — no intermediary</li>
+        <li><span class="sell-point-icon"><i data-lucide="check" aria-hidden="true"></i></span>Dedicated support throughout the sale process</li>
       </ul>
-      <a href="https://wa.me/916363528371?text=Hi, I want to sell my business" target="_blank" class="btn btn-primary btn-lg">📲 WhatsApp to List Now</a>
     </div>
-    <div class="sell-form">
-      <h3>Quick Enquiry Form</h3>
+    <div class="sell-form-wrap">
+      <div class="sell-form-title">Submit Your Business</div>
+      <div class="sell-form-sub">Our team will review your details and get back within 24 hours.</div>
       <div class="form-row">
         <div class="form-group">
           <label>Your Name</label>
-          <input type="text" placeholder="Ramesh Kumar">
+          <input type="text" placeholder="Full Name">
         </div>
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="tel" placeholder="+91 98765 43210">
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
         </div>
       </div>
       <div class="form-group">
         <label>Business Type</label>
         <select>
-          <option>Select category...</option>
+          <option value="">Select category</option>
           <option>Hotel / Lodge</option>
           <option>Restaurant / Dhaba</option>
-          <option>Cafe</option>
+          <option>Café</option>
           <option>Salon / Spa</option>
           <option>Retail Shop</option>
           <option>Bakery</option>
@@ -870,120 +1297,117 @@
       <div class="form-row">
         <div class="form-group">
           <label>Location</label>
-          <input type="text" placeholder="Whitefield, Bangalore">
+          <input type="text" placeholder="Area, City">
         </div>
         <div class="form-group">
-          <label>Asking Price (₹)</label>
-          <input type="text" placeholder="e.g. 2L advance">
+          <label>Asking Price</label>
+          <input type="text" placeholder="e.g. ₹2L advance">
         </div>
       </div>
       <div class="form-group">
-        <label>Brief Description</label>
-        <textarea placeholder="Monthly revenue, years running, reason for selling..."></textarea>
+        <label>Business Description</label>
+        <textarea placeholder="Monthly revenue, years in operation, reason for selling..."></textarea>
       </div>
-      <a href="https://wa.me/916363528371" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;">Send via WhatsApp →</a>
+      <button class="form-submit">Submit Listing Request</button>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
-  <div class="section-label">Success Stories</div>
-  <h2>Deals Made Through Us</h2>
-  <p class="section-sub">Business owners across Bangalore have successfully sold through Direct to Customerz.</p>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Listed my tea stall in the morning, got 3 serious enquiries by evening. Sold within a week. The WhatsApp process was super smooth."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#F26522;">RK</div>
-        <div><div class="author-name">Rajan Kumar</div><div class="author-role">Tea Stall Owner, Rajajinagar</div></div>
-      </div>
+  <div class="section-label"><div class="section-label-line"></div><span>Testimonials</span></div>
+  <h2 class="serif-head">Successful <em>Acquisitions.</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars" aria-label="5 out of 5 stars"><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i></div>
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Listed my tea stall in the morning and had three serious enquiries by evening. Sold within a week. The most straightforward process I've experienced.</p>
+      <div class="testi-author-name">Rajan Kumar</div>
+      <div class="testi-author-role">Tea Stall Owner · Rajajinagar, Bangalore</div>
     </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"I was looking for a snack shop to buy. Found the perfect one here at Whitefield. Monthly biz of ₹1.5L-2L, and zero broker fees."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#1A6B3C;">SM</div>
-        <div><div class="author-name">Suresh Murthy</div><div class="author-role">Buyer, Whitefield</div></div>
-      </div>
+    <div class="testi-card">
+      <div class="testi-stars" aria-label="5 out of 5 stars"><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i></div>
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Found the perfect snack shop in Whitefield — monthly business of ₹1.5–2 Lakh. Zero broker involvement meant I saved considerably on the acquisition cost.</p>
+      <div class="testi-author-name">Suresh Murthy</div>
+      <div class="testi-author-role">Buyer · Whitefield, Bangalore</div>
     </div>
-    <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Sold my salon in just 10 days. The video they made looked very professional. Highly recommend for any business owner wanting to sell fast."</p>
-      <div class="testimonial-author">
-        <div class="author-avatar" style="background:#7C3AED;">PD</div>
-        <div><div class="author-name">Priya Devi</div><div class="author-role">Salon Owner, Koramangala</div></div>
-      </div>
+    <div class="testi-card">
+      <div class="testi-stars" aria-label="5 out of 5 stars"><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i></div>
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">My salon sold in ten days. The professional coverage they created gave buyers genuine confidence. Highly recommend for anyone serious about selling quickly.</p>
+      <div class="testi-author-name">Priya Devi</div>
+      <div class="testi-author-role">Salon Owner · Koramangala, Bangalore</div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="contact">
+<footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <div class="logo-icon">D2C</div>
-        <span class="logo-text">Direct to <span>Customerz</span></span>
-      </div>
-      <p class="footer-desc">Bangalore's trusted platform for buying and selling running businesses. Directly from sellers to customers — no middlemen.</p>
+    <div>
+      <div class="footer-brand-name">Direct to Customerz</div>
+      <div class="footer-brand-tag">Premium Business Acquisitions</div>
+      <p class="footer-desc">Bangalore's trusted platform for buying and selling running businesses. From sellers, directly to customers — no intermediaries.</p>
     </div>
     <div class="footer-col">
       <h4>Listings</h4>
       <ul>
-        <li><a href="#">Hotels</a></li>
+        <li><a href="#">Hotels &amp; Lodges</a></li>
         <li><a href="#">Restaurants</a></li>
+        <li><a href="#">Cafés</a></li>
         <li><a href="#">Salons</a></li>
         <li><a href="#">Retail Shops</a></li>
-        <li><a href="#">Food Trucks</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h4>Navigate</h4>
       <ul>
         <li><a href="#">Browse Listings</a></li>
-        <li><a href="#">Sell Your Business</a></li>
+        <li><a href="#">List a Business</a></li>
         <li><a href="#">How It Works</a></li>
-        <li><a href="https://www.instagram.com/direct_to_customerz" target="_blank">Instagram</a></li>
+        <li><a href="#">About Us</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="https://wa.me/916363528371" target="_blank">WhatsApp: 6363528371</a></li>
-        <li><a href="https://www.instagram.com/direct_to_customerz" target="_blank">@direct_to_customerz</a></li>
+        <li><a href="#">Enquiry Form</a></li>
         <li><a href="#">Bangalore, Karnataka</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Direct to Customerz. All rights reserved.</span>
-    <span>Made for Bangalore's Business Community 🧡</span>
+    <span>© 2026 Direct to Customerz. All Rights Reserved.</span>
+    <span>Bangalore, Karnataka, India</span>
   </div>
 </footer>
 
-<!-- WhatsApp Float -->
-<a href="https://wa.me/916363528371" target="_blank" class="wa-fixed" title="Chat on WhatsApp">💬</a>
-
 <script>
-  function filterListings(cat, btn) {
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  function filter(cat, btn) {
+    document.querySelectorAll('.lf-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.listing-card').forEach(card => {
-      if (cat === 'all' || card.dataset.category === cat) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
     });
   }
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
+  });
+
+  window.lucide?.createIcons();
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.borderBottomColor = window.scrollY > 40
+      ? 'rgba(201,168,76,0.25)'
+      : 'rgba(201,168,76,0.12)';
   });
 </script>
 </body>
