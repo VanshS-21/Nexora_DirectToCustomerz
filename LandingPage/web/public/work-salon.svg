@@ -1,0 +1,18 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#F5D9C8"/>
+  <rect x="100" y="78" width="1000" height="604" rx="38" fill="#FFF8F0"/>
+  <path d="M100 394C214 302 330 302 446 394C560 486 674 486 790 394C904 302 988 316 1100 394V644C1100 665 1083 682 1062 682H138C117 682 100 665 100 644V394Z" fill="#F1B7A1"/>
+  <rect x="166" y="132" width="868" height="58" rx="29" fill="#5C3C48"/>
+  <rect x="205" y="153" width="154" height="16" rx="8" fill="#FFF8F0"/>
+  <rect x="798" y="145" width="154" height="32" rx="16" fill="#E9552E"/>
+  <text x="176" y="316" fill="#3D2D34" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800">Bloom</text>
+  <text x="176" y="394" fill="#3D2D34" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800">Studio</text>
+  <rect x="184" y="440" width="206" height="54" rx="27" fill="#E9552E"/>
+  <text x="221" y="475" fill="#FFF8EA" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Book now</text>
+  <circle cx="782" cy="356" r="126" fill="#FFF8F0"/>
+  <path d="M720 330C744 254 844 256 870 330C898 408 824 470 782 518C740 470 694 408 720 330Z" fill="#5C3C48"/>
+  <circle cx="744" cy="346" r="22" fill="#F1B7A1"/>
+  <circle cx="826" cy="346" r="22" fill="#F1B7A1"/>
+  <rect x="670" y="562" width="266" height="22" rx="11" fill="#5C3C48" opacity="0.28"/>
+  <rect x="706" y="604" width="194" height="22" rx="11" fill="#5C3C48" opacity="0.22"/>
+</svg>

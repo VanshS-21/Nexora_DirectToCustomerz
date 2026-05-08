@@ -1,0 +1,25 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#143F34"/>
+  <rect x="82" y="72" width="1036" height="616" rx="26" fill="#F9F1DF"/>
+  <rect x="82" y="72" width="1036" height="74" rx="26" fill="#173529"/>
+  <circle cx="130" cy="110" r="12" fill="#E9552E"/>
+  <circle cx="166" cy="110" r="12" fill="#F2B84B"/>
+  <circle cx="202" cy="110" r="12" fill="#83B87A"/>
+  <rect x="256" y="98" width="264" height="23" rx="11.5" fill="#E9DEC8"/>
+  <rect x="844" y="94" width="178" height="31" rx="15.5" fill="#E9552E"/>
+  <text x="292" y="285" fill="#252018" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="800">Corner</text>
+  <text x="292" y="364" fill="#252018" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="800">Bistro</text>
+  <rect x="296" y="408" width="184" height="54" rx="27" fill="#E9552E"/>
+  <text x="331" y="443" fill="#FFF8EA" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Reserve</text>
+  <rect x="544" y="218" width="348" height="340" rx="28" fill="#233D31"/>
+  <circle cx="718" cy="388" r="126" fill="#F4C86E"/>
+  <circle cx="682" cy="368" r="44" fill="#D86E3D"/>
+  <circle cx="758" cy="368" r="38" fill="#8EAE64"/>
+  <path d="M620 450C680 496 758 493 824 450" stroke="#FFF8EA" stroke-width="22" stroke-linecap="round"/>
+  <rect x="914" y="220" width="112" height="338" rx="56" fill="#E2EAD8"/>
+  <rect x="930" y="272" width="80" height="22" rx="11" fill="#143F34"/>
+  <rect x="930" y="322" width="80" height="22" rx="11" fill="#143F34"/>
+  <rect x="930" y="372" width="80" height="22" rx="11" fill="#143F34"/>
+  <rect x="172" y="558" width="324" height="58" rx="12" fill="#EEE4CF"/>
+  <rect x="534" y="592" width="418" height="20" rx="10" fill="#E7D7B7"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#191711"/>
+  <rect x="84" y="80" width="1032" height="600" rx="30" fill="#232018"/>
+  <rect x="128" y="126" width="944" height="74" rx="18" fill="#F4EFE5"/>
+  <rect x="174" y="152" width="170" height="22" rx="11" fill="#191711"/>
+  <rect x="814" y="144" width="174" height="38" rx="19" fill="#E9552E"/>
+  <text x="164" y="342" fill="#F7F0DF" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="900">Pulse</text>
+  <text x="164" y="430" fill="#F7F0DF" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="900">Coach</text>
+  <rect x="168" y="478" width="230" height="58" rx="29" fill="#E9552E"/>
+  <text x="211" y="516" fill="#FFF8EA" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800">Start plan</text>
+  <path d="M586 566C650 372 759 252 912 168" stroke="#F2B84B" stroke-width="42" stroke-linecap="round"/>
+  <path d="M620 566C680 444 803 402 932 438" stroke="#83B87A" stroke-width="42" stroke-linecap="round"/>
+  <circle cx="878" cy="312" r="92" fill="#F7F0DF"/>
+  <circle cx="878" cy="312" r="54" fill="#E9552E"/>
+  <rect x="598" y="520" width="390" height="44" rx="22" fill="#F7F0DF" opacity="0.94"/>
+  <rect x="644" y="588" width="278" height="24" rx="12" fill="#F2B84B"/>
+</svg>
