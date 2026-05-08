@@ -36,7 +36,7 @@ export function FooterSection() {
         </a>
         <div className={styles.footerRule} aria-hidden="true" />
         <p className={styles.footerTagline}>We make local websites feel worth clicking.</p>
-        <p className={styles.footerCopyright}>©2026 Nexora Labs</p>
+        <p className={styles.footerCopyright}>&copy;2026 Nexora Labs</p>
       </div>
     </footer>
   );

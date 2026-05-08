@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FooterSection } from "./FooterSection";
 import { IntroGreeting } from "./IntroGreeting";
+import { ScrollChoreography } from "./ScrollChoreography";
 import { TestimonialStack } from "./TestimonialStack";
 import { WorkShowcase } from "./WorkShowcase";
 import styles from "./page.module.css";
@@ -28,100 +29,6 @@ const processSteps = [
   },
 ];
 
-const processCardsScript = `
-(() => {
-  const init = () => {
-    const section = document.querySelector("[data-process-section]");
-    const grid = section?.querySelector("[data-process-grid]");
-    const cards = Array.from(section?.querySelectorAll("[data-process-card]") || []);
-
-    if (!section || !grid || !cards.length) {
-      return;
-    }
-
-    if (section.__nexoraProcessCleanup) {
-      section.__nexoraProcessCleanup();
-    }
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-    const easeOutQuart = (value) => 1 - Math.pow(1 - value, 4);
-
-    const update = () => {
-      frame = 0;
-
-      if (reduceMotion.matches) {
-        cards.forEach((card) => {
-          card.style.setProperty("--process-stack-x", "0px");
-          card.style.setProperty("--process-stack-y", "0px");
-          card.style.setProperty("--process-stack-rotate", "0deg");
-          card.style.setProperty("--process-card-scale", "1");
-        });
-        return;
-      }
-
-      const gridRect = grid.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const rawProgress = clamp((viewportHeight * 0.86 - gridRect.top) / (viewportHeight * 0.48));
-      const progress = easeOutQuart(rawProgress);
-      const remaining = 1 - progress;
-      const stackCenterX = grid.clientWidth / 2;
-      const stackCenterY = grid.clientHeight / 2;
-      const middleIndex = (cards.length - 1) / 2;
-
-      section.style.setProperty("--process-progress", progress.toFixed(3));
-
-      cards.forEach((card, index) => {
-        const cardCenterX = card.offsetLeft + card.offsetWidth / 2;
-        const cardCenterY = card.offsetTop + card.offsetHeight / 2;
-        const stackX = (stackCenterX - cardCenterX) * remaining;
-        const stackY = (stackCenterY - cardCenterY) * remaining;
-        const rotate = (middleIndex - index) * 2.15 * remaining;
-        const scale = 0.94 + progress * 0.06;
-
-        card.style.setProperty("--process-stack-x", Math.round(stackX) + "px");
-        card.style.setProperty("--process-stack-y", Math.round(stackY) + "px");
-        card.style.setProperty("--process-stack-rotate", rotate.toFixed(2) + "deg");
-        card.style.setProperty("--process-card-scale", scale.toFixed(3));
-        card.style.setProperty("--process-z", String(cards.length - index));
-      });
-    };
-
-    const scheduleUpdate = () => {
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    window.addEventListener("pageshow", update);
-    reduceMotion.addEventListener("change", update);
-    section.__nexoraProcessCleanup = () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      window.removeEventListener("pageshow", update);
-      reduceMotion.removeEventListener("change", update);
-    };
-
-    update();
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-})();
-`;
-
 const services = [
   {
     number: "01",
@@ -145,93 +52,6 @@ const services = [
     details: ["Logo and identity design", "Brand guidelines", "Creative direction for launch"],
   },
 ];
-
-const servicesScrollScript = `
-(() => {
-  const init = () => {
-    const section = document.querySelector("[data-services-section]");
-    const shell = section?.querySelector("[data-service-shell]");
-    const rail = section?.querySelector("[data-service-rail]");
-    const panels = Array.from(section?.querySelectorAll("[data-service-panel]") || []);
-
-    if (!section || !shell || !rail || !panels.length) {
-      return;
-    }
-
-    if (section.__nexoraServicesCleanup) {
-      section.__nexoraServicesCleanup();
-    }
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-
-    const update = () => {
-      frame = 0;
-
-      if (reduceMotion.matches || window.innerWidth < 760) {
-        section.style.setProperty("--service-progress", "1");
-        rail.style.setProperty("--service-shift", "0px");
-        panels.forEach((panel) => {
-          panel.style.setProperty("--service-panel-opacity", "1");
-          panel.style.setProperty("--service-panel-scale", "1");
-        });
-        return;
-      }
-
-      const sectionRect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const scrollRange = Math.max(1, section.offsetHeight - viewportHeight);
-      const progress = clamp(-sectionRect.top / scrollRange);
-      const maxShift = Math.max(0, rail.scrollHeight - shell.clientHeight);
-      const activeIndex = progress * (panels.length - 1);
-
-      section.style.setProperty("--service-progress", progress.toFixed(3));
-      rail.style.setProperty("--service-shift", Math.round(-maxShift * progress) + "px");
-
-      panels.forEach((panel, index) => {
-        const distance = Math.abs(index - activeIndex);
-        const opacity = clamp(1 - distance * 0.5, 0.28, 1);
-        const scale = 1 - clamp(distance * 0.035, 0, 0.07);
-
-        panel.style.setProperty("--service-panel-opacity", opacity.toFixed(3));
-        panel.style.setProperty("--service-panel-scale", scale.toFixed(3));
-      });
-    };
-
-    const scheduleUpdate = () => {
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    window.addEventListener("pageshow", update);
-    reduceMotion.addEventListener("change", update);
-    section.__nexoraServicesCleanup = () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      window.removeEventListener("pageshow", update);
-      reduceMotion.removeEventListener("change", update);
-    };
-
-    update();
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-})();
-`;
 
 const packages = [
   {
@@ -347,7 +167,6 @@ export default function Home() {
           <a href="#about">About</a>
           <a href="#work">Work</a>
           <a href="#pricing">Pricing</a>
-          <a href="#showreel">Showreel</a>
           <a href="#contact" className={styles.navCta}>
             Contact us
           </a>
@@ -388,10 +207,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <script
-          id="nexora-process-scroll"
-          dangerouslySetInnerHTML={{ __html: processCardsScript }}
-        />
 
         <section id="services" className={styles.servicesSection} data-services-section>
           <div className={styles.servicesStickyFrame}>
@@ -427,10 +242,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <script
-          id="nexora-services-scroll"
-          dangerouslySetInnerHTML={{ __html: servicesScrollScript }}
-        />
 
         <WorkShowcase />
 
@@ -476,6 +287,7 @@ export default function Home() {
 
         <FooterSection />
       </main>
+      <ScrollChoreography />
     </div>
   );
 }

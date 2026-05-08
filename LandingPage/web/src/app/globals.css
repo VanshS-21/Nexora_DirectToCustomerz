@@ -4,8 +4,8 @@
   /* Colors (Committed Strategy - Orange Anchor) */
   --hue-brand: 45; /* Orange hue */
   
-  --color-primary: oklch(65% 0.22 var(--hue-brand));
-  --color-primary-hover: oklch(60% 0.20 var(--hue-brand));
+  --color-primary: oklch(56% 0.20 var(--hue-brand));
+  --color-primary-hover: oklch(52% 0.18 var(--hue-brand));
   
   /* Warm cream background */
   --color-bg: oklch(97% 0.015 var(--hue-brand));
@@ -88,6 +88,12 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
 }
 
 button {

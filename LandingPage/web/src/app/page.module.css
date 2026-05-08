@@ -112,9 +112,8 @@
   right: 0;
   bottom: 0;
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(92px, 1fr);
-  overflow-x: auto;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  overflow-x: hidden;
   min-height: 66px;
   border-top: 1px solid oklch(28% 0.02 var(--hue-brand) / 0.12);
   background: oklch(96% 0.018 var(--hue-brand));
@@ -124,10 +123,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 0 10px;
+  gap: 5px;
+  min-width: 0;
+  padding: 0 4px;
   color: var(--color-text-muted);
-  font-size: 0.72rem;
+  font-size: clamp(0.58rem, 1.9vw, 0.72rem);
   font-weight: 850;
   white-space: nowrap;
   border-right: 1px solid oklch(28% 0.02 var(--hue-brand) / 0.08);
@@ -183,16 +183,18 @@
   width: 100%;
   margin-left: auto;
   color: var(--color-primary);
-  font-size: 2.7rem;
+  font-size: clamp(2.45rem, 11vw, 7.4rem);
   font-weight: 950;
   line-height: 0.9;
   letter-spacing: 0;
   text-transform: none;
   text-align: right;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .heroTitle span {
-  white-space: nowrap;
+  min-width: 0;
 }
 
 .greetingSection {
@@ -1229,7 +1231,7 @@
   }
 
   .heroTitle {
-    font-size: 6.7rem;
+    font-size: clamp(5rem, 8.7vw, 7.4rem);
   }
 
   .processSection h2,
@@ -1311,7 +1313,7 @@
 
 @media (min-width: 1180px) {
   .heroTitle {
-    font-size: 8.8rem;
+    font-size: clamp(6.8rem, 8vw, 7.4rem);
   }
 
   .processSection h2,
@@ -1331,6 +1333,7 @@
   }
 
   .heroTitle {
+    font-size: clamp(2.55rem, 11vw, 3.4rem);
     text-align: right;
     letter-spacing: 0;
   }

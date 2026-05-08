@@ -68,81 +68,6 @@ function CapabilityGlyph({ type }: { type: string }) {
   );
 }
 
-const greetingScrollScript = `
-(() => {
-  const init = () => {
-    const section = document.querySelector("[data-greeting-section]");
-
-    if (!section) {
-      return;
-    }
-
-    if (section.__nexoraGreetingCleanup) {
-      section.__nexoraGreetingCleanup();
-    }
-
-    const copy = section.querySelector("[data-greeting-copy]");
-    const lines = Array.from(section.querySelectorAll("[data-ink-line]"));
-    const pills = Array.from(section.querySelectorAll("[data-capability-pill]"));
-    let frame = 0;
-    const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-
-    const update = () => {
-      frame = 0;
-      const viewportHeight = window.innerHeight || 1;
-      const copyRect = (copy || section).getBoundingClientRect();
-      const progress = clamp((viewportHeight * 0.84 - copyRect.top) / (viewportHeight * 0.36));
-
-      section.style.setProperty("--scroll-progress", progress.toFixed(3));
-
-      lines.forEach((line) => {
-        const lineRect = line.getBoundingClientRect();
-        const ink = clamp((viewportHeight * 0.82 - lineRect.top) / (viewportHeight * 0.24));
-        line.style.setProperty("--ink-percent", Math.round(ink * 100) + "%");
-      });
-
-      pills.forEach((pill) => {
-        const side = pill.dataset.pillSide;
-        const direction = side === "left" ? 1 : -1;
-        const tiltDirection = side === "left" ? -1 : 1;
-
-        pill.style.setProperty("--pill-shift", Math.round(direction * 66 * progress) + "px");
-        pill.style.setProperty("--pill-tilt", (tiltDirection * 2 * (1 - progress)).toFixed(2) + "deg");
-      });
-    };
-
-    const scheduleUpdate = () => {
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    window.addEventListener("pageshow", update);
-    section.__nexoraGreetingCleanup = () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      window.removeEventListener("pageshow", update);
-    };
-
-    update();
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
-  }
-})();
-`;
-
 export function IntroGreeting() {
   return (
     <>
@@ -182,10 +107,6 @@ export function IntroGreeting() {
           ))}
         </div>
       </section>
-      <script
-        id="nexora-greeting-scroll"
-        dangerouslySetInnerHTML={{ __html: greetingScrollScript }}
-      />
     </>
   );
 }
