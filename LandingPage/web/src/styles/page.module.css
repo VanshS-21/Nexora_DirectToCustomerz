@@ -3282,43 +3282,57 @@
 
 .serviceNavDot,
 .testimonialNavDot {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition:
+    transform 220ms var(--ease-out);
+}
+
+.serviceNavDot::before,
+.testimonialNavDot::before {
+  content: "";
   width: 10px;
   height: 10px;
-  padding: 0;
   border: 1.5px solid oklch(20% 0.02 var(--hue-brand) / 0.2);
   border-radius: 50%;
   background: oklch(99% 0.01 70);
-  cursor: pointer;
   transition:
     background-color 220ms var(--ease-out),
-    transform 220ms var(--ease-out),
-    box-shadow 220ms var(--ease-out);
+    box-shadow 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
 }
 
-.serviceNavDot:hover,
-.testimonialNavDot:hover {
+.serviceNavDot:hover::before,
+.testimonialNavDot:hover::before {
   transform: scale(1.2);
 }
 
-.serviceNavDot[data-dot-state="active"],
-.testimonialNavDot[data-dot-state="active"] {
+.serviceNavDot[data-dot-state="active"]::before,
+.testimonialNavDot[data-dot-state="active"]::before {
   background: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px oklch(56% 0.2 var(--hue-brand) / 0.18);
   transform: scale(1.15);
 }
 
-.serviceNavDot[data-dot-state="passed"],
-.testimonialNavDot[data-dot-state="passed"] {
+.serviceNavDot[data-dot-state="passed"]::before,
+.testimonialNavDot[data-dot-state="passed"]::before {
   background: var(--color-lime);
   border-color: var(--color-lime);
 }
 
-.testimonialNavDot {
+.testimonialNavDot::before {
   border-color: oklch(20% 0.02 var(--hue-brand) / 0.14);
 }
 
-.testimonialNavDot[data-dot-state="active"] {
+.testimonialNavDot[data-dot-state="active"]::before {
   background: var(--color-primary);
   border-color: var(--color-primary);
 }

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Target, Sparkles, Wand, BarChart3 } from "lucide-react";
+import { Target, Sparkles, Wand, BarChart3, ArrowUp } from "lucide-react";
 import { FooterSection } from "@/components/FooterSection";
 import { IntroGreeting } from "@/components/IntroGreeting";
 import { ScrollChoreography } from "@/components/ScrollChoreography";
@@ -216,10 +216,10 @@ export default function Home() {
         <section id="about" className={styles.heroSection}>
           <div className={styles.heroScene} aria-hidden="true">
             <div className={`${styles.heroArtifact} ${styles.heroArtifactBistro}`}>
-              <Image src="/work-bistro.svg" alt="" fill sizes="22vw" />
+              <Image src="/work-bistro.svg" alt="" fill sizes="22vw" priority />
             </div>
             <div className={`${styles.heroArtifact} ${styles.heroArtifactClinic}`}>
-              <Image src="/work-clinic.svg" alt="" fill sizes="18vw" />
+              <Image src="/work-clinic.svg" alt="" fill sizes="18vw" priority />
             </div>
           </div>
           <div className={styles.heroIntro}>
@@ -278,11 +278,12 @@ export default function Home() {
           <div className={styles.servicesStickyFrame}>
             <div className={styles.servicesMedia}>
               <Image
-                src="/services-background.png"
+                src="/services-background.webp"
                 alt=""
                 fill
                 sizes="100vw"
                 className={styles.servicesBackground}
+                priority
               />
             </div>
             <div className={styles.servicesScrim} />
@@ -356,7 +357,7 @@ export default function Home() {
                     <li key={feature}>{feature}</li>
                   ))}
                 </ul>
-                <a href="#contact">{item.action}</a>
+                <a href="#contact" aria-label={`${item.action} — ${item.name}`}>{item.action}</a>
               </article>
             ))}
           </div>
@@ -386,9 +387,7 @@ export default function Home() {
         data-back-to-top
         aria-label="Back to top"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-          <path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor" />
-        </svg>
+        <ArrowUp size={20} aria-hidden="true" />
       </button>
       <ScrollChoreography />
     </div>

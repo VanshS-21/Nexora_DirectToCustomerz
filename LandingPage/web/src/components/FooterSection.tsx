@@ -13,7 +13,7 @@ export function FooterSection() {
   return (
     <footer id="contact" className={styles.contactSection}>
       <Image
-        src="/footer-sunrise.png"
+        src="/footer-sunrise.webp"
         alt=""
         fill
         sizes="100vw"

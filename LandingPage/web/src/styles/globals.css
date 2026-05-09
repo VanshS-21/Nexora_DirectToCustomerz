@@ -80,7 +80,7 @@
   --shadow-sm: 0 4px 12px oklch(28% 0.02 var(--hue-brand) / 0.05);
   --shadow-md: 0 8px 24px oklch(28% 0.02 var(--hue-brand) / 0.08);
   --shadow-lg: 0 16px 48px oklch(28% 0.02 var(--hue-brand) / 0.12);
-  
+
   /* Transitions */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);

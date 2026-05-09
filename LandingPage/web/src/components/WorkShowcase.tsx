@@ -26,7 +26,7 @@ const workProjects = [
     title: "Pulse Coach",
     category: "Coaching offer page",
     proof: "Turned a personal brand into a focused coaching offer with a clear enquiry path.",
-    image: "/work-fitness.svg",
+    image: "/work-salon.svg",
     placement: "workBottomLeft",
     tone: "workInk",
     sticker: "Lead ready",
@@ -52,7 +52,7 @@ export function WorkShowcase() {
           <p className={styles.workKicker}>Market-fit examples</p>
           <h2>Buyer paths, pinned to the wall</h2>
           <p>Every preview starts with a real decision: book a table, trust a clinic, enquire about coaching, or choose a salon.</p>
-          <a href="#contact">Find your website job</a>
+          <a href="#contact" aria-label="Find your website job">Find your website job</a>
         </div>
 
         <div className={styles.workProjectField} aria-label="Selected website projects">
