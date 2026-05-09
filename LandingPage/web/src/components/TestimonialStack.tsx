@@ -45,12 +45,6 @@ export function TestimonialStack() {
             <p className={styles.sectionLead}>
               Practical outcomes from owners who needed clearer positioning, stronger trust cues, and a better route to contact.
             </p>
-            <div className={styles.testimonialProgress} aria-hidden="true">
-              <span>Notes</span>
-              <div className={styles.progressTrack}>
-                <i />
-              </div>
-            </div>
             <nav className={styles.testimonialNav} aria-label="Testimonial cards">
               {testimonials.map((testimonial, index) => (
                 <button

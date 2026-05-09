@@ -88,7 +88,7 @@
   align-items: center;
 }
 
-.navLinks a:hover {
+.navLinks a:not(.navCta):hover {
   color: var(--color-primary);
 }
 
@@ -334,6 +334,8 @@
   gap: 24px;
   color: oklch(48% 0.018 var(--hue-brand));
   font-size: 1rem;
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
 }
 
 .greetingLabel span {
@@ -362,6 +364,9 @@
     oklch(16% 0.015 var(--hue-brand)) var(--ink-percent, 48%),
     oklch(62% 0.02 var(--hue-brand))
   );
+  opacity: 0;
+  animation: greetingLineIn 560ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--line-index, 0) * 90ms + 200ms);
 }
 
 .capabilityOrbit {
@@ -472,6 +477,7 @@
 }
 
 .processSection {
+  --process-progress: 0;
   display: grid;
   justify-items: center;
   background: linear-gradient(180deg, oklch(97% 0.015 var(--hue-brand)), oklch(96% 0.019 82));
@@ -495,6 +501,17 @@
   margin: 16px auto 42px;
 }
 
+.processSection .sectionKicker,
+.processSection h2,
+.processSection .sectionLead {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+}
+
+.processSection .sectionKicker { animation-delay: 100ms; }
+.processSection h2 { animation-delay: 200ms; }
+.processSection .sectionLead { animation-delay: 300ms; }
+
 .processGrid {
   position: relative;
   isolation: isolate;
@@ -513,6 +530,7 @@
   --process-stack-rotate: 0deg;
   --process-card-scale: 1;
   --process-hover-y: 0px;
+  --process-card-active: 0;
   position: sticky;
   top: 20svh;
   z-index: var(--process-z, 1);
@@ -539,7 +557,7 @@
     scale(var(--process-card-scale));
   transform-origin: center;
   will-change: transform;
-  transition: box-shadow 240ms var(--ease-out), transform 300ms var(--ease-out);
+  transition: box-shadow 240ms var(--ease-out), transform 300ms var(--ease-out), border-color 280ms var(--ease-out);
 }
 
 .processCard:hover {
@@ -557,6 +575,12 @@
   border-radius: 8px;
   background: var(--color-surface-pale);
   box-shadow: 4px 4px 0 oklch(from var(--color-warm-dark) L C H / 0.08);
+  transition: transform 320ms var(--ease-out-quart), box-shadow 320ms var(--ease-out-quart);
+}
+
+.processCard:hover .processIcon {
+  transform: rotate(-6deg) scale(1.08);
+  box-shadow: 5px 5px 0 oklch(from var(--color-warm-dark) L C H / 0.12);
 }
 
 .processIconSvg {
@@ -576,6 +600,17 @@
   color: oklch(17% 0.016 var(--hue-brand));
   font-size: 1.16rem;
   font-weight: var(--weight-heading);
+}
+
+.processStepNumber {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: var(--weight-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .processCard p {
@@ -642,53 +677,9 @@
   box-shadow:
     0 24px 54px oklch(22% 0.02 var(--hue-brand) / 0.18),
     8px 8px 0 oklch(from var(--color-warm-dark) L C H / 0.1);
-}
-
-.serviceProgress,
-.testimonialProgress {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  gap: 9px;
-  width: min(220px, 44vw);
-  color: oklch(25% 0.018 var(--hue-brand));
-  font-size: 0.72rem;
-  font-weight: var(--weight-display);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.serviceProgress {
-  position: absolute;
-  left: clamp(18px, 7vw, 138px);
-  bottom: clamp(28px, 5vw, 72px);
-  color: oklch(98% 0.01 var(--hue-brand));
-}
-
-.progressTrack {
-  position: relative;
-  overflow: hidden;
-  height: 5px;
-  border-radius: var(--radius-full);
-  background: oklch(from var(--color-warm-dark) L C H / 0.16);
-}
-
-.serviceProgress .progressTrack {
-  background: oklch(from var(--color-surface-pale) L C H / 0.36);
-}
-
-.progressTrack i {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--color-primary);
-  transform: scaleX(var(--service-progress, var(--testimonial-progress, 0)));
-  transform-origin: left center;
-}
-
-.serviceProgress .progressTrack i {
-  background: oklch(90% 0.11 84);
+  opacity: 0;
+  animation: studioRiseIn 640ms var(--ease-out-quint) both;
+  animation-delay: 200ms;
 }
 
 .serviceStack::after {
@@ -697,9 +688,13 @@
   bottom: 0;
   left: 0;
   z-index: 4;
-  height: 160px;
+  height: 180px;
   pointer-events: none;
-  background: linear-gradient(180deg, oklch(99% 0.012 88 / 0), oklch(99% 0.012 88 / 0.96) 76%);
+  background: linear-gradient(180deg, oklch(99% 0.012 88 / 0), oklch(99% 0.012 88 / 0.92) 60%, oklch(99% 0.012 88 / 0.98));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  mask-image: linear-gradient(180deg, transparent 0%, black 40%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 40%);
   content: "";
 }
 
@@ -714,17 +709,20 @@
   --service-panel-opacity: 1;
   --service-panel-scale: 1;
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   gap: clamp(18px, 3vw, 34px);
   min-height: min(580px, calc(100svh - 166px));
   padding: clamp(28px, 3.7vw, 48px);
   opacity: var(--service-panel-opacity);
   transform: scale(var(--service-panel-scale));
   transform-origin: top center;
-  transition: opacity 180ms linear;
+  transition: opacity 280ms var(--ease-out-quart), transform 280ms var(--ease-out-quart);
 }
 
 .serviceNumber {
+  grid-column: 1;
+  grid-row: 1;
   font-family: var(--font-display);
   color: oklch(12% 0.012 var(--hue-brand));
   font-size: 4rem;
@@ -733,11 +731,13 @@
 }
 
 .serviceRule {
+  grid-column: 1 / -1;
   height: 1px;
   background: oklch(18% 0.015 var(--hue-brand) / 0.72);
 }
 
 .serviceCopy {
+  grid-column: 1 / -1;
   align-self: end;
 }
 
@@ -813,6 +813,30 @@
   margin: 0 auto;
   gap: 14px;
   text-align: left;
+}
+
+.workKicker {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 100ms;
+}
+
+.workHeader h2 {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+  animation-delay: 200ms;
+}
+
+.workHeader p:not(.workKicker) {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 320ms;
+}
+
+.workHeader a {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 420ms;
 }
 
 .workHeader::before {
@@ -932,21 +956,24 @@
   position: absolute;
   top: -18px;
   right: clamp(16px, 4vw, 42px);
-  z-index: 4;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   min-height: 34px;
-  padding: 0 13px;
-  border: 1px solid oklch(from var(--color-warm-dark) L C H / 0.14);
-  border-radius: 999px;
-  background: oklch(90% 0.11 84);
-  color: oklch(18% 0.016 var(--hue-brand));
-  font-size: 0.72rem;
+  padding: 0 14px;
+  border: 1px solid oklch(from var(--color-warm-darker) L C H / 0.18);
+  border-radius: var(--radius-full);
+  background: var(--color-yellow);
+  color: oklch(17% 0.018 var(--hue-brand));
+  font-size: 0.68rem;
   font-weight: var(--weight-display);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  box-shadow: 4px 5px 0 oklch(from var(--color-warm-dark) L C H / 0.12);
+  box-shadow: 3px 3px 0 oklch(from var(--color-warm-darker) L C H / 0.13);
   transform: rotate(var(--sticker-rotate, -3deg));
+  opacity: 0;
+  animation: studioStampIn 420ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--work-card-index, 0) * 120ms + 600ms);
 }
 
 .workProject:nth-child(2) .workSticker,
@@ -991,6 +1018,11 @@
 
 .workProjectImage img {
   object-fit: cover;
+  transition: transform 420ms var(--ease-out-quart);
+}
+
+.workProject:hover .workProjectImage img {
+  transform: scale(1.04) translateY(-4px);
 }
 
 .workSage .workProjectImage {
@@ -1039,13 +1071,31 @@
   gap: 14px;
 }
 
-.testimonialIntro .sectionLead {
-  margin: 0;
+.testimonialIntro .sectionKicker {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 100ms;
 }
 
 .testimonialIntro h2 {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+  animation-delay: 200ms;
   max-width: 17ch;
   font-size: 4rem;
+}
+
+.testimonialIntro .sectionLead {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 300ms;
+  margin: 0;
+}
+
+.testimonialNav {
+  opacity: 0;
+  animation: studioRiseIn 420ms var(--ease-out-quint) both;
+  animation-delay: 400ms;
 }
 
 .testimonialDeck {
@@ -1058,6 +1108,9 @@
   margin: clamp(28px, 4vw, 46px) auto 0;
   perspective: 1200px;
   transform: translateY(calc(var(--testimonial-progress) * -8px));
+  opacity: 0;
+  animation: studioRiseIn 640ms var(--ease-out-quint) both;
+  animation-delay: 500ms;
 }
 
 .testimonialDeck::before,
@@ -2065,6 +2118,7 @@
 
   .servicePanel {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
     min-height: auto;
     padding: 26px;
     opacity: 1;
@@ -2072,7 +2126,17 @@
   }
 
   .serviceNumber {
+    grid-column: 1;
+    grid-row: auto;
     font-size: 3rem;
+  }
+
+  .serviceRule {
+    grid-column: 1;
+  }
+
+  .serviceCopy {
+    grid-column: 1;
   }
 
   .servicePanel h2 {
@@ -2089,10 +2153,6 @@
     min-height: 58px;
     gap: 10px;
     font-size: 0.88rem;
-  }
-
-  .serviceProgress {
-    display: none;
   }
 
   .workSection {
@@ -2210,10 +2270,6 @@
     min-height: 420px;
   }
 
-  .testimonialProgress {
-    width: min(210px, 64vw);
-  }
-
   .testimonialCard {
     grid-template-columns: 1fr;
     align-items: start;
@@ -2274,6 +2330,7 @@
   .pricingCard a:hover {
     transform: translateY(-2px);
     background: var(--color-primary-hover);
+    color: var(--color-text-inverse);
   }
 
   .secondaryAction:hover {
@@ -2527,6 +2584,7 @@
   left: 54%;
   background: var(--color-rose);
   transform: rotate(-8deg);
+  --stamp-target-rotate: -8deg;
 }
 
 .heroStamp {
@@ -2534,6 +2592,7 @@
   bottom: 27%;
   background: var(--color-yellow);
   transform: rotate(8deg);
+  --stamp-target-rotate: 8deg;
 }
 
 .heroTitleWrap {
@@ -2715,7 +2774,6 @@
   border: 2px solid oklch(from var(--color-surface) L C H / 0.72);
   background: oklch(97% 0.025 84 / 0.96);
   box-shadow: 14px 14px 0 oklch(13% 0.02 var(--hue-brand) / 0.28);
-  transform: rotate(1deg);
 }
 
 .servicePanel h2 {
@@ -2803,7 +2861,16 @@
   margin: 0 auto 42px;
 }
 
+.pricingIntro .sectionKicker {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 100ms;
+}
+
 .pricingIntro h2 {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+  animation-delay: 200ms;
   max-width: 12ch;
   color: var(--color-ink);
   font-size: 3.2rem;
@@ -2811,6 +2878,9 @@
 }
 
 .pricingIntro p {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 300ms;
   max-width: 46ch;
   color: oklch(27% 0.02 var(--hue-brand));
   font-weight: var(--weight-body-strong);
@@ -2863,6 +2933,24 @@
 
 .faqSection h2 {
   color: var(--color-ink);
+}
+
+.faqSection [data-reveal]:first-child .sectionKicker {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 100ms;
+}
+
+.faqSection [data-reveal]:first-child h2 {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+  animation-delay: 200ms;
+}
+
+.faqSection [data-reveal]:first-child .sectionLead {
+  opacity: 0;
+  animation: studioRiseIn 480ms var(--ease-out-quint) both;
+  animation-delay: 300ms;
 }
 
 .faqList details {
@@ -3462,29 +3550,6 @@
     var(--color-lime);
 }
 
-.copyEmailButton {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  margin-top: -4px;
-  padding: 0 18px;
-  border: 1px solid oklch(from var(--color-warm-darker) L C H / 0.15);
-  border-radius: var(--radius-full);
-  background: oklch(from var(--color-surface) L C H / 0.9);
-  color: oklch(15% 0.018 var(--hue-brand));
-  font-size: 0.78rem;
-  font-weight: var(--weight-display);
-  box-shadow: 4px 5px 0 oklch(from var(--color-warm-darker) L C H / 0.1);
-  transition:
-    transform 220ms var(--ease-out),
-    translate 160ms var(--ease-out-quart),
-    scale 160ms var(--ease-out-quart),
-    background-color 220ms var(--ease-out),
-    box-shadow 220ms var(--ease-out);
-}
-
 .copyEmailButton small {
   position: absolute;
   width: 1px;
@@ -3671,17 +3736,30 @@
 .announcementBanner,
 .topNav {
   animation: studioBarIn 520ms var(--ease-out-quint) both;
+  transition:
+    background 360ms var(--ease-out-quart),
+    border-color 360ms var(--ease-out-quart),
+    box-shadow 360ms var(--ease-out-quart),
+    backdrop-filter 360ms var(--ease-out-quart);
 }
 
 .topNav {
   animation-delay: 70ms;
 }
 
+.topNav[data-nav-state="scrolled"] {
+  background: oklch(97% 0.025 84 / 0.88);
+  border-bottom-color: oklch(25% 0.02 var(--hue-brand) / 0.06);
+  box-shadow: 0 1px 3px oklch(from var(--color-warm-dark) L C H / 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .heroTitle span,
 .heroIntro,
 .heroArtifact {
   opacity: 0;
-  animation: studioRiseIn 720ms var(--ease-out) both;
+  animation: studioRiseIn 720ms var(--ease-out-quint) both;
   will-change: opacity, translate, scale, filter;
 }
 
@@ -3707,6 +3785,56 @@
 
 .heroArtifactClinic {
   animation-delay: 620ms;
+}
+
+.heroSticker,
+.heroStamp {
+  opacity: 0;
+  animation: studioStampIn 480ms var(--ease-out-quint) both;
+}
+
+.heroSticker {
+  animation-delay: 720ms;
+}
+
+.heroStamp {
+  animation-delay: 820ms;
+}
+
+.heroLaunchNote {
+  opacity: 0;
+  animation: studioStampIn 480ms var(--ease-out-quint) both;
+  animation-delay: 920ms;
+}
+
+.heroTrustList li {
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+}
+
+.heroTrustList li:nth-child(1) { animation-delay: 560ms; }
+.heroTrustList li:nth-child(2) { animation-delay: 640ms; }
+.heroTrustList li:nth-child(3) { animation-delay: 720ms; }
+
+.heroArtifact {
+  animation: studioRiseIn 720ms var(--ease-out-quint) both;
+}
+
+.heroArtifactBistro {
+  animation: studioRiseIn 720ms var(--ease-out-quint) both, artifactFloat 6s var(--ease-out) 1.2s infinite alternate;
+}
+
+.heroArtifactClinic {
+  animation: studioRiseIn 720ms var(--ease-out-quint) both, artifactFloat 7s var(--ease-out) 1.6s infinite alternate;
+  animation-direction: normal, alternate;
+}
+
+.heroArtifactBistro {
+  animation-delay: 520ms, 1.2s;
+}
+
+.heroArtifactClinic {
+  animation-delay: 620ms, 1.6s;
 }
 
 .wrapper[data-motion-ready="true"] [data-reveal] {
@@ -3821,13 +3949,61 @@
 @keyframes studioRiseIn {
   from {
     opacity: 0;
-    filter: blur(5px);
-    scale: 0.985;
-    translate: 0 22px;
+    translate: 0 18px;
   }
   to {
     opacity: 1;
-    filter: blur(0);
+    translate: 0 0;
+  }
+}
+
+@keyframes studioStampIn {
+  from {
+    opacity: 0;
+    scale: 0.6;
+    rotate: var(--stamp-target-rotate, 0deg);
+  }
+  60% {
+    scale: 1.08;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    rotate: var(--stamp-target-rotate, 0deg);
+  }
+}
+
+@keyframes artifactFloat {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes greetingLineIn {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes pillDropIn {
+  from {
+    opacity: 0;
+    scale: 0.7;
+    translate: 0 20px;
+  }
+  60% {
+    scale: 1.06;
+  }
+  to {
+    opacity: 1;
     scale: 1;
     translate: 0 0;
   }
@@ -3939,6 +4115,33 @@
   .heroTitle span,
   .heroIntro,
   .heroArtifact,
+  .heroSticker,
+  .heroStamp,
+  .heroLaunchNote,
+  .heroTrustList li,
+  .greetingLabel,
+  .greetingLine,
+  .capabilityPill,
+  .processSection .sectionKicker,
+  .processSection h2,
+  .processSection .sectionLead,
+  .serviceStack,
+  .workKicker,
+  .workHeader h2,
+  .workHeader p:not(.workKicker),
+  .workHeader a,
+  .workSticker,
+  .testimonialIntro .sectionKicker,
+  .testimonialIntro h2,
+  .testimonialIntro .sectionLead,
+  .testimonialNav,
+  .testimonialDeck,
+  .pricingIntro .sectionKicker,
+  .pricingIntro h2,
+  .pricingIntro p,
+  .faqSection [data-reveal]:first-child .sectionKicker,
+  .faqSection [data-reveal]:first-child h2,
+  .faqSection [data-reveal]:first-child .sectionLead,
   .copyEmailButton[data-copy-state="copied"],
   .wrapper [data-reveal],
   .faqList details[open] p,
@@ -3958,6 +4161,33 @@
   .heroTitle span,
   .heroIntro,
   .heroArtifact,
+  .heroSticker,
+  .heroStamp,
+  .heroLaunchNote,
+  .heroTrustList li,
+  .greetingLabel,
+  .greetingLine,
+  .capabilityPill,
+  .processSection .sectionKicker,
+  .processSection h2,
+  .processSection .sectionLead,
+  .serviceStack,
+  .workKicker,
+  .workHeader h2,
+  .workHeader p:not(.workKicker),
+  .workHeader a,
+  .workSticker,
+  .testimonialIntro .sectionKicker,
+  .testimonialIntro h2,
+  .testimonialIntro .sectionLead,
+  .testimonialNav,
+  .testimonialDeck,
+  .pricingIntro .sectionKicker,
+  .pricingIntro h2,
+  .pricingIntro p,
+  .faqSection [data-reveal]:first-child .sectionKicker,
+  .faqSection [data-reveal]:first-child h2,
+  .faqSection [data-reveal]:first-child .sectionLead,
   .wrapper [data-reveal],
   .wrapper[data-motion-ready="true"] [data-reveal] {
     opacity: 1 !important;
@@ -4128,9 +4358,7 @@
 }
 
 .workSticker,
-.workProjectMeta span,
-.serviceProgress,
-.testimonialProgress {
+.workProjectMeta span {
   font-size: var(--text-label);
   font-weight: var(--weight-label);
   letter-spacing: var(--tracking-label);
@@ -4235,9 +4463,29 @@
 }
 
 .navLinks a:not(.navCta) {
+  position: relative;
   justify-content: center;
   min-width: 44px;
   padding-inline: 4px;
+}
+
+.navLinks a:not(.navCta)::after {
+  position: absolute;
+  bottom: -2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-primary);
+  content: "";
+  scale: 0 1;
+  transform-origin: left center;
+  transition: scale 220ms var(--ease-out);
+}
+
+.navLinks a:not(.navCta):hover::after,
+.navLinks a:not(.navCta):focus-visible::after {
+  scale: 1 1;
 }
 
 .copyEmailButton {

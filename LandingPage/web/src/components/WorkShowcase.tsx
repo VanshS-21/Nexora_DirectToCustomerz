@@ -56,12 +56,13 @@ export function WorkShowcase() {
         </div>
 
         <div className={styles.workProjectField} aria-label="Selected website projects">
-          {workProjects.map((project) => (
+          {workProjects.map((project, index) => (
             <article
               className={`${styles.workProject} ${styles[project.placement]} ${styles[project.tone]}`}
               aria-label={`${project.title}, ${project.category}`}
               data-work-card
               data-work-rotate={project.rotate}
+              style={{ "--work-card-index": index } as React.CSSProperties}
               key={project.title}
             >
               <span className={styles.workSticker} aria-hidden="true">

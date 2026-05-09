@@ -12,6 +12,7 @@ const getAll = <T extends HTMLElement>(root: ParentNode | null | undefined, sele
   Array.from(root?.querySelectorAll<T>(selector) ?? []);
 
 interface CachedRefs {
+  topNav: HTMLElement | null;
   launchMap: HTMLElement | null;
   launchFill: HTMLElement | null;
   launchStops: HTMLAnchorElement[];
@@ -41,6 +42,7 @@ export function ScrollChoreography() {
   const [metrics, setMetrics] = useState(0);
   const metricsVersion = useRef(0);
   const cachedRefs = useRef<CachedRefs>({
+    topNav: null,
     launchMap: null, launchFill: null, launchStops: [],
     greetingSection: null, greetingInkLines: [], greetingPills: [],
     processSection: null, processGrid: null, processCards: [],
@@ -88,6 +90,7 @@ export function ScrollChoreography() {
   // Cache DOM refs when metrics change
   useEffect(() => {
     const r = cachedRefs.current;
+    r.topNav = document.querySelector<HTMLElement>("[data-top-nav]");
     r.launchMap = document.querySelector<HTMLElement>("[data-launch-map]");
     r.launchFill = r.launchMap?.querySelector<HTMLElement>("[data-launch-fill]") ?? null;
     r.launchStops = getAll<HTMLAnchorElement>(r.launchMap, "[data-launch-stop]");
@@ -206,6 +209,18 @@ export function ScrollChoreography() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const viewportHeight = window.innerHeight || 1;
     const r = cachedRefs.current;
+
+    // Top Nav scroll state (hysteresis prevents flicker at threshold)
+    if (r.topNav) {
+      const currentState = r.topNav.dataset.navState;
+      const enterAt = viewportHeight * 0.12;
+      const leaveAt = viewportHeight * 0.04;
+      if (currentState !== "scrolled" && latestScrollY > enterAt) {
+        r.topNav.dataset.navState = "scrolled";
+      } else if (currentState === "scrolled" && latestScrollY < leaveAt) {
+        r.topNav.dataset.navState = "top";
+      }
+    }
 
     // Launch Map
     if (r.launchMap && r.launchFill && r.launchStops.length) {

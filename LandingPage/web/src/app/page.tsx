@@ -197,7 +197,7 @@ export default function Home() {
         </ol>
       </nav>
 
-      <header className={styles.topNav}>
+      <header className={styles.topNav} data-top-nav>
         <a href="#" className={styles.logo} aria-label="Nexora Labs home">
           <span>Nexora</span>
           <b>Labs</b>
@@ -261,13 +261,16 @@ export default function Home() {
             A clear path for busy owners: decide who the site must win over, what proof they need, and how the website should turn attention into action.
           </p>
           <div className={styles.processGrid} data-process-grid>
-            {processSteps.map((step) => (
+            {processSteps.map((step, index) => (
               <article className={styles.processCard} data-process-card key={step.label}>
                 <div className={styles.processIcon}>
                   <ProcessGlyph type={step.icon} />
                 </div>
-                <h3>{step.label}</h3>
-                <p>{step.copy}</p>
+                <div>
+                  <span className={styles.processStepNumber}>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{step.label}</h3>
+                  <p>{step.copy}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -287,12 +290,6 @@ export default function Home() {
               />
             </div>
             <div className={styles.servicesScrim} />
-            <div className={styles.serviceProgress} aria-hidden="true">
-              <span>Services</span>
-              <div className={styles.progressTrack}>
-                <i />
-              </div>
-            </div>
             <nav className={styles.serviceNav} aria-label="Service panels">
               {services.map((service, index) => (
                 <button

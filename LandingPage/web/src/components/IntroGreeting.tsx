@@ -48,19 +48,20 @@ export function IntroGreeting() {
             <span />
           </div>
           <h2 data-greeting-copy>
-            {greetingLines.map((line) => (
-              <span className={styles.greetingLine} data-ink-line key={line}>
+            {greetingLines.map((line, index) => (
+              <span className={styles.greetingLine} data-ink-line style={{ "--line-index": index } as React.CSSProperties} key={line}>
                 {line}
               </span>
             ))}
           </h2>
         </div>
         <div className={styles.capabilityOrbit} aria-label="Nexora capabilities">
-          {capabilityPills.map((pill) => (
+          {capabilityPills.map((pill, index) => (
             <div
               className={`${styles.capabilityPill} ${styles[pill.pos]}`}
               data-capability-pill
               data-pill-drift={pill.drift}
+              style={{ "--pill-index": index } as React.CSSProperties}
               key={pill.label}
             >
               <span className={`${styles.capabilityIcon} ${styles[pill.icon]}`}>
