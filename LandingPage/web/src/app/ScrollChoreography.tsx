@@ -18,6 +18,7 @@ export function ScrollChoreography() {
     let updaters: Array<() => void> = [];
     let revealObserver: IntersectionObserver | null = null;
     let frame = 0;
+    let isActive = true;
 
     const setRevealed = (element: HTMLElement) => {
       element.dataset.visible = "true";
@@ -114,7 +115,7 @@ export function ScrollChoreography() {
         const greetingOffsetTop = getPageTop(target);
         const lines = getAll<HTMLElement>(greetingSection, "[data-ink-line]").map(line => ({
           el: line,
-          offsetTop: getPageTop(line)
+          offsetTop: getPageTop(line),
         }));
         const pills = getAll<HTMLElement>(greetingSection, "[data-capability-pill]");
 
@@ -321,13 +322,21 @@ export function ScrollChoreography() {
       scheduleUpdate();
     };
 
+    const refreshWhenReady = () => {
+      if (!isActive) return;
+      handleMetricsChange();
+    };
+
     setupReveals();
     updateMetrics();
     runUpdates();
 
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", handleMetricsChange);
+    window.addEventListener("load", refreshWhenReady);
     window.addEventListener("pageshow", handleMetricsChange);
+    window.visualViewport?.addEventListener("resize", handleMetricsChange);
+    document.fonts?.ready.then(refreshWhenReady).catch(() => undefined);
 
     if (typeof reduceMotion.addEventListener === "function") {
       reduceMotion.addEventListener("change", handleMetricsChange);
@@ -336,12 +345,15 @@ export function ScrollChoreography() {
     }
 
     return () => {
+      isActive = false;
       if (frame) window.cancelAnimationFrame(frame);
       revealObserver?.disconnect();
       motionRoot?.removeAttribute("data-motion-ready");
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", handleMetricsChange);
+      window.removeEventListener("load", refreshWhenReady);
       window.removeEventListener("pageshow", handleMetricsChange);
+      window.visualViewport?.removeEventListener("resize", handleMetricsChange);
       if (typeof reduceMotion.removeEventListener === "function") {
         reduceMotion.removeEventListener("change", handleMetricsChange);
       } else {
