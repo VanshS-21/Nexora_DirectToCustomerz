@@ -271,7 +271,7 @@ export function ScrollChoreography() {
       r.greetingInkLines.forEach((line) => {
         const offsetTop = getPageTop(line);
         const ink = clamp((viewportHeight * 0.82 - (offsetTop - latestScrollY)) / (viewportHeight * 0.24));
-        line.style.setProperty("--ink-percent", Math.round(48 + ink * 52) + "%");
+        line.style.setProperty("--ink-percent", Math.round(ink * 100) + "%");
       });
 
       r.greetingPills.forEach((pill) => {
