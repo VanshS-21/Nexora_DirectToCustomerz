@@ -12,8 +12,42 @@ const getAll = <T extends HTMLElement>(root: ParentNode | null | undefined, sele
 export function ScrollChoreography() {
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const motionRoot = document.querySelector<HTMLElement>("[data-motion-root]");
+    const revealNodes = getAll<HTMLElement>(document, "[data-reveal]");
     let updaters: Array<() => void> = [];
+    let revealObserver: IntersectionObserver | null = null;
     let frame = 0;
+
+    const setRevealed = (element: HTMLElement) => {
+      element.dataset.visible = "true";
+    };
+
+    const setupReveals = () => {
+      motionRoot?.setAttribute("data-motion-ready", "true");
+      revealObserver?.disconnect();
+      revealObserver = null;
+
+      if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+        revealNodes.forEach(setRevealed);
+        return;
+      }
+
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            setRevealed(entry.target as HTMLElement);
+            revealObserver?.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -14% 0px", threshold: 0.16 },
+      );
+
+      revealNodes.forEach((element) => {
+        if (element.dataset.visible === "true") return;
+        revealObserver?.observe(element);
+      });
+    };
 
     const runUpdates = () => {
       frame = 0;
@@ -239,26 +273,39 @@ export function ScrollChoreography() {
     };
 
     const handleMetricsChange = () => {
+      setupReveals();
       updateMetrics();
       scheduleUpdate();
     };
 
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", handleMetricsChange);
-    window.addEventListener("pageshow", handleMetricsChange);
-    reduceMotion.addEventListener("change", handleMetricsChange);
-    
+    setupReveals();
     updateMetrics();
     runUpdates();
 
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", handleMetricsChange);
+    window.addEventListener("pageshow", handleMetricsChange);
+
+    if (typeof reduceMotion.addEventListener === "function") {
+      reduceMotion.addEventListener("change", handleMetricsChange);
+    } else {
+      reduceMotion.addListener(handleMetricsChange);
+    }
+
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
+      revealObserver?.disconnect();
+      motionRoot?.removeAttribute("data-motion-ready");
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", handleMetricsChange);
       window.removeEventListener("pageshow", handleMetricsChange);
-      reduceMotion.removeEventListener("change", handleMetricsChange);
+      if (typeof reduceMotion.removeEventListener === "function") {
+        reduceMotion.removeEventListener("change", handleMetricsChange);
+      } else {
+        reduceMotion.removeListener(handleMetricsChange);
+      }
     };
   }, []);
 
-  return null;
+  return <span aria-hidden="true" data-choreography-probe hidden />;
 }

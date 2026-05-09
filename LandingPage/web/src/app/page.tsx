@@ -151,7 +151,7 @@ function ProcessGlyph({ type }: { type: string }) {
 
 export default function Home() {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-motion-root>
       <a href="#main" className="visually-hidden">Skip to main content</a>
       <div className={styles.announcementBanner} role="status" aria-label="Current focus">
         Now shaping playful web launches for local brands.
@@ -206,6 +206,12 @@ export default function Home() {
             </div>
             <span className={styles.heroSticker}>No templates</span>
             <span className={styles.heroStamp}>Done for you</span>
+            <div className={styles.heroLaunchNote}>
+              <span>Launch packet</span>
+              <b>Strategy</b>
+              <b>Design</b>
+              <b>Build</b>
+            </div>
           </div>
           <div className={styles.heroIntro}>
             <p>
@@ -306,14 +312,19 @@ export default function Home() {
         <TestimonialStack />
 
         <section id="pricing" className={styles.pricingSection}>
-          <div className={styles.pricingIntro}>
+          <div className={styles.pricingIntro} data-reveal>
             <div className={styles.sectionKicker}>Pricing</div>
             <h2>Pick a starting shape</h2>
             <p>Simple proposal-style packages, with enough room to tailor the build around your actual business.</p>
           </div>
           <div className={styles.pricingGrid}>
             {packages.map((item) => (
-              <article className={`${styles.pricingCard} ${item.featured ? styles.featuredPricing : ""}`} key={item.name}>
+              <article
+                className={`${styles.pricingCard} ${item.featured ? styles.featuredPricing : ""}`}
+                data-reveal
+                key={item.name}
+              >
+                {item.featured ? <span className={styles.pricingBadge}>Most handled</span> : null}
                 <h3>{item.name}</h3>
                 <strong>{item.price}</strong>
                 <p>{item.intro}</p>
@@ -329,14 +340,14 @@ export default function Home() {
         </section>
 
         <section id="faqs" className={styles.faqSection}>
-          <div>
+          <div data-reveal>
             <div className={styles.sectionKicker}>FAQs</div>
             <h2>The curious corner</h2>
             <p className={styles.sectionLead}>The bits clients usually ask before we start building.</p>
           </div>
           <div className={styles.faqList}>
             {faqs.map((faq) => (
-              <details key={faq.question}>
+              <details data-reveal key={faq.question}>
                 <summary>{faq.question}</summary>
                 <p>{faq.answer}</p>
               </details>
