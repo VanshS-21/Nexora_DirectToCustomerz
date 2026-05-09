@@ -40,30 +40,32 @@
   --font-sans: var(--font-onest), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --weight-body: 500;
   --weight-body-strong: 650;
+  --weight-medium: 550;
   --weight-strong: 700;
   --weight-label: 600;
   --weight-heading: 700;
   --weight-display: 800;
-  --tracking-label: 0.08em;
   --tracking-tight-label: 0.04em;
+  --tracking-label: 0.08em;
+  --tracking-wide-label: 0.12em;
   --leading-hero: 0.84;
   --leading-tight: 0.9;
   --leading-heading: 0.96;
   --leading-title: 1.08;
+  --leading-card: 1.5;
   --leading-copy: 1.58;
   --measure-copy: 65ch;
   --measure-narrow: 48ch;
   
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
   --text-3xl: 3rem;
   --text-4xl: 4rem;
   --text-label: 0.72rem;
-  --text-caption: 0.78rem;
+  --text-caption: 0.8rem;
   --text-body: 1rem;
   --text-body-lg: 1.08rem;
   --text-lead: clamp(1.08rem, 0.98rem + 0.45vw, 1.34rem);
@@ -79,6 +81,20 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
+
+  /* Derived alpha colors (borders & hard shadows) */
+  --color-warm-dark-08: oklch(from var(--color-warm-dark) L C H / 0.08);
+  --color-warm-dark-10: oklch(from var(--color-warm-dark) L C H / 0.1);
+  --color-warm-dark-12: oklch(from var(--color-warm-dark) L C H / 0.12);
+  --color-warm-dark-14: oklch(from var(--color-warm-dark) L C H / 0.14);
+  --color-warm-dark-16: oklch(from var(--color-warm-dark) L C H / 0.16);
+  --color-warm-dark-18: oklch(from var(--color-warm-dark) L C H / 0.18);
+  --color-warm-darker-10: oklch(from var(--color-warm-darker) L C H / 0.1);
+  --color-warm-darker-12: oklch(from var(--color-warm-darker) L C H / 0.12);
+  --color-warm-darker-13: oklch(from var(--color-warm-darker) L C H / 0.13);
+  --color-warm-darker-14: oklch(from var(--color-warm-darker) L C H / 0.14);
+  --color-warm-darker-16: oklch(from var(--color-warm-darker) L C H / 0.16);
+  --color-warm-darker-18: oklch(from var(--color-warm-darker) L C H / 0.18);
 
   /* Elevation (Choreographed Depth) */
   --shadow-sm: 0 4px 12px oklch(28% 0.02 var(--hue-brand) / 0.05);
