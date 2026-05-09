@@ -169,6 +169,7 @@ export default function Home() {
         className={styles.launchMap}
         aria-label="Launch route navigation"
         data-launch-map
+        data-launch-visibility="hidden"
       >
         <div className={styles.launchMapHeader}>
           <span>Fit route</span>

@@ -479,11 +479,32 @@
 }
 
 .processSection {
+  padding-block: clamp(82px, 12vw, 152px) clamp(56px, 8vw, 112px);
+}
+
+.workSection {
+  padding-block: clamp(72px, 9vw, 128px) clamp(88px, 14vw, 180px);
+}
+
+.testimonialsSection {
+  padding-block: clamp(56px, 7vw, 96px) clamp(72px, 11vw, 148px);
+}
+
+.pricingSection {
+  padding-block: clamp(96px, 14vw, 172px) clamp(64px, 8vw, 108px);
+}
+
+.faqSection {
+  padding-block: clamp(72px, 9vw, 120px) clamp(96px, 15vw, 192px);
+}
+
+.processSection {
   --process-progress: 0;
   display: grid;
-  justify-items: center;
+  justify-items: start;
+  padding-inline: clamp(18px, 6vw, 92px) clamp(18px, 10vw, 180px);
   background: linear-gradient(180deg, oklch(97% 0.015 var(--hue-brand)), oklch(96% 0.019 82));
-  text-align: center;
+  text-align: left;
   overflow: clip;
 }
 
@@ -498,7 +519,10 @@
   line-height: var(--leading-tight);
 }
 
-.processSection .sectionLead,
+.processSection .sectionLead {
+  margin: 16px 0 42px;
+}
+
 .testimonialsSection .sectionLead {
   margin: 16px auto 42px;
 }
@@ -519,7 +543,7 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0;
   max-width: 1120px;
   margin: 0 auto;
@@ -1396,11 +1420,13 @@
   padding-block: 120px;
   max-width: 1200px;
   margin: 0 auto;
+  justify-items: start;
 }
 
 .faqList {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  max-width: min(100%, 820px);
   border: none;
 }
 
@@ -1410,6 +1436,14 @@
   border-radius: 12px;
   padding-inline: 24px;
   transition: border-color 200ms ease;
+}
+
+.faqList details:nth-child(3n+1) {
+  margin-top: 8px;
+}
+
+.faqList details:nth-child(3n+3) {
+  margin-top: 4px;
 }
 
 .faqList details[open] {
@@ -1573,7 +1607,7 @@
   box-shadow:
     0 22px 42px oklch(from var(--color-warm-dark) L C H / 0.12),
     10px 10px 0 oklch(from var(--color-warm-darker) L C H / 0.12);
-  transform: rotate(-0.8deg);
+  transform: none;
 }
 
 .contactFormHeader {
@@ -2738,10 +2772,15 @@
 
 .processCard:nth-child(odd) {
   align-self: flex-start;
+  margin-left: 0;
 }
 
 .processCard:nth-child(even) {
-  align-self: flex-end;
+  align-self: flex-start;
+  margin-left: clamp(80px, 12vw, 220px);
+}
+
+.processCard:nth-child(2) {
   background: oklch(95% 0.08 210);
 }
 
@@ -2795,6 +2834,7 @@
       oklch(94% 0.05 350) 34px 68px
     );
   padding-block: clamp(92px, 11vw, 162px);
+  border-top: 2px solid oklch(from var(--color-warm-darker) L C H / 0.1);
 }
 
 .workHeader {
@@ -2855,6 +2895,7 @@
       oklch(92% 0.12 88) 0 26px,
       oklch(94% 0.09 88) 26px 52px
     );
+  border-top: 2px solid oklch(from var(--color-warm-darker) L C H / 0.1);
 }
 
 .pricingIntro {
@@ -2862,6 +2903,7 @@
   gap: 12px;
   width: min(1200px, 100%);
   margin: 0 auto 42px;
+  justify-items: start;
 }
 
 .pricingIntro .sectionKicker {
@@ -2896,6 +2938,7 @@
 .pricingGrid {
   align-items: start;
   gap: clamp(18px, 3vw, 36px);
+  padding-block: 0 clamp(12px, 2vw, 28px);
 }
 
 .pricingCard {
@@ -2907,18 +2950,19 @@
 }
 
 .pricingCard:nth-child(1) {
-  margin-top: 34px;
+  margin-top: clamp(28px, 4vw, 54px);
   background: oklch(99% 0.012 75);
   --price-rotate: -2deg;
 }
 
 .pricingCard:nth-child(2) {
   min-height: 610px;
+  margin-top: 0;
   --price-rotate: 1.6deg;
 }
 
 .pricingCard:nth-child(3) {
-  margin-top: 70px;
+  margin-top: clamp(56px, 8vw, 96px);
   background: oklch(94% 0.07 210);
   --price-rotate: -1deg;
 }
@@ -2930,8 +2974,10 @@
 .faqSection {
   max-width: none;
   margin: 0;
-  padding-inline: clamp(18px, 8vw, 140px);
+  padding-inline: clamp(18px, 6vw, 92px) clamp(18px, 14vw, 240px);
+  padding-block-end: clamp(96px, 15vw, 192px);
   background: oklch(97% 0.026 94);
+  border-top: 2px solid oklch(from var(--color-warm-darker) L C H / 0.1);
 }
 
 .faqSection h2 {
@@ -3089,6 +3135,7 @@
 
   .processCard:nth-child(even) {
     --mobile-process-rotate: 1deg;
+    margin-left: 0;
   }
 
   .servicesStickyFrame {
@@ -3242,6 +3289,15 @@
     0 16px 34px oklch(from var(--color-warm-darker) L C H / 0.13),
     9px 9px 0 oklch(from var(--color-warm-darker) L C H / 0.12);
   transform: translateX(-50%) rotate(-0.7deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.launchMap[data-launch-visibility="visible"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) rotate(-0.7deg);
+  transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out);
 }
 
 .launchMap::before,
@@ -3430,6 +3486,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) translateY(18px) rotate(-0.7deg);
+  transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out);
 }
 
 @media (min-width: 1120px) {
