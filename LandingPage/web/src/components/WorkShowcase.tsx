@@ -7,7 +7,6 @@ const workProjects = [
     category: "Restaurant enquiry path",
     proof: "Menu, table booking, and private event enquiries arranged around one clear next step.",
     image: "/work-bistro.svg",
-    placement: "workTopLeft",
     tone: "workSage",
     sticker: "Bookings",
     rotate: "-3.4",
@@ -17,7 +16,6 @@ const workProjects = [
     category: "Clinic trust system",
     proof: "Reduced patient hesitation with service pages, credentials, FAQs, and direct contact routes.",
     image: "/work-clinic.svg",
-    placement: "workTopRight",
     tone: "workSky",
     sticker: "Care routes",
     rotate: "2.7",
@@ -27,7 +25,6 @@ const workProjects = [
     category: "Coaching offer page",
     proof: "Turned a personal brand into a focused coaching offer with a clear enquiry path.",
     image: "/work-salon.svg",
-    placement: "workBottomLeft",
     tone: "workInk",
     sticker: "Lead ready",
     rotate: "1.8",
@@ -37,7 +34,6 @@ const workProjects = [
     category: "Salon booking launch",
     proof: "Packaged services, location details, price cues, and booking intent for a premium local launch.",
     image: "/work-salon.svg",
-    placement: "workBottomRight",
     tone: "workPeach",
     sticker: "Launch kit",
     rotate: "-2.2",
@@ -58,7 +54,7 @@ export function WorkShowcase() {
         <div className={styles.workProjectField} aria-label="Selected website projects">
           {workProjects.map((project, index) => (
             <article
-              className={`${styles.workProject} ${styles[project.placement]} ${styles[project.tone]}`}
+              className={`${styles.workProject} ${styles[project.tone]}`}
               aria-label={`${project.title}, ${project.category}`}
               data-work-card
               data-work-rotate={project.rotate}

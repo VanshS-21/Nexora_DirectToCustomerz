@@ -145,11 +145,6 @@ export default function Home() {
         Market-fit websites for service brands with real-world trust.
       </div>
 
-      <aside className={styles.sideTab} aria-label="Nexora honors">
-        <span className={styles.sideMark}>N.</span>
-        <span>Nexora Works</span>
-      </aside>
-
       <nav className={styles.fixedBottomNav} aria-label="Mobile section navigation">
         <a href="#process" aria-label="Go to Process section">
           <span>01</span> Process
@@ -237,11 +232,6 @@ export default function Home() {
                 See buyer paths
               </a>
             </div>
-            <ul className={styles.heroTrustList} aria-label="Nexora project strengths">
-              <li>For owner-led service brands</li>
-              <li>Positioning, design, and build</li>
-              <li>Built for enquiries and bookings</li>
-            </ul>
             <span aria-hidden="true">&darr;</span>
           </div>
           <div className={styles.heroTitleWrap}>

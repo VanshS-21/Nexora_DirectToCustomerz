@@ -205,7 +205,7 @@
 }
 
 .footerCopyright {
-  color: var(--color-text-subtle);
+  color: var(--color-text-secondary);
   font-size: var(--text-caption);
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight-label);

@@ -197,14 +197,6 @@
   .workProject:nth-child(4) { grid-column: 7 / span 6; margin-top: 62px; }
 }
 
-.workTopLeft,
-.workTopRight,
-.workBottomLeft,
-.workBottomRight {
-  inset: auto;
-  width: auto;
-}
-
 .workProjectMeta {
   position: relative;
   z-index: 2;
@@ -378,25 +370,6 @@
 
   .workProjectMeta p {
     font-size: 0.7rem;
-  }
-
-  .workTopLeft {
-    inset: auto;
-  }
-
-  .workTopRight {
-    inset: auto;
-    width: auto;
-  }
-
-  .workBottomLeft {
-    inset: auto;
-    width: auto;
-  }
-
-  .workBottomRight {
-    inset: auto;
-    width: auto;
   }
 }
 

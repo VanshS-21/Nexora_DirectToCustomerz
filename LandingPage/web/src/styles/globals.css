@@ -25,12 +25,10 @@
 
   /* Secondary text tokens (extracted from hard-coded OKLCH) */
   --color-text-secondary: oklch(34% 0.018 var(--hue-brand));
-  --color-text-tertiary: oklch(39% 0.014 var(--hue-brand));
   --color-text-heading: oklch(17% 0.016 var(--hue-brand));
   --color-text-deep: oklch(13% 0.02 var(--hue-brand));
   --color-text-dim: oklch(36% 0.018 var(--hue-brand));
   --color-text-label: oklch(22% 0.016 var(--hue-brand));
-  --color-text-subtle: oklch(32% 0.018 var(--hue-brand));
   --color-text-placeholder: oklch(52% 0.018 var(--hue-brand));
 
   /* Spacing (4pt scale) */

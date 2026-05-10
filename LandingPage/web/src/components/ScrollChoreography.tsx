@@ -7,14 +7,6 @@ const easeOutQuart = (value: number) => 1 - Math.pow(1 - value, 4);
 const getPageTop = (element: HTMLElement) => element.getBoundingClientRect().top + window.scrollY;
 const launchTargets = ["#about", "#process", "#services", "#work", "#contact"] as const;
 
-if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
-  console.log(
-    "%cNexora Labs%c Built with care \u2192 hello@nexoralabs.com",
-    "background:#5b4cd0;color:#fff;padding:4px 10px;border-radius:4px 0 0 4px;font-weight:700;font-size:12px;",
-    "background:#faf5eb;color:#3a3835;padding:4px 10px;border-radius:0 4px 4px 0;font-size:12px;"
-  );
-}
-
 const getAll = <T extends HTMLElement>(root: ParentNode | null | undefined, selector: string) =>
   Array.from(root?.querySelectorAll<T>(selector) ?? []);
 
@@ -104,11 +96,15 @@ export function ScrollChoreography() {
     document.fonts?.ready.then(recalc).catch(() => undefined);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = () => recalc();
+    reduceMotionRef.current = reduceMotion.matches;
+    const motionHandler = (e: MediaQueryListEvent) => {
+      reduceMotionRef.current = e.matches;
+      recalc();
+    };
     if (typeof reduceMotion.addEventListener === "function") {
-      reduceMotion.addEventListener("change", handler);
+      reduceMotion.addEventListener("change", motionHandler);
     } else {
-      reduceMotion.addListener(handler);
+      reduceMotion.addListener(motionHandler);
     }
 
     return () => {
@@ -117,9 +113,9 @@ export function ScrollChoreography() {
       window.removeEventListener("pageshow", recalc);
       window.visualViewport?.removeEventListener("resize", recalc);
       if (typeof reduceMotion.removeEventListener === "function") {
-        reduceMotion.removeEventListener("change", handler);
+        reduceMotion.removeEventListener("change", motionHandler);
       } else {
-        reduceMotion.removeListener(handler);
+        reduceMotion.removeListener(motionHandler);
       }
     };
   }, [recalc]);
@@ -246,38 +242,31 @@ export function ScrollChoreography() {
   useEffect(() => {
     const viewportHeight = window.innerHeight || 1;
     const r = cachedRefs.current;
-
     const handlers: Array<{ el: HTMLButtonElement; handler: () => void }> = [];
 
-    if (r.servicesSection && r.servicePanels.length) {
-      const sectionOffsetTop = getPageTop(r.servicesSection);
-      const sectionOffsetHeight = r.servicesSection.offsetHeight;
-      r.serviceNavDots.forEach((dot) => {
+    const bindDotGroup = (
+      section: HTMLElement,
+      dots: HTMLButtonElement[],
+      itemCount: number,
+      indexAttr: string,
+    ) => {
+      if (!itemCount) return;
+      const sectionOffsetTop = getPageTop(section);
+      const sectionOffsetHeight = section.offsetHeight;
+      dots.forEach((dot) => {
         const handler = () => {
-          const targetIndex = Number(dot.dataset.serviceIndex ?? 0);
+          const targetIndex = Number(dot.dataset[indexAttr] ?? 0);
           const scrollRange = Math.max(1, sectionOffsetHeight - viewportHeight);
-          const targetProgress = targetIndex / Math.max(1, r.servicePanels.length - 1);
+          const targetProgress = targetIndex / Math.max(1, itemCount - 1);
           window.scrollTo({ top: sectionOffsetTop + targetProgress * scrollRange, behavior: "smooth" });
         };
         dot.addEventListener("click", handler);
         handlers.push({ el: dot, handler });
       });
-    }
+    };
 
-    if (r.testimonialSection && r.testimonialCards.length) {
-      const sectionOffsetTop = getPageTop(r.testimonialSection);
-      const sectionOffsetHeight = r.testimonialSection.offsetHeight;
-      r.testimonialNavDots.forEach((dot) => {
-        const handler = () => {
-          const targetIndex = Number(dot.dataset.testimonialIndex ?? 0);
-          const scrollRange = Math.max(1, sectionOffsetHeight - viewportHeight);
-          const targetProgress = targetIndex / Math.max(1, r.testimonialCards.length - 1);
-          window.scrollTo({ top: sectionOffsetTop + targetProgress * scrollRange, behavior: "smooth" });
-        };
-        dot.addEventListener("click", handler);
-        handlers.push({ el: dot, handler });
-      });
-    }
+    if (r.servicesSection) bindDotGroup(r.servicesSection, r.serviceNavDots, r.servicePanels.length, "serviceIndex");
+    if (r.testimonialSection) bindDotGroup(r.testimonialSection, r.testimonialNavDots, r.testimonialCards.length, "testimonialIndex");
 
     return () => {
       handlers.forEach(({ el, handler }) => el.removeEventListener("click", handler));
@@ -293,25 +282,6 @@ export function ScrollChoreography() {
     return () => btn.removeEventListener("click", handler);
   }, [metrics]);
 
-  // Cache reduce-motion preference (recalculated on metrics change)
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reduceMotionRef.current = mq.matches;
-    const handler = (e: MediaQueryListEvent) => { reduceMotionRef.current = e.matches; };
-    if (typeof mq.addEventListener === "function") {
-      mq.addEventListener("change", handler);
-    } else {
-      mq.addListener(handler);
-    }
-    return () => {
-      if (typeof mq.removeEventListener === "function") {
-        mq.removeEventListener("change", handler);
-      } else {
-        mq.removeListener(handler);
-      }
-    };
-  }, []);
-
   // Main scroll-driven updater — native scroll listener, throttled to rAF
   useEffect(() => {
     const onScroll = () => {
@@ -320,233 +290,218 @@ export function ScrollChoreography() {
       rafId.current = requestAnimationFrame(() => {
         rafId.current = 0;
         const scrollY = pendingScrollY.current;
-      const reduceMotion = reduceMotionRef.current;
-      const viewportHeight = window.innerHeight || 1;
-      const r = cachedRefs.current;
-      const m = cachedMetrics.current;
+        const reduceMotion = reduceMotionRef.current;
+        const viewportHeight = window.innerHeight || 1;
+        const r = cachedRefs.current;
+        const m = cachedMetrics.current;
 
-    // Top Nav scroll state (hysteresis prevents flicker at threshold)
-    if (r.topNav) {
-      const currentState = r.topNav.dataset.navState;
-      const enterAt = viewportHeight * 0.12;
-      const leaveAt = viewportHeight * 0.04;
-      if (currentState !== "scrolled" && scrollY > enterAt) {
-        r.topNav.dataset.navState = "scrolled";
-      } else if (currentState === "scrolled" && scrollY < leaveAt) {
-        r.topNav.dataset.navState = "top";
-      }
-    }
+        // Top Nav scroll state (hysteresis prevents flicker at threshold)
+        if (r.topNav) {
+          const currentState = r.topNav.dataset.navState;
+          const enterAt = viewportHeight * 0.12;
+          const leaveAt = viewportHeight * 0.04;
+          if (currentState !== "scrolled" && scrollY > enterAt) {
+            r.topNav.dataset.navState = "scrolled";
+          } else if (currentState === "scrolled" && scrollY < leaveAt) {
+            r.topNav.dataset.navState = "top";
+          }
+        }
 
-    // Launch Map
-    if (r.launchMap && r.launchFill && r.launchStops.length) {
-      const launchSections = m.launchSectionTops;
+        // Launch Map
+        if (r.launchMap && r.launchFill && r.launchStops.length) {
+          const launchSections = m.launchSectionTops;
 
-      if (launchSections.length) {
-        const pageStart = launchSections[0].top;
-        const pageEnd = launchSections[launchSections.length - 1].bottom;
-        const focusLine = scrollY + viewportHeight * 0.42;
-        const progress = reduceMotion ? 1 : clamp((focusLine - pageStart) / Math.max(1, pageEnd - pageStart));
+          if (launchSections.length) {
+            const pageStart = launchSections[0].top;
+            const pageEnd = launchSections[launchSections.length - 1].bottom;
+            const focusLine = scrollY + viewportHeight * 0.42;
+            const progress = reduceMotion ? 1 : clamp((focusLine - pageStart) / Math.max(1, pageEnd - pageStart));
 
-        let activeIndex = 0;
-        launchSections.forEach((section, index) => {
-          if (focusLine >= section.top - viewportHeight * 0.14) activeIndex = index;
-        });
+            let activeIndex = 0;
+            launchSections.forEach((section, index) => {
+              if (focusLine >= section.top - viewportHeight * 0.14) activeIndex = index;
+            });
 
-        r.launchMap.style.setProperty("--launch-progress", progress.toFixed(3));
-        r.launchFill.style.setProperty("--launch-fill", progress.toFixed(3));
-        r.launchStops.forEach((stop, index) => {
-          const distance = Math.abs(index - activeIndex);
-          stop.dataset.launchState = index === activeIndex ? "active" : index < activeIndex ? "passed" : "upcoming";
-          stop.style.setProperty("--launch-stop-distance", Math.min(distance, 3).toFixed(2));
-          stop.setAttribute("aria-current", index === activeIndex ? "true" : "false");
-        });
-        r.launchMap.dataset.launchVisibility =
-          activeIndex === 0 && scrollY < pageStart + viewportHeight * 0.72 ? "hidden" : "visible";
-      }
-    }
+            r.launchMap.style.setProperty("--launch-progress", progress.toFixed(3));
+            r.launchFill.style.setProperty("--launch-fill", progress.toFixed(3));
+            r.launchStops.forEach((stop, index) => {
+              const distance = Math.abs(index - activeIndex);
+              stop.dataset.launchState = index === activeIndex ? "active" : index < activeIndex ? "passed" : "upcoming";
+              stop.style.setProperty("--launch-stop-distance", Math.min(distance, 3).toFixed(2));
+              stop.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+            });
+            r.launchMap.dataset.launchVisibility =
+              activeIndex === 0 && scrollY < pageStart + viewportHeight * 0.72 ? "hidden" : "visible";
+          }
+        }
 
-    // Greeting Section
-    if (r.greetingSection) {
-      const progress = clamp((viewportHeight * 0.84 - (m.greetingCopyTop - scrollY)) / (viewportHeight * 0.36));
-      r.greetingSection.style.setProperty("--scroll-progress", progress.toFixed(3));
+        // Greeting Section
+        if (r.greetingSection) {
+          const progress = clamp((viewportHeight * 0.84 - (m.greetingCopyTop - scrollY)) / (viewportHeight * 0.36));
+          r.greetingSection.style.setProperty("--scroll-progress", progress.toFixed(3));
 
-      r.greetingInkLines.forEach((line, index) => {
-        const offsetTop = m.inkLineTops[index] ?? 0;
-        const ink = clamp((viewportHeight * 0.82 - (offsetTop - scrollY)) / (viewportHeight * 0.24));
-        line.style.setProperty("--ink-percent", Math.round(ink * 100) + "%");
-      });
+          r.greetingInkLines.forEach((line, index) => {
+            const offsetTop = m.inkLineTops[index] ?? 0;
+            const ink = clamp((viewportHeight * 0.82 - (offsetTop - scrollY)) / (viewportHeight * 0.24));
+            line.style.setProperty("--ink-percent", Math.round(ink * 100) + "%");
+          });
 
-      r.greetingPills.forEach((pill) => {
-        const drift = Number(pill.dataset.pillDrift || 0);
-        const tiltDirection = drift >= 0 ? -1 : 1;
-        pill.style.setProperty("--pill-shift", Math.round(drift * (1 - progress)) + "px");
-        pill.style.setProperty("--pill-tilt", (tiltDirection * 1.8 * (1 - progress)).toFixed(2) + "deg");
-      });
-    }
+          r.greetingPills.forEach((pill) => {
+            const drift = Number(pill.dataset.pillDrift || 0);
+            const tiltDirection = drift >= 0 ? -1 : 1;
+            pill.style.setProperty("--pill-shift", Math.round(drift * (1 - progress)) + "px");
+            pill.style.setProperty("--pill-tilt", (tiltDirection * 1.8 * (1 - progress)).toFixed(2) + "deg");
+          });
+        }
 
-    // Process Section
-    if (r.processSection && r.processGrid && r.processCards.length) {
-      if (reduceMotion) {
-        r.processSection.style.setProperty("--process-progress", "1");
-        r.processCards.forEach((card, index) => {
-          card.style.setProperty("--process-stack-x", "0px");
-          card.style.setProperty("--process-stack-y", "0px");
-          card.style.setProperty("--process-stack-rotate", "0deg");
-          card.style.setProperty("--process-card-scale", "1");
-          card.style.setProperty("--process-z", String(index + 1));
-        });
-      } else {
-        const progress = easeOutQuart(clamp((viewportHeight * 0.86 - (m.processGridTop - scrollY)) / (viewportHeight * 0.48)));
-        const remaining = 1 - progress;
-        const stackCenterX = m.processGridWidth / 2;
-        const stackCenterY = m.processGridHeight / 2;
-        const middleIndex = (r.processCards.length - 1) / 2;
+        // Process Section
+        if (r.processSection && r.processGrid && r.processCards.length) {
+          if (reduceMotion) {
+            r.processSection.style.setProperty("--process-progress", "1");
+            r.processCards.forEach((card, index) => {
+              card.style.setProperty("--process-stack-x", "0px");
+              card.style.setProperty("--process-stack-y", "0px");
+              card.style.setProperty("--process-stack-rotate", "0deg");
+              card.style.setProperty("--process-card-scale", "1");
+              card.style.setProperty("--process-z", String(index + 1));
+            });
+          } else {
+            const progress = easeOutQuart(clamp((viewportHeight * 0.86 - (m.processGridTop - scrollY)) / (viewportHeight * 0.48)));
+            const remaining = 1 - progress;
+            const stackCenterX = m.processGridWidth / 2;
+            const stackCenterY = m.processGridHeight / 2;
+            const middleIndex = (r.processCards.length - 1) / 2;
 
-        r.processCards.forEach((card, index) => {
-          const center = m.processCardCenters[index] ?? { x: 0, y: 0 };
-          const centerX = center.x;
-          const centerY = center.y;
-          const stackX = (stackCenterX - centerX) * remaining;
-          const stackY = (stackCenterY - centerY) * remaining;
-          const rotate = (middleIndex - index) * 2.15 * remaining;
-          const scale = 0.94 + progress * 0.06;
-          card.style.setProperty("--process-stack-x", Math.round(stackX) + "px");
-          card.style.setProperty("--process-stack-y", Math.round(stackY) + "px");
-          card.style.setProperty("--process-stack-rotate", rotate.toFixed(2) + "deg");
-          card.style.setProperty("--process-card-scale", scale.toFixed(3));
-          card.style.setProperty("--process-z", String(index + 1));
-        });
-        r.processSection.style.setProperty("--process-progress", progress.toFixed(3));
-      }
-    }
+            r.processCards.forEach((card, index) => {
+              const center = m.processCardCenters[index] ?? { x: 0, y: 0 };
+              const stackX = (stackCenterX - center.x) * remaining;
+              const stackY = (stackCenterY - center.y) * remaining;
+              const rotate = (middleIndex - index) * 2.15 * remaining;
+              const scale = 0.94 + progress * 0.06;
+              card.style.setProperty("--process-stack-x", Math.round(stackX) + "px");
+              card.style.setProperty("--process-stack-y", Math.round(stackY) + "px");
+              card.style.setProperty("--process-stack-rotate", rotate.toFixed(2) + "deg");
+              card.style.setProperty("--process-card-scale", scale.toFixed(3));
+              card.style.setProperty("--process-z", String(index + 1));
+            });
+            r.processSection.style.setProperty("--process-progress", progress.toFixed(3));
+          }
+        }
 
-    // Services Section
-    if (r.servicesSection && r.serviceShell && r.serviceRail && r.servicePanels.length) {
-      if (reduceMotion || window.innerWidth < 760) {
-        r.servicesSection.style.setProperty("--service-progress", "1");
-        r.serviceRail.style.setProperty("--service-shift", "0px");
-        r.servicePanels.forEach((panel) => {
-          panel.style.setProperty("--service-panel-opacity", "1");
-          panel.style.setProperty("--service-panel-scale", "1");
-        });
-        r.serviceNavDots.forEach((dot) => { dot.dataset.dotState = "active"; });
-      } else {
-        const sectionOffsetTop = m.servicesTop;
-        const sectionOffsetHeight = m.servicesHeight;
-        const railScrollHeight = m.serviceRailScrollHeight;
-        const shellClientHeight = m.serviceShellClientHeight;
-        const scrollRange = Math.max(1, sectionOffsetHeight - viewportHeight);
-        const progress = clamp(-(sectionOffsetTop - scrollY) / scrollRange);
-        const maxShift = Math.max(0, railScrollHeight - shellClientHeight);
-        const activeIndex = progress * (r.servicePanels.length - 1);
+        // Services Section
+        if (r.servicesSection && r.serviceShell && r.serviceRail && r.servicePanels.length) {
+          if (reduceMotion || window.innerWidth < 760) {
+            r.servicesSection.style.setProperty("--service-progress", "1");
+            r.serviceRail.style.setProperty("--service-shift", "0px");
+            r.servicePanels.forEach((panel) => {
+              panel.style.setProperty("--service-panel-opacity", "1");
+              panel.style.setProperty("--service-panel-scale", "1");
+            });
+            r.serviceNavDots.forEach((dot) => { dot.dataset.dotState = "active"; });
+          } else {
+            const scrollRange = Math.max(1, m.servicesHeight - viewportHeight);
+            const progress = clamp(-(m.servicesTop - scrollY) / scrollRange);
+            const maxShift = Math.max(0, m.serviceRailScrollHeight - m.serviceShellClientHeight);
+            const activeIndex = progress * (r.servicePanels.length - 1);
 
-        r.servicesSection.style.setProperty("--service-progress", progress.toFixed(3));
-        r.serviceRail.style.setProperty("--service-shift", Math.round(-maxShift * progress) + "px");
-        r.servicePanels.forEach((panel, index) => {
-          const distance = Math.abs(index - activeIndex);
-          panel.style.setProperty("--service-panel-opacity", clamp(1 - distance * 0.5, 0.28, 1).toFixed(3));
-          panel.style.setProperty("--service-panel-scale", (1 - clamp(distance * 0.035, 0, 0.07)).toFixed(3));
-        });
-        r.serviceNavDots.forEach((dot, index) => {
-          const roundedActive = Math.round(activeIndex);
-          dot.dataset.dotState = index === roundedActive ? "active" : index < roundedActive ? "passed" : "upcoming";
-          dot.setAttribute("aria-current", index === roundedActive ? "true" : "false");
-        });
-      }
-    }
+            r.servicesSection.style.setProperty("--service-progress", progress.toFixed(3));
+            r.serviceRail.style.setProperty("--service-shift", Math.round(-maxShift * progress) + "px");
+            r.servicePanels.forEach((panel, index) => {
+              const distance = Math.abs(index - activeIndex);
+              panel.style.setProperty("--service-panel-opacity", clamp(1 - distance * 0.5, 0.28, 1).toFixed(3));
+              panel.style.setProperty("--service-panel-scale", (1 - clamp(distance * 0.035, 0, 0.07)).toFixed(3));
+            });
+            r.serviceNavDots.forEach((dot, index) => {
+              const roundedActive = Math.round(activeIndex);
+              dot.dataset.dotState = index === roundedActive ? "active" : index < roundedActive ? "passed" : "upcoming";
+              dot.setAttribute("aria-current", index === roundedActive ? "true" : "false");
+            });
+          }
+        }
 
-    // Work Section
-    if (r.workSection && r.workStage && r.workCenter && r.workCards.length) {
-      const stageOffsetTop = m.workStageTop;
-      const stageOffsetHeight = m.workStageHeight;
-      const stageTop = stageOffsetTop - scrollY;
-      const stageBottom = stageTop + stageOffsetHeight;
-      const visibleHeight = Math.max(0, Math.min(stageBottom, viewportHeight) - Math.max(stageTop, 0));
-      const spreadProgress = reduceMotion ? 1 : easeOutQuart(clamp(visibleHeight / Math.min(stageOffsetHeight, viewportHeight * 0.72)));
-      const remaining = 1 - spreadProgress;
-      const middleIndex = (r.workCards.length - 1) / 2;
+        // Work Section
+        if (r.workSection && r.workStage && r.workCenter && r.workCards.length) {
+          const stageTop = m.workStageTop - scrollY;
+          const stageBottom = stageTop + m.workStageHeight;
+          const visibleHeight = Math.max(0, Math.min(stageBottom, viewportHeight) - Math.max(stageTop, 0));
+          const spreadProgress = reduceMotion ? 1 : easeOutQuart(clamp(visibleHeight / Math.min(m.workStageHeight, viewportHeight * 0.72)));
+          const remaining = 1 - spreadProgress;
+          const middleIndex = (r.workCards.length - 1) / 2;
 
-      const centerX = m.workCenterCenter.x;
-      const centerY = m.workCenterCenter.y;
+          r.workCards.forEach((card, index) => {
+            const cardCenter = m.workCardCenters[index] ?? { x: 0, y: 0 };
+            const targetRotate = Number(card.dataset.workRotate || 0);
+            const stackRotate = (index - middleIndex) * 2.4;
+            const stackX = (m.workCenterCenter.x - cardCenter.x) * remaining;
+            const stackY = (m.workCenterCenter.y - cardCenter.y) * remaining;
+            const rotate = stackRotate * remaining + targetRotate * spreadProgress;
+            const scale = 0.84 + spreadProgress * 0.16;
+            const opacity = 0.5 + spreadProgress * 0.5;
 
-      r.workCards.forEach((card, index) => {
-        const cardCenter = m.workCardCenters[index] ?? { x: 0, y: 0 };
-        const cardCenterX = cardCenter.x;
-        const cardCenterY = cardCenter.y;
-        const targetRotate = Number(card.dataset.workRotate || 0);
-        const stackRotate = (index - middleIndex) * 2.4;
-        const stackX = (centerX - cardCenterX) * remaining;
-        const stackY = (centerY - cardCenterY) * remaining;
-        const rotate = stackRotate * remaining + targetRotate * spreadProgress;
-        const scale = 0.84 + spreadProgress * 0.16;
-        const opacity = 0.5 + spreadProgress * 0.5;
+            card.style.setProperty("--work-shift-x", Math.round(stackX) + "px");
+            card.style.setProperty("--work-shift-y", Math.round(stackY) + "px");
+            card.style.setProperty("--work-rotate", rotate.toFixed(2) + "deg");
+            card.style.setProperty("--work-scale", scale.toFixed(3));
+            card.style.setProperty("--work-opacity", opacity.toFixed(3));
+            card.style.setProperty("--work-z", String(r.workCards.length - index));
+          });
+          r.workSection.style.setProperty("--work-spread", spreadProgress.toFixed(3));
+        }
 
-        card.style.setProperty("--work-shift-x", Math.round(stackX) + "px");
-        card.style.setProperty("--work-shift-y", Math.round(stackY) + "px");
-        card.style.setProperty("--work-rotate", rotate.toFixed(2) + "deg");
-        card.style.setProperty("--work-scale", scale.toFixed(3));
-        card.style.setProperty("--work-opacity", opacity.toFixed(3));
-        card.style.setProperty("--work-z", String(r.workCards.length - index));
-      });
-      r.workSection.style.setProperty("--work-spread", spreadProgress.toFixed(3));
-    }
+        // Testimonial Section
+        if (r.testimonialSection && r.testimonialCards.length) {
+          if (reduceMotion) {
+            r.testimonialSection.style.setProperty("--testimonial-progress", "0");
+            r.testimonialCards.forEach((card) => {
+              card.style.setProperty("--testimonial-x", "0px");
+              card.style.setProperty("--testimonial-y", "0px");
+              card.style.setProperty("--testimonial-rotate", "0deg");
+              card.style.setProperty("--testimonial-scale", "1");
+              card.style.setProperty("--testimonial-opacity", "1");
+              card.style.setProperty("--testimonial-content-opacity", "1");
+              card.style.setProperty("--testimonial-z", "100");
+            });
+            r.testimonialNavDots.forEach((dot) => { dot.dataset.dotState = "active"; });
+          } else {
+            const scrollRange = Math.max(1, m.testimonialHeight - viewportHeight);
+            const progress = clamp(-(m.testimonialTop - scrollY) / scrollRange);
+            const active = progress * Math.max(1, r.testimonialCards.length - 1);
 
-    // Testimonial Section
-    if (r.testimonialSection && r.testimonialCards.length) {
-      if (reduceMotion) {
-        r.testimonialSection.style.setProperty("--testimonial-progress", "0");
-        r.testimonialCards.forEach((card) => {
-          card.style.setProperty("--testimonial-x", "0px");
-          card.style.setProperty("--testimonial-y", "0px");
-          card.style.setProperty("--testimonial-rotate", "0deg");
-          card.style.setProperty("--testimonial-scale", "1");
-          card.style.setProperty("--testimonial-opacity", "1");
-          card.style.setProperty("--testimonial-content-opacity", "1");
-          card.style.setProperty("--testimonial-z", "100");
-        });
-        r.testimonialNavDots.forEach((dot) => { dot.dataset.dotState = "active"; });
-      } else {
-        const sectionOffsetTop = m.testimonialTop;
-        const sectionOffsetHeight = m.testimonialHeight;
-        const scrollRange = Math.max(1, sectionOffsetHeight - viewportHeight);
-        const progress = clamp(-(sectionOffsetTop - scrollY) / scrollRange);
-        const active = progress * Math.max(1, r.testimonialCards.length - 1);
+            r.testimonialSection.style.setProperty("--testimonial-progress", progress.toFixed(3));
+            r.testimonialCards.forEach((card, index) => {
+              const distance = index - active;
+              const futureOffset = Math.max(distance, 0);
+              const passed = clamp(active - index);
+              const localProgress = easeOutQuart(passed);
+              const activeDistance = Math.abs(distance);
+              const x = futureOffset * 13 - localProgress * 46;
+              const y = futureOffset * 11 - localProgress * 118;
+              const rotate = futureOffset * 1.45 - localProgress * 4.6;
+              const scale = 1 - futureOffset * 0.018 - localProgress * 0.035;
+              const opacity = 1 - Math.max(0, activeDistance - 1.08) * 0.34 - localProgress * 0.18;
+              const contentOpacity = 1 - clamp(activeDistance * 0.95, 0, 1);
+              const z = Math.round(100 - activeDistance * 18 + index);
 
-        r.testimonialSection.style.setProperty("--testimonial-progress", progress.toFixed(3));
-        r.testimonialCards.forEach((card, index) => {
-          const distance = index - active;
-          const futureOffset = Math.max(distance, 0);
-          const passed = clamp(active - index);
-          const localProgress = easeOutQuart(passed);
-          const activeDistance = Math.abs(distance);
-          const x = futureOffset * 13 - localProgress * 46;
-          const y = futureOffset * 11 - localProgress * 118;
-          const rotate = futureOffset * 1.45 - localProgress * 4.6;
-          const scale = 1 - futureOffset * 0.018 - localProgress * 0.035;
-          const opacity = 1 - Math.max(0, activeDistance - 1.08) * 0.34 - localProgress * 0.18;
-          const contentOpacity = 1 - clamp(activeDistance * 0.95, 0, 1);
-          const z = Math.round(100 - activeDistance * 18 + index);
+              card.style.setProperty("--testimonial-x", x.toFixed(1) + "px");
+              card.style.setProperty("--testimonial-y", y.toFixed(1) + "px");
+              card.style.setProperty("--testimonial-rotate", rotate.toFixed(2) + "deg");
+              card.style.setProperty("--testimonial-scale", scale.toFixed(3));
+              card.style.setProperty("--testimonial-opacity", clamp(opacity, 0.28, 1).toFixed(3));
+              card.style.setProperty("--testimonial-content-opacity", contentOpacity.toFixed(3));
+              card.style.setProperty("--testimonial-z", String(z));
+            });
+            r.testimonialNavDots.forEach((dot, index) => {
+              const roundedActive = Math.round(active);
+              dot.dataset.dotState = index === roundedActive ? "active" : index < roundedActive ? "passed" : "upcoming";
+              dot.setAttribute("aria-current", index === roundedActive ? "true" : "false");
+            });
+          }
+        }
 
-          card.style.setProperty("--testimonial-x", x.toFixed(1) + "px");
-          card.style.setProperty("--testimonial-y", y.toFixed(1) + "px");
-          card.style.setProperty("--testimonial-rotate", rotate.toFixed(2) + "deg");
-          card.style.setProperty("--testimonial-scale", scale.toFixed(3));
-          card.style.setProperty("--testimonial-opacity", clamp(opacity, 0.28, 1).toFixed(3));
-          card.style.setProperty("--testimonial-content-opacity", contentOpacity.toFixed(3));
-          card.style.setProperty("--testimonial-z", String(z));
-        });
-        r.testimonialNavDots.forEach((dot, index) => {
-          const roundedActive = Math.round(active);
-          dot.dataset.dotState = index === roundedActive ? "active" : index < roundedActive ? "passed" : "upcoming";
-          dot.setAttribute("aria-current", index === roundedActive ? "true" : "false");
-        });
-      }
-    }
-
-    // Back to top
-    if (r.backToTop) {
-      r.backToTop.dataset.visible = scrollY > viewportHeight * 1.2 ? "true" : "false";
-    }
+        // Back to top
+        if (r.backToTop) {
+          r.backToTop.dataset.visible = scrollY > viewportHeight * 1.2 ? "true" : "false";
+        }
       }); // end rAF callback
     };
 
