@@ -92,6 +92,10 @@
   --radius-lg: 24px;
   --radius-full: 9999px;
 
+  /* Error states */
+  --color-error: oklch(28% 0.06 20);
+  --color-error-muted: oklch(32% 0.08 20);
+
   /* Derived alpha colors (borders & hard shadows) */
   --color-warm-dark-08: oklch(from var(--color-warm-dark) L C H / 0.08);
   --color-warm-dark-10: oklch(from var(--color-warm-dark) L C H / 0.1);

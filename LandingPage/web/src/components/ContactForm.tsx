@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
-import styles from "@/styles/page.module.css";
+import styles from "@/styles/contact.module.css";
 
 const SERVICE_OPTIONS = [
   { value: "", label: "Choose a service" },

@@ -1,5 +1,5 @@
 import { LayoutGrid, Square, Search, Scan, Waves, Compass } from "lucide-react";
-import styles from "@/styles/page.module.css";
+import styles from "@/styles/greeting.module.css";
 
 const capabilityPills = [
   { label: "Offer clarity", icon: "grid", pos: "pos-0", drift: "34" },

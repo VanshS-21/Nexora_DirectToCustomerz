@@ -1,4 +1,4 @@
-import styles from "@/styles/page.module.css";
+import styles from "@/styles/testimonial.module.css";
 
 const testimonials = [
   {

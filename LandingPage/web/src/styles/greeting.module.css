@@ -1,0 +1,319 @@
+/* Greeting section: IntroGreeting component */
+
+/* Shared keyframes used by this module */
+@keyframes studioRiseIn {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes greetingLineIn {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes pillDropIn {
+  from {
+    opacity: 0;
+    scale: 0.7;
+    translate: 0 20px;
+  }
+  60% {
+    scale: 1.06;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+  }
+}
+
+.greetingSection {
+  --scroll-progress: 0;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  min-height: 112svh;
+  padding: 120px clamp(28px, 9.5vw, 186px);
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      -8deg,
+      oklch(82% 0.11 214) 0 24px,
+      oklch(85% 0.08 214) 24px 48px
+    );
+  border-block: 0;
+}
+
+.greetingCenter {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 48px;
+  width: min(1120px, 100%);
+  text-align: center;
+}
+
+.greetingLabel {
+  display: grid;
+  grid-template-columns: 74px auto 74px;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 18px;
+  border: 1px solid var(--color-warm-darker-14);
+  border-radius: 999px;
+  background: oklch(from var(--color-surface) L C H / 0.82);
+  color: var(--color-ink);
+  font-size: var(--text-body);
+  box-shadow: 4px 4px 0 var(--color-warm-darker-12);
+  transform: rotate(2deg);
+  opacity: 0;
+  animation: studioRiseIn 520ms var(--ease-out-quint) both;
+}
+
+.greetingLabel span {
+  height: 1px;
+  background: oklch(52% 0.018 var(--hue-brand) / 0.26);
+}
+
+.greetingLabel p {
+  max-width: none;
+}
+
+.greetingCenter h2 {
+  max-width: 22ch;
+  font-family: var(--font-display);
+  color: oklch(13% 0.02 var(--hue-brand));
+  font-size: 3rem;
+  font-weight: var(--weight-display);
+  line-height: var(--leading-heading);
+  letter-spacing: 0;
+}
+
+.greetingLine {
+  display: block;
+  color: color-mix(
+    in oklch,
+    oklch(16% 0.015 var(--hue-brand)) var(--ink-percent, 0%),
+    oklch(82% 0.014 var(--hue-brand))
+  );
+  opacity: 0;
+  animation: greetingLineIn 560ms var(--ease-out-quint) both;
+  animation-delay: calc(var(--line-index, 0) * 90ms + 200ms);
+  clip-path: inset(0 calc(100% - var(--ink-percent, 0%)) 0 0);
+  transition: clip-path 120ms var(--ease-out);
+}
+
+.capabilityOrbit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.capabilityPill {
+  --compress-x: 0px;
+  --tilt: -2deg;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 7px 18px 7px 7px;
+  border: 1px solid var(--color-warm-darker-12);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-pale);
+  color: var(--color-warm-darker);
+  font-size: 1rem;
+  font-weight: var(--weight-body-strong);
+  box-shadow: 8px 10px 0 var(--color-warm-darker-12);
+  transform: translateX(var(--pill-shift, 0px)) rotate(var(--pill-tilt, var(--tilt)));
+}
+
+.capabilityIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.capabilityIcon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.grid {
+  color: var(--color-primary);
+  background: oklch(84% 0.16 52);
+}
+
+.square {
+  color: oklch(44% 0.16 142);
+  background: oklch(86% 0.12 135);
+}
+
+.search {
+  color: oklch(42% 0.11 214);
+  background: oklch(88% 0.08 214);
+}
+
+.frame {
+  color: oklch(62% 0.2 340);
+  background: oklch(90% 0.1 340);
+}
+
+.motion {
+  color: oklch(62% 0.18 37);
+  background: oklch(88% 0.1 45);
+}
+
+.compass {
+  color: oklch(44% 0.12 210);
+  background: oklch(87% 0.08 205);
+}
+
+.capabilityPill.pos-0 { top: 13%; left: 8%; --tilt: -4deg; }
+.capabilityPill.pos-1 { top: 11%; right: 10%; --tilt: 3deg; }
+.capabilityPill.pos-2 { top: 44%; left: 3%; --tilt: 2deg; }
+.capabilityPill.pos-3 { top: 48%; right: 5%; --tilt: -3deg; }
+.capabilityPill.pos-4 { bottom: 15%; left: 16%; --tilt: -2deg; }
+.capabilityPill.pos-5 { bottom: 12%; right: 19%; --tilt: 4deg; }
+
+/* ── Responsive: 760px+ ── */
+@media (min-width: 760px) {
+  .greetingCenter h2 {
+    font-size: 3.5rem;
+  }
+}
+
+/* ── Responsive: 1180px+ ── */
+@media (min-width: 1180px) {
+  .greetingCenter h2 {
+    font-size: 4rem;
+  }
+}
+
+/* ── Responsive: mobile ── */
+@media (max-width: 759px) {
+  .greetingSection {
+    min-height: auto;
+    padding-block: 84px 112px;
+  }
+
+  .greetingCenter {
+    gap: 24px;
+  }
+
+  .greetingLabel {
+    grid-template-columns: 52px auto 52px;
+    gap: 14px;
+    font-size: 0.9rem;
+  }
+
+  .greetingCenter h2 {
+    max-width: 16ch;
+    font-size: 3.2rem;
+    line-height: 1.22;
+  }
+
+  .capabilityOrbit {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 370px;
+    margin-top: 34px;
+  }
+
+  .capabilityPill {
+    position: static;
+    min-height: 48px;
+    gap: 8px;
+    padding: 6px 12px 6px 6px;
+    font-size: 0.82rem;
+    transform: none !important;
+    animation: none;
+    box-shadow:
+      0 12px 18px var(--color-warm-dark-08),
+      4px 5px 0 oklch(from var(--color-warm-dark) L C H / 0.04);
+  }
+
+  .capabilityIcon {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ── Typeset pass ── */
+.greetingLabel {
+  font-size: var(--text-body);
+  font-weight: var(--weight-body-strong);
+  line-height: var(--leading-title);
+}
+
+.greetingCenter h2 {
+  max-width: 18ch;
+  font-size: clamp(2.35rem, 1.48rem + 4.3vw, 5.35rem);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-heading);
+}
+
+.capabilityPill {
+  font-size: var(--text-body);
+  font-weight: var(--weight-body-strong);
+  line-height: var(--leading-title);
+}
+
+@media (max-width: 759px) {
+  .greetingCenter h2 {
+    font-size: clamp(2.75rem, 12vw, 3.75rem);
+    line-height: 0.95;
+  }
+}
+
+/* ── Harden pass ── */
+.capabilityPill {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .greetingLabel,
+  .greetingLine,
+  .capabilityPill {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    scale: 1 !important;
+    translate: 0 0 !important;
+  }
+
+  .greetingLine {
+    clip-path: none !important;
+    --ink-percent: 100% !important;
+  }
+}

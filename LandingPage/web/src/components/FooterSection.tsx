@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ContactForm } from "@/components/ContactForm";
-import styles from "@/styles/page.module.css";
+import styles from "@/styles/contact.module.css";
 
 const footerLinks = [
   { label: "Work", href: "#work" },

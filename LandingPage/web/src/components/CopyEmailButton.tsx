@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "@/styles/page.module.css";
+import styles from "@/styles/contact.module.css";
 
 const EMAIL_ADDRESS = "hello@nexoralabs.com";
 const CLIPBOARD_TIMEOUT_MS = 650;
