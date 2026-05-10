@@ -8,10 +8,10 @@
   /* Warm cream background */
   --color-bg: oklch(96% 0.03 75);
   --color-surface: oklch(99% 0.01 70);
-  --color-lime: oklch(82% 0.18 132);
-  --color-sky: oklch(80% 0.11 214);
-  --color-rose: oklch(76% 0.16 350);
-  --color-yellow: oklch(90% 0.12 88);
+  --color-lime: oklch(78% 0.14 132);
+  --color-sky: oklch(78% 0.09 214);
+  --color-rose: oklch(74% 0.13 350);
+  --color-yellow: oklch(86% 0.09 88);
   --color-ink: oklch(19% 0.025 var(--hue-brand));
   --color-warm-dark: oklch(28% 0.02 var(--hue-brand));
   --color-warm-darker: oklch(20% 0.02 var(--hue-brand));
@@ -20,7 +20,7 @@
   
   /* Text */
   --color-text: oklch(25% 0.02 var(--hue-brand));
-  --color-text-muted: oklch(44% 0.02 var(--hue-brand));
+  --color-text-muted: oklch(50% 0.02 var(--hue-brand));
   --color-text-inverse: oklch(98% 0.01 var(--hue-brand));
 
   /* Secondary text tokens (extracted from hard-coded OKLCH) */
@@ -85,9 +85,9 @@
   --text-numeral: clamp(3.4rem, 2.6rem + 2.7vw, 4.4rem);
 
   /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   --radius-full: 9999px;
 
   /* Error states */
@@ -108,10 +108,23 @@
   --color-warm-darker-16: oklch(from var(--color-warm-darker) L C H / 0.16);
   --color-warm-darker-18: oklch(from var(--color-warm-darker) L C H / 0.18);
 
-  /* Elevation (Choreographed Depth) */
-  --shadow-sm: 0 4px 12px oklch(28% 0.02 var(--hue-brand) / 0.05);
-  --shadow-md: 0 8px 24px oklch(28% 0.02 var(--hue-brand) / 0.08);
-  --shadow-lg: 0 16px 48px oklch(28% 0.02 var(--hue-brand) / 0.12);
+  /* Elevation (Hybrid Workshop Shadows) */
+  /* Workshop shadows: offset + small blur for tactile depth */
+  --shadow-workshop-xs: 3px 3px 4px oklch(20% 0.02 var(--hue-brand) / 0.08);
+  --shadow-workshop-sm: 5px 5px 4px oklch(20% 0.02 var(--hue-brand) / 0.10);
+  --shadow-workshop-md: 8px 8px 4px oklch(20% 0.02 var(--hue-brand) / 0.10);
+  --shadow-workshop-lg: 10px 10px 4px oklch(20% 0.02 var(--hue-brand) / 0.10);
+  --shadow-workshop-xl: 12px 12px 4px oklch(20% 0.02 var(--hue-brand) / 0.12);
+  /* Ambient lift: blur-only for hover states */
+  --shadow-ambient-sm: 0 4px 12px oklch(28% 0.02 var(--hue-brand) / 0.05);
+  --shadow-ambient-md: 0 8px 24px oklch(28% 0.02 var(--hue-brand) / 0.08);
+  --shadow-ambient-lg: 0 16px 48px oklch(28% 0.02 var(--hue-brand) / 0.12);
+  /* Deep stack: combined ambient + workshop for thick objects */
+  --shadow-deep: 0 20px 48px oklch(22% 0.02 var(--hue-brand) / 0.14), 6px 6px 4px oklch(28% 0.02 var(--hue-brand) / 0.08);
+  /* Legacy aliases (ambient-only, for gradual migration) */
+  --shadow-sm: var(--shadow-ambient-sm);
+  --shadow-md: var(--shadow-ambient-md);
+  --shadow-lg: var(--shadow-ambient-lg);
 
   /* Transitions */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);

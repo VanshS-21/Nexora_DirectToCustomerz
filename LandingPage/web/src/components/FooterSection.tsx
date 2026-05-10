@@ -5,7 +5,7 @@ import styles from "@/styles/contact.module.css";
 const footerLinks = [
   { label: "Work", href: "#work" },
   { label: "Pricing", href: "#pricing" },
-  { label: "FAQs", href: "#faqs" },
+  { label: "FAQs", href: "#pricing" },
   { label: "Process", href: "#process" },
 ] as const;
 

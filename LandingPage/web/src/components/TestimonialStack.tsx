@@ -43,7 +43,7 @@ export function TestimonialStack() {
             <div className={styles.sectionKicker}>Client notes</div>
             <h2 id="testimonials-heading">What clients say after launch</h2>
             <p className={styles.sectionLead}>
-              Practical outcomes from owners who needed a clearer offer, more credibility, and more enquiries.
+              Outcomes from owners who needed a clearer offer, more credibility, and more enquiries.
             </p>
             <nav className={styles.testimonialNav} aria-label="Testimonial cards">
               {testimonials.map((testimonial, index) => (

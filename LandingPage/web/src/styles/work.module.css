@@ -31,12 +31,7 @@
   --work-spread: 0;
   overflow: hidden;
   padding-block: clamp(92px, 11vw, 162px);
-  background:
-    repeating-linear-gradient(
-      0deg,
-      oklch(91% 0.08 350) 0 34px,
-      oklch(94% 0.05 350) 34px 68px
-    );
+  background: var(--color-surface-tinted);
   border-top: 2px solid var(--color-warm-darker-10);
 }
 
@@ -94,12 +89,12 @@
   z-index: -1;
   width: 88px;
   height: 88px;
-  background: oklch(90% 0.12 88);
+  background: oklch(86% 0.09 88);
   border: 0;
   border-radius: 50%;
   content: "";
   opacity: 1;
-  transform: rotate(-12deg);
+  transform: rotate(-6deg);
 }
 
 .workHeader h2 {
@@ -140,20 +135,20 @@
   color: var(--color-text-inverse);
   font-size: 0.9rem;
   font-weight: var(--weight-heading);
-  box-shadow: 5px 5px 0 var(--color-warm-dark-12);
-  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background-color 220ms var(--ease-out);
+  box-shadow: 5px 5px 4px oklch(from var(--color-warm-dark) L C H / 0.10);
+  transition: transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out), background-color 280ms var(--ease-out);
 }
 
 .workHeader a:hover {
   transform: translateY(-2px);
   background: var(--color-primary-hover);
-  box-shadow: 7px 7px 0 var(--color-warm-dark-14);
+  box-shadow: 6px 6px 4px oklch(from var(--color-warm-dark) L C H / 0.12);
 }
 
 .workHeader a:active {
   translate: 0 1px;
   scale: 0.985;
-  box-shadow: 4px 4px 0 var(--color-warm-dark-12);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-dark) L C H / 0.10);
 }
 
 .workHeader a:focus-visible {
@@ -208,9 +203,9 @@
   margin-right: 0;
   padding: 12px 14px;
   border: 1px solid var(--color-warm-dark-12);
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--color-surface);
-  box-shadow: 7px 7px 0 var(--color-warm-darker-13);
+  box-shadow: 6px 6px 4px oklch(from var(--color-warm-darker) L C H / 0.10);
   transform: rotate(-1.5deg);
 }
 
@@ -231,7 +226,7 @@
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  box-shadow: 3px 3px 0 var(--color-warm-darker-13);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-darker) L C H / 0.10);
   transform: rotate(var(--sticker-rotate, -3deg));
   opacity: 0;
   animation: studioStampIn 420ms var(--ease-out-quint) both;
@@ -271,9 +266,9 @@
   overflow: hidden;
   aspect-ratio: 16 / 10;
   border: 12px solid oklch(18% 0.02 var(--hue-brand));
-  border-radius: 8px;
+  border-radius: 6px;
   background: oklch(94% 0.02 var(--hue-brand));
-  box-shadow: 16px 16px 0 var(--color-warm-darker-18);
+  box-shadow: 12px 12px 4px oklch(from var(--color-warm-darker) L C H / 0.14);
 }
 
 .workProjectImage img {
@@ -355,7 +350,7 @@
   .workProjectImage {
     border-width: 7px;
     box-shadow:
-      8px 8px 0 var(--color-warm-dark-12),
+      6px 6px 4px oklch(from var(--color-warm-dark) L C H / 0.10),
       0 18px 30px var(--color-warm-dark-10);
   }
 
@@ -403,7 +398,7 @@
   .workProjectImage {
     border-width: clamp(7px, 1.4vw, 10px);
     box-shadow:
-      9px 9px 0 oklch(from var(--color-warm-darker) L C H / 0.15),
+      7px 7px 4px oklch(from var(--color-warm-darker) L C H / 0.12),
       0 18px 32px oklch(from var(--color-warm-darker) L C H / 0.09);
   }
 
@@ -472,22 +467,22 @@
 /* ── Hover interactions ── */
 @media (hover: hover) {
   .workProjectImage {
-    transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background-color 220ms var(--ease-out);
+    transition: transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out), background-color 280ms var(--ease-out);
   }
 
   .workProject:hover .workProjectImage {
     box-shadow:
-      14px 14px 0 var(--color-warm-dark-16),
+      10px 10px 4px oklch(from var(--color-warm-dark) L C H / 0.12),
       0 30px 54px var(--color-warm-dark-14);
   }
 
   .workSticker {
-    transition: translate 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+    transition: translate 280ms var(--ease-out), box-shadow 280ms var(--ease-out);
   }
 
   .workProject:hover .workSticker {
     translate: 0 -5px;
-    box-shadow: 5px 5px 0 var(--color-warm-darker-16);
+    box-shadow: 4px 4px 4px oklch(from var(--color-warm-darker) L C H / 0.12);
   }
 }
 

@@ -105,7 +105,7 @@
   place-items: center;
   padding: 120px 24px;
   text-align: center;
-  background: oklch(70% 0.06 165);
+  background: var(--color-surface-tinted);
   border-top: 2px solid var(--color-warm-darker-14);
 }
 
@@ -156,7 +156,7 @@
   color: var(--color-text-deep);
   font-size: 0.85rem;
   font-weight: var(--weight-display);
-  box-shadow: 3px 4px 0 var(--color-warm-dark-12);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-dark) L C H / 0.10);
 }
 
 .footerAvailability {
@@ -171,7 +171,7 @@
   color: var(--color-ink);
   font-size: 0.92rem;
   font-weight: var(--weight-strong);
-  box-shadow: 4px 4px 0 var(--color-warm-dark-08);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-dark) L C H / 0.08);
 }
 
 .footerAvailability span {
@@ -219,7 +219,7 @@
   border: 2px solid var(--color-warm-darker-14);
   border-radius: 12px;
   background: oklch(from var(--color-surface) L C H / 0.94);
-  box-shadow: 14px 14px 0 var(--color-warm-darker-14);
+  box-shadow: 12px 12px 4px oklch(from var(--color-warm-darker) L C H / 0.10);
   transform: none;
 }
 
@@ -254,7 +254,7 @@
 
 .contactFormError {
   padding: 10px 14px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: oklch(from var(--color-rose) L C H / 0.12);
   border: 1px solid oklch(from var(--color-rose) L C H / 0.3);
   color: var(--color-error);
@@ -286,7 +286,7 @@
   min-height: 48px;
   padding: 0 14px;
   border: 1.5px solid var(--color-warm-dark-18);
-  border-radius: 8px;
+  border-radius: 6px;
   background: oklch(from var(--color-surface-pale) L C H / 0.6);
   color: var(--color-text-deep);
   font-family: var(--font-sans);
@@ -389,22 +389,22 @@
   font-size: var(--text-sm);
   font-weight: var(--weight-label);
   letter-spacing: 0;
-  box-shadow: 5px 5px 0 var(--color-warm-dark-12);
+  box-shadow: 5px 5px 4px oklch(from var(--color-warm-dark) L C H / 0.10);
   cursor: pointer;
   max-width: 100%;
   white-space: normal;
   text-align: center;
   transition:
-    transform 220ms var(--ease-out),
+    transform 280ms var(--ease-out),
     translate 160ms var(--ease-out-quart),
     scale 160ms var(--ease-out-quart),
-    box-shadow 220ms var(--ease-out),
-    background-color 220ms var(--ease-out);
+    box-shadow 280ms var(--ease-out),
+    background-color 280ms var(--ease-out);
 }
 
 .contactFormSubmit:hover {
   transform: translateY(-2px);
-  box-shadow: 7px 7px 0 var(--color-warm-dark-14);
+  box-shadow: 6px 6px 4px oklch(from var(--color-warm-dark) L C H / 0.12);
 }
 
 .contactFormSubmit:active {
@@ -421,7 +421,7 @@
   opacity: 0.72;
   cursor: wait;
   transform: none;
-  box-shadow: 3px 3px 0 var(--color-warm-dark-08);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-dark) L C H / 0.08);
 }
 
 /* ── Contact form success state ── */
@@ -551,7 +551,7 @@
 
 .copyEmailButton:hover {
   transform: translateY(-2px) rotate(-1deg);
-  box-shadow: 6px 7px 0 var(--color-warm-darker-13);
+  box-shadow: 5px 5px 4px oklch(from var(--color-warm-darker) L C H / 0.10);
 }
 
 .copyEmailButton:active {
@@ -571,7 +571,7 @@
 .copyEmailButton:disabled {
   opacity: 0.74;
   transform: none;
-  box-shadow: 3px 3px 0 oklch(from var(--color-warm-darker) L C H / 0.08);
+  box-shadow: 3px 3px 4px oklch(from var(--color-warm-darker) L C H / 0.08);
 }
 
 .copyEmailButton[data-copy-state="copying"] {
@@ -624,7 +624,7 @@
 /* ── Hover interactions ── */
 @media (hover: hover) {
   .footerSocials a {
-    transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background-color 220ms var(--ease-out);
+    transition: transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out), background-color 280ms var(--ease-out);
   }
 
   .footerSocials a:hover {
@@ -634,7 +634,7 @@
   .footerSocials a:active {
     translate: 0 1px;
     scale: 0.985;
-    box-shadow: 2px 2px 0 var(--color-warm-dark-08);
+    box-shadow: 2px 2px 4px oklch(from var(--color-warm-dark) L C H / 0.08);
   }
 
   .footerRule:hover::before {

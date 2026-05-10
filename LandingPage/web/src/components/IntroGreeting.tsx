@@ -14,7 +14,7 @@ const greetingLines = [
   "Your best customers",
   "already trust you offline",
   "we build the site",
-  "that proves it",
+  "that shows proof",
   "before they enquire",
 ];
 

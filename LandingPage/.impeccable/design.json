@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-09T18:00:00Z",
+  "generatedAt": "2026-05-10T18:30:00Z",
   "title": "Design System: Nexora Labs",
   "extensions": {
     "colorMeta": {
@@ -36,23 +36,27 @@
       },
       "lime": {
         "role": "secondary",
-        "displayName": "Studio Lime",
-        "canonical": "oklch(82% 0.18 132)"
+        "displayName": "Workshop Lime",
+        "canonical": "oklch(78% 0.14 132)",
+        "usage": "Highlights only: passed-state nav dots, copy-success feedback, rare sticker accents."
       },
       "sky": {
         "role": "secondary",
-        "displayName": "Open Sky",
-        "canonical": "oklch(80% 0.11 214)"
+        "displayName": "Workshop Sky",
+        "canonical": "oklch(78% 0.09 214)",
+        "usage": "Decorative touches only: launch map stickers, bottom-nav tinting."
       },
       "rose": {
         "role": "secondary",
-        "displayName": "Proof Rose",
-        "canonical": "oklch(76% 0.16 350)"
+        "displayName": "Workshop Rose",
+        "canonical": "oklch(74% 0.13 350)",
+        "usage": "Testimonial sticker fills and rare decorative circles."
       },
       "yellow": {
         "role": "secondary",
-        "displayName": "Warm Yellow",
-        "canonical": "oklch(90% 0.12 88)"
+        "displayName": "Workshop Yellow",
+        "canonical": "oklch(86% 0.09 88)",
+        "usage": "Status only: pricing badges, copy-in-progress feedback. Never as section background."
       },
       "warm-dark": {
         "role": "structural",
@@ -101,28 +105,28 @@
     },
     "shadows": [
       {
-        "name": "sticker-shadow-sm",
-        "value": "3px 3px 0 oklch(20% 0.02 45 / 0.12)",
+        "name": "workshop-shadow-xs",
+        "value": "3px 3px 4px oklch(20% 0.02 45 / 0.08)",
         "purpose": "Small decorative elements: nav dots, badges, small stickers."
       },
       {
-        "name": "sticker-shadow-md",
-        "value": "5px 5px 0 oklch(20% 0.02 45 / 0.12)",
+        "name": "workshop-shadow-sm",
+        "value": "5px 5px 4px oklch(20% 0.02 45 / 0.10)",
         "purpose": "Default decorative shadow for buttons and pills."
       },
       {
-        "name": "sticker-shadow-lg",
-        "value": "9px 9px 0 oklch(20% 0.02 45 / 0.1)",
+        "name": "workshop-shadow-md",
+        "value": "8px 8px 4px oklch(20% 0.02 45 / 0.10)",
         "purpose": "Medium cards and panels."
       },
       {
-        "name": "sticker-shadow-xl",
-        "value": "12px 12px 0 oklch(20% 0.02 45 / 0.14)",
+        "name": "workshop-shadow-lg",
+        "value": "10px 10px 4px oklch(20% 0.02 45 / 0.10)",
         "purpose": "Large cards and project images."
       },
       {
-        "name": "sticker-shadow-2xl",
-        "value": "14px 14px 0 oklch(20% 0.02 45 / 0.14)",
+        "name": "workshop-shadow-xl",
+        "value": "12px 12px 4px oklch(20% 0.02 45 / 0.12)",
         "purpose": "Testimonial cards and service stack panel."
       },
       {
@@ -132,25 +136,25 @@
       },
       {
         "name": "deep-stack",
-        "value": "0 24px 54px oklch(22% 0.02 45 / 0.18), 8px 8px 0 oklch(28% 0.02 45 / 0.1)",
-        "purpose": "Combined ambient and sticker shadow for thick substantial objects."
+        "value": "0 20px 48px oklch(22% 0.02 45 / 0.14), 6px 6px 4px oklch(28% 0.02 45 / 0.08)",
+        "purpose": "Combined ambient and workshop shadow for thick substantial objects."
       }
     ],
     "motion": [
       {
         "name": "ease-out",
         "value": "cubic-bezier(0, 0, 0.38, 1)",
-        "purpose": "Standard easing for hover transitions (220ms)."
+        "purpose": "Standard easing for hover transitions (280ms)."
       },
       {
         "name": "ease-out-quart",
         "value": "cubic-bezier(0.25, 1, 0.5, 1)",
-        "purpose": "Scroll-driven choreography and reveal animations (560ms)."
+        "purpose": "Scroll-driven choreography and reveal animations (560ms-720ms)."
       },
       {
         "name": "ease-out-quint",
         "value": "cubic-bezier(0.23, 1, 0.32, 1)",
-        "purpose": "Studio entrance animations (520ms-720ms)."
+        "purpose": "Workshop entrance animations (640ms-900ms)."
       }
     ]
   },
@@ -161,7 +165,7 @@
       "refersTo": "primaryAction",
       "description": "The main call to action. Pill-shaped, orange, sticker shadow.",
       "html": "<a class=\"primaryAction\" href=\"#contact\">Get Started</a>",
-      "css": ".primaryAction { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border-radius: 9999px; background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); font-size: 0.86rem; font-weight: 600; border: 1px solid oklch(20% 0.02 45 / 0.16); box-shadow: 5px 5px 0 oklch(20% 0.02 45 / 0.12); transition: transform 220ms cubic-bezier(0, 0, 0.38, 1), background-color 220ms; } .primaryAction:hover { transform: translateY(-2px); background: oklch(52% 0.18 45); } .primaryAction:active { translate: 0 1px; scale: 0.985; }"
+      "css": ".primaryAction { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border-radius: 9999px; background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); font-size: 0.86rem; font-weight: 600; border: 1px solid oklch(20% 0.02 45 / 0.16); box-shadow: 5px 5px 4px oklch(20% 0.02 45 / 0.10); transition: transform 280ms cubic-bezier(0, 0, 0.38, 1), background-color 280ms; } .primaryAction:hover { transform: translateY(-2px); background: oklch(52% 0.18 45); } .primaryAction:active { translate: 0 1px; scale: 0.985; }"
     },
     {
       "name": "Process Card",
@@ -169,7 +173,7 @@
       "refersTo": "processCard",
       "description": "Stacked card for multi-step process. Scroll-driven stack-to-spread choreography.",
       "html": "<article class=\"processCard\" data-process-card><div class=\"processIcon\"><svg/></div><h3>Discovery</h3><p>A 30-min call to understand your business goals.</p></article>",
-      "css": ".processCard { width: min(82%, 720px); min-height: 260px; border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 8px; background: oklch(98% 0.028 94); box-shadow: 12px 12px 0 oklch(20% 0.02 45 / 0.16); } .processCard:nth-child(2) { background: oklch(95% 0.08 210); } .processCard:nth-child(3) { background: oklch(96% 0.07 350); } .processCard:nth-child(4) { background: oklch(94% 0.08 88); } .processIcon { background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); box-shadow: 4px 4px 0 oklch(28% 0.02 45 / 0.08); }"
+      "css": ".processCard { width: min(82%, 720px); min-height: 260px; border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 6px; background: oklch(98% 0.028 94); box-shadow: 10px 10px 4px oklch(20% 0.02 45 / 0.12); } .processCard:nth-child(2) { background: oklch(95% 0.08 210); } .processCard:nth-child(3) { background: oklch(96% 0.07 350); } .processCard:nth-child(4) { background: oklch(94% 0.08 88); } .processIcon { background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); box-shadow: 3px 3px 4px oklch(28% 0.02 45 / 0.08); }"
     },
     {
       "name": "Testimonial Card",
@@ -177,7 +181,7 @@
       "refersTo": "testimonialCard",
       "description": "Stacked proof card with scroll-driven deck choreography.",
       "html": "<article class=\"testimonialCard\" data-testimonial-card><div class=\"testimonialCopy\"><span>01</span><h3>Akhil Lodha</h3><strong>Made the offer easier to choose</strong><p>They dug into what clients ask before they call.</p><small>Financial advisor</small></div><div class=\"testimonialSticker\"><b>Proof</b><span>first</span></div></article>",
-      "css": ".testimonialCard { border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 16px; background: oklch(94% 0.035 82); box-shadow: 14px 14px 0 oklch(20% 0.02 45 / 0.14); } .testimonialSticker { background: oklch(76% 0.16 350); } .testimonialCard.testimonialWarm { background: oklch(98% 0.028 94); } .testimonialCard.testimonialRose { background: oklch(96% 0.06 350); } .testimonialCard.testimonialMint { background: oklch(96% 0.055 210); }"
+      "css": ".testimonialCard { border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 12px; background: oklch(94% 0.035 82); box-shadow: 12px 12px 4px oklch(20% 0.02 45 / 0.10); } .testimonialSticker { background: oklch(74% 0.13 350); } .testimonialCard.testimonialWarm { background: oklch(98% 0.028 94); } .testimonialCard.testimonialRose { background: oklch(96% 0.06 350); } .testimonialCard.testimonialMint { background: oklch(96% 0.055 210); }"
     },
     {
       "name": "Pricing Card",
@@ -185,7 +189,7 @@
       "refersTo": "pricingCard",
       "description": "Pinned-proposal pricing card with slight rotation and decorative circle.",
       "html": "<article class=\"pricingCard\"><div class=\"pricingBadge\">Most Popular</div><h3>Growth</h3><strong>₹85,000</strong><p>For established businesses.</p><ul><li>Custom design</li><li>Launch support</li></ul><a href=\"#contact\">Get Started</a></article>",
-      "css": ".pricingCard { border: 2px solid oklch(20% 0.02 45 / 0.12); border-radius: 8px; background: oklch(99% 0.012 75); box-shadow: 12px 12px 0 oklch(20% 0.02 45 / 0.14); } .featuredPricing { background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); } .pricingBadge { background: oklch(90% 0.12 88); border-radius: 9999px; box-shadow: 4px 4px 0 oklch(20% 0.02 45 / 0.13); transform: rotate(-3deg); }"
+      "css": ".pricingCard { border: 2px solid oklch(20% 0.02 45 / 0.12); border-radius: 6px; background: oklch(99% 0.012 75); box-shadow: 10px 10px 4px oklch(20% 0.02 45 / 0.10); } .featuredPricing { background: oklch(56% 0.20 45); color: oklch(98% 0.01 45); } .pricingBadge { background: oklch(86% 0.09 88); border-radius: 9999px; box-shadow: 3px 3px 4px oklch(20% 0.02 45 / 0.12); transform: rotate(-3deg); }"
     },
     {
       "name": "FAQ Accordion",
@@ -193,7 +197,7 @@
       "refersTo": "faqList",
       "description": "Details-based accordion with sticker shadow and orange border on open.",
       "html": "<div class=\"faqList\"><details><summary>How long does a build take?</summary><p>Most market-fit sites ship within 3-4 weeks.</p></details></div>",
-      "css": ".faqList details { border: 2px solid oklch(20% 0.02 45 / 0.1); border-radius: 8px; background: oklch(99% 0.01 70); box-shadow: 6px 6px 0 oklch(20% 0.02 45 / 0.08); } .faqList details[open] { border-color: oklch(56% 0.20 45); box-shadow: 9px 9px 0 oklch(20% 0.02 45 / 0.1); } .faqSection { background: oklch(97% 0.026 94); border-top: 2px solid oklch(20% 0.02 45 / 0.1); }"
+      "css": ".faqList details { border: 2px solid oklch(20% 0.02 45 / 0.1); border-radius: 6px; background: oklch(99% 0.01 70); box-shadow: 5px 5px 4px oklch(20% 0.02 45 / 0.10); } .faqList details[open] { border-color: oklch(56% 0.20 45); box-shadow: 7px 7px 4px oklch(20% 0.02 45 / 0.10); } .faqSection { background: oklch(97% 0.026 94); border-top: 2px solid oklch(20% 0.02 45 / 0.1); }"
     },
     {
       "name": "Copy Email Button",
@@ -201,7 +205,7 @@
       "refersTo": "copyEmailButton",
       "description": "Pill-shaped clipboard button with state feedback (idle, copying, copied, failed).",
       "html": "<button class=\"copyEmailButton\" data-copy-state=\"idle\"><span>Copy email</span><small>Copy email</small></button>",
-      "css": ".copyEmailButton { min-height: 42px; padding: 0 18px; border-radius: 9999px; background: oklch(99% 0.01 70 / 0.9); color: oklch(15% 0.018 45); font-size: 0.78rem; font-weight: 800; border: 1px solid oklch(20% 0.02 45 / 0.15); box-shadow: 4px 5px 0 oklch(20% 0.02 45 / 0.1); } .copyEmailButton[data-copy-state=\"copied\"] { background: oklch(82% 0.18 132); } .copyEmailButton[data-copy-state=\"failed\"] { background: oklch(76% 0.16 350); }"
+      "css": ".copyEmailButton { min-height: 42px; padding: 0 18px; border-radius: 9999px; background: oklch(99% 0.01 70 / 0.9); color: oklch(15% 0.018 45); font-size: 0.78rem; font-weight: 800; border: 1px solid oklch(20% 0.02 45 / 0.15); box-shadow: 4px 4px 4px oklch(20% 0.02 45 / 0.10); } .copyEmailButton[data-copy-state=\"copied\"] { background: oklch(78% 0.14 132); } .copyEmailButton[data-copy-state=\"failed\"] { background: oklch(74% 0.13 350); }"
     },
     {
       "name": "Launch Map",
@@ -209,19 +213,19 @@
       "refersTo": "launchMap",
       "description": "Desktop-only fixed route tracker at page bottom. Five stops with progress rail.",
       "html": "<nav class=\"launchMap\" data-launch-map><div class=\"launchMapHeader\"><span>Route</span><b>Your website story</b></div><ol class=\"launchMapStops\"><li class=\"launchMapStop\" data-launch-stop><span>01</span><b>About</b><small>Who for</small></li></ol></nav>",
-      "css": ".launchMap { border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 12px; background: repeating-linear-gradient(-6deg, oklch(99% 0.012 76) 0 11px, oklch(96% 0.035 88) 11px 12px); box-shadow: 0 16px 34px oklch(20% 0.02 45 / 0.13), 9px 9px 0 oklch(20% 0.02 45 / 0.12); transform: translateX(-50%) rotate(-0.7deg); }"
+      "css": ".launchMap { border: 2px solid oklch(20% 0.02 45 / 0.14); border-radius: 12px; background: repeating-linear-gradient(-6deg, oklch(99% 0.012 76) 0 11px, oklch(96% 0.035 88) 11px 12px); box-shadow: 8px 8px 4px oklch(20% 0.02 45 / 0.10); transform: translateX(-50%) rotate(-0.5deg); }"
     }
   ],
   "narrative": {
-    "northStar": "The Playful Studio Table",
-    "overview": "Nexora Labs should feel like a small expert team that turns real-world trust into a clear digital buyer path. The system is warm, tactile, clear, custom, and more visibly playful than a typical agency site. It should feel like a studio table covered with useful tools, marked-up proofs, launch notes, and confident little stickers.",
+    "northStar": "The Organized Workshop",
+    "overview": "Nexora Labs should feel like a calm expert team in an organized workshop. Tools are out but arranged, work is visible but not chaotic, and every detail shows intention. The system is warm, tactile, clear, and crafted with playful moments that feel earned, not overwhelming.",
     "keyCharacteristics": [
       "Warm and inviting palette with committed orange",
-      "Punchy and playful accent colors as spatial actors",
-      "Tactile hierarchy via solid offset shadows and stacked objects",
+      "Muted accent colors used as rare highlights, not constant spatial actors",
+      "Tactile hierarchy via hybrid offset shadows (offset + small blur)",
       "Typographic authority with bold geometric sans",
-      "Scroll-driven choreography that proves craft",
-      "Studio-table layout rhythm, not generic section stacking"
+      "Scroll-driven choreography at a calmer, more considered pace",
+      "Organized workshop layout rhythm, not generic section stacking"
     ],
     "rules": [
       {
@@ -231,7 +235,7 @@
       },
       {
         "name": "The Flat-at-Rest Rule",
-        "body": "Surfaces are clean and flat by default. Shadows appear only as a response to state or as a deliberate sticker-shadow decorative choice.",
+        "body": "Surfaces are clean and flat by default. Shadows appear only as a response to state or as a deliberate workshop-shadow decorative choice.",
         "section": "elevation"
       },
       {
@@ -240,8 +244,8 @@
         "section": "typography"
       },
       {
-        "name": "The Sticker-Shadow Only Rule",
-        "body": "The only decorative shadow vocabulary is the hard-edged offset shadow (no blur). Blurred shadows are reserved for ambient lift on interactive hover states.",
+        "name": "The Workshop-Shadow Only Rule",
+        "body": "The decorative shadow vocabulary is the hybrid offset shadow (offset + small 4px blur). Blurred shadows alone are reserved for ambient lift on interactive hover states.",
         "section": "elevation"
       }
     ],
@@ -250,7 +254,7 @@
       "Do keep the palette warm, tinted, and brand-specific. Every neutral is hue-shifted toward 45.",
       "Do make orange a committed brand signal, not a tiny accent.",
       "Do use large type with real confidence. The display clamp reaches 8.2rem.",
-      "Do use the sticker-shadow pattern (solid offset, no blur) for decorative depth.",
+      "Do use the workshop-shadow pattern (offset + small blur) for tactile depth.",
       "Do wrap body text at 65ch for legibility.",
       "Do preserve reduced-motion support for all scroll choreography and entrance animations."
     ],
@@ -262,7 +266,9 @@
       "Don't repeat identical icon-card grids as the main structure.",
       "Don't make the site look like a generic SaaS landing page.",
       "Don't use standard SaaS blue or cold greys.",
-      "Don't use generic AI-generated assets."
+      "Don't use generic AI-generated assets.",
+      "Don't use accent colors as section backgrounds or large color bands. They are highlights only.",
+      "Don't pack multiple sections into a single viewport. Give each section room."
     ]
   }
 }

@@ -64,7 +64,7 @@
   font-weight: var(--weight-label);
   white-space: normal;
   text-align: center;
-  box-shadow: 5px 5px 0 var(--color-warm-dark-12);
+  box-shadow: 5px 5px 4px oklch(from var(--color-warm-dark) L C H / 0.10);
 }
 
 .stateActions a + a,

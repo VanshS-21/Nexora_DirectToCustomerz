@@ -48,7 +48,7 @@ export function WorkShowcase() {
           <p className={styles.workKicker}>Selected work</p>
           <h2>Real projects, pinned to the wall</h2>
           <p>Every preview starts with a real decision: book a table, trust a clinic, enquire about coaching, or choose a salon.</p>
-          <a href="#contact" aria-label="See what we'd build for you">See what we'd build for you</a>
+          <a href="#contact" aria-label="See what we would build for you">See what we would build for you</a>
         </div>
 
         <div className={styles.workProjectField} aria-label="Selected website projects">

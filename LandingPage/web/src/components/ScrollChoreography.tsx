@@ -6,7 +6,7 @@ const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, v
 const easeOutQuart = (value: number) => 1 - Math.pow(1 - value, 4);
 const getPageTop = (element: HTMLElement) => element.getBoundingClientRect().top + window.scrollY;
 const launchTargets = ["#about", "#process", "#services", "#work", "#contact"] as const;
-const sectionTargets = ["#about", "#process", "#services", "#work", "#pricing", "#faqs", "#contact"] as const;
+const sectionTargets = ["#about", "#process", "#services", "#work", "#pricing", "#contact"] as const;
 
 const getAll = <T extends HTMLElement>(root: ParentNode | null | undefined, selector: string) =>
   Array.from(root?.querySelectorAll<T>(selector) ?? []);
@@ -389,7 +389,7 @@ export function ScrollChoreography() {
               const center = m.processCardCenters[index] ?? { x: 0, y: 0 };
               const stackX = (stackCenterX - center.x) * remaining;
               const stackY = (stackCenterY - center.y) * remaining;
-              const rotate = (middleIndex - index) * 2.15 * remaining;
+              const rotate = (middleIndex - index) * 1.35 * remaining;
               const scale = 0.94 + progress * 0.06;
               card.style.setProperty("--process-stack-x", Math.round(stackX) + "px");
               card.style.setProperty("--process-stack-y", Math.round(stackY) + "px");
@@ -444,7 +444,7 @@ export function ScrollChoreography() {
           r.workCards.forEach((card, index) => {
             const cardCenter = m.workCardCenters[index] ?? { x: 0, y: 0 };
             const targetRotate = Number(card.dataset.workRotate || 0);
-            const stackRotate = (index - middleIndex) * 2.4;
+            const stackRotate = (index - middleIndex) * 1.5;
             const stackX = (m.workCenterCenter.x - cardCenter.x) * remaining;
             const stackY = (m.workCenterCenter.y - cardCenter.y) * remaining;
             const rotate = stackRotate * remaining + targetRotate * spreadProgress;
@@ -489,7 +489,7 @@ export function ScrollChoreography() {
               const activeDistance = Math.abs(distance);
               const x = futureOffset * 13 - localProgress * 46;
               const y = futureOffset * 11 - localProgress * 118;
-              const rotate = futureOffset * 1.45 - localProgress * 4.6;
+              const rotate = futureOffset * 1.0 - localProgress * 3.2;
               const scale = 1 - futureOffset * 0.018 - localProgress * 0.035;
               const opacity = 1 - Math.max(0, activeDistance - 1.08) * 0.34 - localProgress * 0.18;
               const contentOpacity = 1 - clamp(activeDistance * 0.95, 0, 1);

@@ -10,22 +10,22 @@ import styles from "@/styles/page.module.css";
 const processSteps = [
   {
     label: "Clarify the audience",
-    copy: "We identify who your website is for, what they need to hear, and what the site needs to achieve.",
+    copy: "Who your website is for, what they need to hear, and what the site needs to achieve.",
     icon: "target",
   },
   {
     label: "Shape the offer",
-    copy: "We turn services, proof, pricing, photos, and rough notes into a page plan buyers can follow.",
+    copy: "Services, proof, pricing, photos, and rough notes turned into a page plan buyers can follow.",
     icon: "spark",
   },
   {
     label: "Design for trust",
-    copy: "We design and code around the doubts someone has before they enquire, book, or call.",
+    copy: "Design and code built around the doubts someone has before they enquire, book, or call.",
     icon: "wand",
   },
   {
     label: "Launch and learn",
-    copy: "Go live with analytics, handover notes, and a clear route for improving the site after launch.",
+    copy: "Live site with analytics, handover notes, and a clear route for improving after launch.",
     icon: "chart",
   },
 ];
@@ -35,21 +35,21 @@ const services = [
     number: "01",
     title: "Offer and audience clarity",
     description:
-      "We clarify who the site is for, what they need to hear, and what proof moves them toward contact.",
+      "Who the site is for, what they need to hear, and what proof moves them toward contact.",
     details: ["Audience and offer clarity", "Page jobs and sitemap", "Proof and trust plan"],
   },
   {
     number: "02",
     title: "Trust-led design",
     description:
-      "Custom pages that make your service feel specific, credible, and easy to choose on mobile or desktop.",
+      "Custom pages that make your service feel specific, credible, and easy to choose on any device.",
     details: ["Website and landing page design", "Booking and enquiry flows", "Mobile-first page systems"],
   },
   {
     number: "03",
     title: "Custom build and launch",
     description:
-      "Fast, responsive, owned websites with clean handover, launch support, and no rented-template dependency.",
+      "Fast, responsive, owned websites with clean handover, launch support, and no template dependency.",
     details: ["Custom-coded frontend", "Analytics and launch support", "Ownership and handover docs"],
   },
 ];
@@ -58,14 +58,14 @@ const packages = [
   {
     name: "Clarity Sprint",
     price: "Rs 39,999",
-    intro: "For service businesses that need to clarify their offer and audience before building.",
+    intro: "For businesses that need to clarify their offer and audience before building.",
     items: ["Discovery workshop", "Audience and offer clarity", "Sitemap and page jobs", "One custom design direction"],
     action: "Book a free call",
   },
   {
     name: "Website Launch",
     price: "Rs 89,999",
-    intro: "For owners ready to turn services, proof, and reputation into a live custom website.",
+    intro: "For owners ready to turn services, proof, and reputation into a live, custom website.",
     items: ["Everything from the sprint", "Custom frontend build", "Enquiry or booking path", "Analytics and handover"],
     action: "Book a free call",
     featured: true,
@@ -73,7 +73,7 @@ const packages = [
   {
     name: "Growth Partner",
     price: "Custom",
-    intro: "For more complex service brands with multiple offers, locations, integrations, or growth goals.",
+    intro: "For service brands with multiple offers, locations, integrations, or growth goals.",
     items: ["Full website strategy", "Advanced integrations", "Multi-page content system", "Launch and growth support"],
     action: "Talk about your project",
   },
@@ -91,37 +91,37 @@ const faqs = [
   {
     question: "Who is Nexora best for?",
     answer:
-      "Owner-led service businesses with proof, referrals, or local trust, but an online presence that does not explain the offer clearly enough to earn enquiries.",
+      "Owner-led service businesses with proof, referrals, or local trust — but an online presence that does not explain the offer clearly enough to earn enquiries.",
   },
   {
     question: "What if our offer still feels messy?",
     answer:
-      "That is normal. We start by sorting services, audience, proof, prices, photos, and buyer questions into a clear page plan before design begins.",
+      "That is normal. We sort services, audience, proof, prices, photos, and buyer questions into a clear page plan before design begins.",
   },
   {
     question: "Do you only build websites?",
     answer:
-      "The website is the center of the work. Around it, we can clarify your offer, shape copy, design the booking flow, polish basic brand direction, and launch the site.",
+      "The website is the centre of the work. Around it, we can clarify your offer, shape copy, design the booking flow, polish brand direction, and launch the site.",
   },
   {
     question: "What makes this different from a template site?",
     answer:
-      "We start with your buyer, proof, service structure, and local trust signals. The goal is not a prettier shell. It is a site that makes someone feel safe contacting you.",
+      "We start with your buyer, proof, service structure, and local trust signals. The goal is not a prettier shell — it is a site that makes someone feel safe contacting you.",
   },
   {
     question: "Are we a good fit if we only want the cheapest site?",
     answer:
-      "Probably not. Nexora is for businesses that want a clearer offer, custom design, clean code, and an owned site they can grow from.",
+      "Probably not. Nexora is for businesses that want a clearer offer, custom design, clean code, and a site they can grow from.",
   },
   {
     question: "How long does a typical project take?",
     answer:
-      "A focused website usually takes 3-6 weeks depending on content readiness, number of pages, integrations, and how much strategy work is needed.",
+      "A focused website usually takes 3–6 weeks depending on content readiness, number of pages, and integrations.",
   },
   {
     question: "What if I do not like the first direction?",
     answer:
-      "We make the first direction from an agreed brief, then use review rounds to tighten it. If the strategy is wrong, we revisit the brief before polishing pixels.",
+      "We make the first direction from an agreed brief, then use review rounds to tighten it. If the strategy is wrong, we revisit the brief first.",
   },
 ];
 
@@ -220,9 +220,8 @@ export default function Home() {
           </div>
           <div className={styles.heroIntro}>
             <p>
-              For service businesses that already earn trust offline, but need
-              a website that explains the offer, proves credibility, and gives
-              buyers a clear reason to enquire.
+              For service businesses that earn trust offline but need a website
+              that explains the offer, shows proof, and makes it easy to enquire.
             </p>
             <div className={styles.heroActions}>
               <a href="#contact" className={styles.primaryAction}>
@@ -249,7 +248,7 @@ export default function Home() {
           <div className={styles.sectionKicker}>Process</div>
           <h2>Clarify before you build</h2>
           <p className={styles.sectionLead}>
-            A clear path for busy owners: decide who the site must reach, what proof they need, and how the website should turn attention into action.
+            Four steps: decide who the site must reach, what proof they need, and how it turns attention into action.
           </p>
           <div className={styles.processGrid} data-process-grid>
             {processSteps.map((step, index) => (
@@ -327,7 +326,7 @@ export default function Home() {
           <div className={styles.pricingIntro} data-reveal>
             <div className={styles.sectionKicker}>Pricing</div>
             <h2>Start with the right problem</h2>
-            <p>Choose the level of strategy and build support your business needs. Every package starts with who the site is for, what proves you credible, and what each page needs to do.</p>
+            <p>Every package starts with who the site is for, what proves you credible, and what each page needs to do. Pick the level of support that fits.</p>
           </div>
           <div className={styles.pricingGrid}>
             {packages.map((item) => (
@@ -349,21 +348,21 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </section>
 
-        <section id="faqs" className={styles.faqSection}>
-          <div data-reveal>
-            <div className={styles.sectionKicker}>FAQs</div>
-            <h2>Common questions, answered</h2>
-            <p className={styles.sectionLead}>The practical questions owners ask before trusting us with their website.</p>
-          </div>
-          <div className={styles.faqList}>
-            {faqs.map((faq) => (
-              <details data-reveal key={faq.question}>
-                <summary><span>{faq.question}</span></summary>
-                <p>{faq.answer}</p>
-              </details>
-            ))}
+          <div className={styles.faqBlock}>
+            <div data-reveal>
+              <div className={styles.sectionKicker}>FAQs</div>
+              <h2>Common questions</h2>
+              <p className={styles.sectionLead}>What owners ask before they get in touch.</p>
+            </div>
+            <div className={styles.faqList}>
+              {faqs.map((faq) => (
+                <details data-reveal key={faq.question}>
+                  <summary><span>{faq.question}</span></summary>
+                  <p>{faq.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
