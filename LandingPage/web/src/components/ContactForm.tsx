@@ -43,6 +43,7 @@ function validate(data: FormData): FieldErrors {
 export function ContactForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again.");
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -114,14 +115,26 @@ export function ContactForm() {
 
       clearTimeout(timeoutId);
 
-      if (!res.ok) throw new Error("Submission failed");
+      if (!res.ok) {
+        setErrorMessage("We couldn't process your enquiry. Please try again or email us directly.");
+        setFormState("error");
+        errorRef.current?.focus();
+        return;
+      }
 
       setFormState("fading");
       setTimeout(() => {
         setFormState("success");
         setTimeout(() => successRef.current?.focus(), 60);
       }, 280);
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setErrorMessage("Connection timed out. Please check your network and try again.");
+      } else if (err instanceof TypeError) {
+        setErrorMessage("Could not reach the server. Please check your connection and try again.");
+      } else {
+        setErrorMessage("Something went wrong. Please try again.");
+      }
       setFormState("error");
       errorRef.current?.focus();
     }
@@ -148,7 +161,7 @@ export function ContactForm() {
     >
       {formState === "error" && (
         <p className={styles.contactFormError} role="alert" tabIndex={-1} ref={errorRef}>
-          Something went wrong. Please try again.
+          {errorMessage}
         </p>
       )}
 

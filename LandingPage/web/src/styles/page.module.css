@@ -140,6 +140,15 @@
   font-weight: var(--weight-label);
   white-space: nowrap;
   border-right: 1px solid var(--color-warm-dark-08);
+  transition: color 220ms var(--ease-out);
+}
+
+.fixedBottomNav a:not(.bottomNavCta)[data-nav-active] {
+  color: var(--color-primary);
+}
+
+.fixedBottomNav .bottomNavCta[data-nav-active] {
+  box-shadow: 0 0 0 3px oklch(56% 0.2 var(--hue-brand) / 0.22), 5px 5px 0 var(--color-warm-dark-12);
 }
 
 .fixedBottomNav a:nth-child(2) {
@@ -606,7 +615,7 @@
 .servicesSection {
   position: relative;
   z-index: 1;
-  min-height: 270svh;
+  min-height: 200svh;
   background: var(--color-ink);
   border-block: 0;
 }
@@ -1081,8 +1090,8 @@
 
   .heroSection {
     min-height: auto;
-    gap: 16px;
-    padding: 62px 18px 112px;
+    gap: 10px;
+    padding: 48px 18px 80px;
     background:
       linear-gradient(180deg, oklch(96% 0.03 75) 0 72%, oklch(86% 0.12 132) 72% 100%);
   }
@@ -2461,8 +2470,13 @@
 }
 
 .navLinks a:not(.navCta):hover::after,
-.navLinks a:not(.navCta):focus-visible::after {
+.navLinks a:not(.navCta):focus-visible::after,
+.navLinks a:not(.navCta)[data-nav-active]::after {
   scale: 1 1;
+}
+
+.navLinks a:not(.navCta)[data-nav-active] {
+  color: var(--color-primary);
 }
 
 :global(#about),

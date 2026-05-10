@@ -159,6 +159,10 @@ p {
   max-width: var(--measure-copy);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 a {
   color: inherit;
   text-decoration: none;

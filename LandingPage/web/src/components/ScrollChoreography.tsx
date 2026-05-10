@@ -6,12 +6,14 @@ const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, v
 const easeOutQuart = (value: number) => 1 - Math.pow(1 - value, 4);
 const getPageTop = (element: HTMLElement) => element.getBoundingClientRect().top + window.scrollY;
 const launchTargets = ["#about", "#process", "#services", "#work", "#contact"] as const;
+const sectionTargets = ["#about", "#process", "#services", "#work", "#pricing", "#faqs", "#contact"] as const;
 
 const getAll = <T extends HTMLElement>(root: ParentNode | null | undefined, selector: string) =>
   Array.from(root?.querySelectorAll<T>(selector) ?? []);
 
 interface CachedRefs {
   topNav: HTMLElement | null;
+  navLinks: HTMLElement[];
   launchMap: HTMLElement | null;
   launchFill: HTMLElement | null;
   launchStops: HTMLAnchorElement[];
@@ -54,6 +56,7 @@ interface CachedMetrics {
   testimonialTop: number;
   testimonialHeight: number;
   launchSectionTops: Array<{ top: number; bottom: number }>;
+  sectionTops: Array<{ id: string; top: number; bottom: number }>;
 }
 
 export function ScrollChoreography() {
@@ -61,6 +64,7 @@ export function ScrollChoreography() {
   const metricsVersion = useRef(0);
   const cachedRefs = useRef<CachedRefs>({
     topNav: null,
+    navLinks: [],
     launchMap: null, launchFill: null, launchStops: [],
     greetingSection: null, greetingInkLines: [], greetingPills: [],
     processSection: null, processGrid: null, processCards: [],
@@ -76,6 +80,7 @@ export function ScrollChoreography() {
     workStageTop: 0, workStageHeight: 0, workCenterCenter: { x: 0, y: 0 }, workCardCenters: [],
     testimonialTop: 0, testimonialHeight: 0,
     launchSectionTops: [],
+    sectionTops: [],
   });
   const reduceMotionRef = useRef(false);
   const rafId = useRef(0);
@@ -152,6 +157,7 @@ export function ScrollChoreography() {
     r.testimonialNavDots = getAll<HTMLButtonElement>(r.testimonialSection, "[data-testimonial-nav-dot]");
 
     r.backToTop = document.querySelector<HTMLButtonElement>("[data-back-to-top]");
+    r.navLinks = getAll<HTMLElement>(document, "[data-nav-section]");
 
     // Cache layout metrics (avoids reflow in scroll handler)
     const m = cachedMetrics.current;
@@ -204,6 +210,13 @@ export function ScrollChoreography() {
       .map((sel) => document.querySelector<HTMLElement>(sel))
       .filter((s): s is HTMLElement => Boolean(s))
       .map((s) => ({ top: getPageTop(s), bottom: getPageTop(s) + s.offsetHeight }));
+
+    m.sectionTops = sectionTargets
+      .map((sel) => {
+        const el = document.querySelector<HTMLElement>(sel);
+        return el ? { id: sel.slice(1), top: getPageTop(el), bottom: getPageTop(el) + el.offsetHeight } : null;
+      })
+      .filter((s): s is { id: string; top: number; bottom: number } => Boolean(s));
   }, [metrics]);
 
   // IntersectionObserver-based reveals (runs once per metrics recalc)
@@ -502,6 +515,23 @@ export function ScrollChoreography() {
         if (r.backToTop) {
           r.backToTop.dataset.visible = scrollY > viewportHeight * 1.2 ? "true" : "false";
         }
+
+        // Nav active state
+        if (r.navLinks.length && m.sectionTops.length) {
+          const focusLine = scrollY + viewportHeight * 0.42;
+          let activeId = "";
+          for (const section of m.sectionTops) {
+            if (focusLine >= section.top - viewportHeight * 0.14) activeId = section.id;
+          }
+          r.navLinks.forEach((link) => {
+            if (link.dataset.navSection === activeId) {
+              link.dataset.navActive = "true";
+            } else {
+              delete link.dataset.navActive;
+            }
+          });
+        }
+
       }); // end rAF callback
     };
 

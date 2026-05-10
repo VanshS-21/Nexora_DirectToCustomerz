@@ -146,16 +146,16 @@ export default function Home() {
       </div>
 
       <nav className={styles.fixedBottomNav} aria-label="Mobile section navigation">
-        <a href="#process" aria-label="Go to Process section">
+        <a href="#process" data-nav-section="process" aria-label="Go to Process section">
           <span>01</span> Process
         </a>
-        <a href="#work" aria-label="Go to Work section">
+        <a href="#work" data-nav-section="work" aria-label="Go to Work section">
           <span>02</span> Work
         </a>
-        <a href="#pricing" aria-label="Go to Pricing section">
+        <a href="#pricing" data-nav-section="pricing" aria-label="Go to Pricing section">
           <span>03</span> Pricing
         </a>
-        <a href="#contact" className={styles.bottomNavCta} aria-label="Go to Contact section">
+        <a href="#contact" data-nav-section="contact" className={styles.bottomNavCta} aria-label="Go to Contact section">
           <span>04</span> Contact
         </a>
       </nav>
@@ -199,10 +199,10 @@ export default function Home() {
           <b>Labs</b>
         </a>
         <nav className={styles.navLinks} aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#work">Work</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact" className={styles.navCta}>
+          <a href="#about" data-nav-section="about">About</a>
+          <a href="#work" data-nav-section="work">Work</a>
+          <a href="#pricing" data-nav-section="pricing">Pricing</a>
+          <a href="#contact" data-nav-section="contact" className={styles.navCta}>
             Contact us
           </a>
         </nav>
